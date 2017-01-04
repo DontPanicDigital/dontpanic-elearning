@@ -1,0 +1,4 @@
+default:
+    -
+        resource: dashboard
+        privilege: display

@@ -1,0 +1,35 @@
+/* [Components] - Buttons
+------------------------------------------------------------------ */
+
+.button {
+    background-color: $blue;
+    color: $white;
+    padding: 13px 20px 12px;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    @include transition(all 150ms ease-in);
+    @include border-radius(10px);
+
+    &:hover {
+        background-color: darken($blue, 10%);
+    }
+
+    &--red {
+        background-color: $red;
+
+        &:hover {
+            background-color: darken($red, 10%);
+        }
+    }
+
+    &--green {
+        background-color: $green;
+
+        &:hover {
+            background-color: darken($green, 10%);
+        }
+    }
+}

@@ -1,0 +1,6 @@
+parameters:
+	environment: development
+
+application:
+	debugger: true
+	catchExceptions: false

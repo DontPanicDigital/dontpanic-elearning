@@ -1,0 +1,5 @@
+services:
+	- DontPanic\Forms\SignFormFactory
+	- DontPanic\Forms\PasswordFormFactory
+	- DontPanic\Forms\UserFormFactory
+	- DontPanic\Forms\UserFilterFormFactory

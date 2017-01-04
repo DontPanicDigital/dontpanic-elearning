@@ -1,0 +1,25 @@
+{block content}
+    <h1>ACL - Role</h1>
+    {control createRoleForm}
+
+    <br />
+
+    {if count($roles)}
+        {block #roles}
+            <ul>
+                {foreach $roles as $role}
+                    <li>
+                        {$role->getName()}
+                        <a href="{plink detail, id=>$role->getId()}">{_admin.role.edit}</a>
+                        <a n:href="remove! id=>$role->getId()">{_admin.role.remove}</a>
+                        {if count($role->getChildrens())}
+                            {include #roles, roles => $role->getChildrens()}
+                        {/if}
+                    </li>
+                {/foreach}
+            </ul>
+        {/block}
+    {else}
+        {_admin.role.role_list_empty}
+    {/if}
+{/block}

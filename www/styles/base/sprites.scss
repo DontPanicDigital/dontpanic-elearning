@@ -1,0 +1,24 @@
+@mixin calculate($width, $height, $x, $y) {
+    width: $width/2;
+    height: $height/2;
+    background-position: (-$x/2) (-$y/2);
+}
+
+@mixin sprites($name) {
+    
+    @include retina-image($imgPath + sprite, 66px 398px, 'png', null, '@2x', false);
+    
+    background-repeat: no-repeat;
+    position: relative;
+    display: inline-block;
+    text-indent: -9999px;
+
+    @if $name == "search-blue" { @include calculate(76px, 76px, 0px, 0px); }
+    @if $name == "search" { @include calculate(76px, 76px, 0px, 76px); }
+    @if $name == "arrow" { @include calculate(108px, 79px, 0px, 152px); }
+    @if $name == "facebook" { @include calculate(96px, 96px, 0px, 231px); }
+    @if $name == "instagram" { @include calculate(96px, 96px, 0px, 327px); }
+    @if $name == "yt-playbutton" { @include calculate(132px, 102px, 0px, 423px); }
+    @if $name == "carousel-left" { @include calculate(78px, 136px, 0px, 525px); }
+    @if $name == "carousel-right" { @include calculate(78px, 136px, 0px, 661px); }
+}

@@ -1,0 +1,9 @@
+/* [Core] - Helpers
+------------------------------------------------------------------ */
+.text {
+    &--center   { text-align: center; }
+    &--left     { text-align: left; }
+    &--right    { text-align: right; }
+}
+
+.clearfix { @include clearfix; }

@@ -1,0 +1,26 @@
+services:
+	- DontPanic\Auth\PresenterAuthorizationModel
+
+	- DontPanic\Acl\SetAclModel
+	- DontPanic\Acl\AclModel
+	- DontPanic\Acl\AclResourceModel
+	- DontPanic\Acl\AclPrivilegesModel
+	- DontPanic\Acl\AclRoleModel
+
+	- DontPanic\User\UserLoginModel
+	- DontPanic\User\UserModel
+	- DontPanic\User\UserPasswordModel
+	- DontPanic\User\UserRegisterModel
+	- DontPanic\User\UserRoleModel
+	- DontPanic\User\UserFilterModel
+
+	- DontPanic\Setting\SettingModel
+	- DontPanic\Setting\SettingCategoryModel
+
+	- DontPanic\Api\ApiTokenModel
+
+	- DontPanic\ParametersProvider(
+		%serializer.groups%,
+		%rest%,
+		%acl%
+	)

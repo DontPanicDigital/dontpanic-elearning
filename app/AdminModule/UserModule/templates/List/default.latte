@@ -1,0 +1,21 @@
+{block content}
+    <h1>User</h1>
+    {snippet userList}
+        {control userSystemFilterForm}
+
+        {if count($users)}
+            <ul>
+                {foreach $users as $item}
+                    <li>
+                        {$item->getName()}
+                        <a class="ajax" n:href="remove! $item->getId()">remove</a>
+                        <a href="{plink Detail:default id=>$item->getToken()}">edit</a>
+                    </li>
+                {/foreach}
+            </ul>
+            {control vp}
+        {else}
+            kde nic není...
+        {/if}
+    {/snippet}
+{/block}

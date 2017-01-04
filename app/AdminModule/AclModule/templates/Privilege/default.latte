@@ -1,0 +1,18 @@
+{block content}
+    <h1>ACL - Privileges</h1>
+    {control createPrivilegeForm}
+
+    <br />
+
+    {if count($privileges)}
+        <ul>
+            {foreach $privileges as $privilege}
+                <li>
+                    {$privilege->getName()}
+                    <a href="{plink detail, id=>$privilege->getId()}">{_admin.privilege.edit}</a>
+                    <a n:href="remove! id=>$privilege->getId()">{_admin.privilege.remove}</a>
+                </li>
+            {/foreach}
+        </ul>
+    {/if}
+{/block}

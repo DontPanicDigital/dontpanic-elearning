@@ -1,0 +1,95 @@
+login:
+    form:
+        email: E-mail
+        password: Heslo
+        stay_logged: Neodhlašovat automaticky
+        enter: Přihlásit
+        errors:
+            fill_email: Zadejte email
+            fill_valid_email: Zadejte platný email
+            fill_password: Zadejte heslo
+
+registration:
+    form:
+        full_name: Jméno a Příjmení
+        email: E-mail
+        password: Heslo
+        rules: Podmínky užití
+        do_registration: Registrovat se
+        errors:
+            fill_email: Zadejte email
+            fill_valid_email: Zadejte platný email
+            fill_password: Zadejte heslo
+            fill_full_name: Zadejte své jméno a příjmení
+            full_name_pattern: Jméno a příjmení může obsahovat pouze písmena a tečky
+            check_rules: Musíte souhlasit s podmínkami
+            email_taken: E-mail je již registrován
+            registration_failed: Registraci se nepodařilo dokončit
+
+password_change:
+    form:
+        old_password: Staré heslo
+        password: Heslo
+        password_repeat: Heslo pro kontrolu
+        do_change: Změnit
+        errors:
+            old_password_min: Staré heslo musí mít alespoň %d znaky
+            password_min: Heslo musí mít alespoň %d znaky
+            choose_password: Zvolte si heslo
+            fill_repeat_password: Zadejte prosím heslo ještě jednou pro kontrolu
+            passwords_not_match: Hesla se neshodují
+            change_failed: Heslo se nepodařilo změnit
+            old_password_not_match: Staré heslo není moc ok
+
+password_request:
+    form:
+        email: E-mail
+        do_request: Zaslat heslo
+        errors:
+            fill_email: Zadejte email
+            fill_valid_email: Zadejte platný email
+            email_not_found: tohle asi nepujde
+
+password_update:
+    form:
+        password: Heslo
+        password_repeat: Heslo pro kontrolu
+        do_change: Změmit
+        errors:
+            password_min: Heslo musí mít alespoň %d znaky
+            choose_password: Zvolte si heslo
+            fill_repeat_password: Zadejte prosím heslo ještě jednou pro kontrolu
+            passwords_not_match: Hesla se neshodují
+            password_change_failed: Heslo se nepodařilo změnit
+
+update_profile:
+    form:
+        name: Jméno a přijmení
+        email: E-mail
+        phone: Telefon
+        address: Adresa
+        do_save: Uložit
+        errors:
+            fill_email: Zadejte email
+            fill_valid_email: Zadejte platný email
+            fill_phone: Zadejte telefon
+            fill_valid_phone: Zadejte platný telefon
+            fill_full_name: Zadejte své jméno a příjmení
+            full_name_pattern: Jméno a příjmení může obsahovat pouze písmena a tečky
+            user_update_failed: Profil se nepodařilo uložit
+            user_update_address_failed: Adresu se nepodařilo uložit
+        placeholder:
+            phone: 777 123 456
+        success:
+            profile_update: Profil byl aktualizován
+
+admin:
+    message_after_login: Vítej zpět
+    message_after_logout: Naviděnou
+
+secured:
+    message_after_logout_inactivity: Kvůli delší nečinnosti jste byli odhlášeni
+    message_no_permission: Nemáte dostatečná oprávnění
+
+login_user: Přihlásit se
+logout: Odhlásit se

@@ -1,0 +1,34 @@
+{block content}
+    <h1>ACL - Role detail</h1>
+    {form roleForm}
+    {input name}
+        <br/>
+    {input comment}
+    {input submit}
+
+    {if count($roles)}
+        {var $firstLevel = true}
+        {block #roles}
+            <ul>
+                {if $firstLevel}
+                    <li>
+                        <input type="radio" name="role" id="role_0" value="0">
+                        <label for="role_0">nic</label>
+                    </li>
+                {/if}
+                {foreach $roles as $role}
+                    {if $role->getId() != $id}
+                        <li>
+                            <input type="radio" name="role" id="role_{$role->getId()}" value="{$role->getId()}" {if $parentId == $role->getId()}checked{/if}>
+                            <label for="role_{$role->getId()}">{$role->getName()}</label>
+                            {if count($role->getChildrens())}
+                                {include #roles, roles => $role->getChildrens(), firstLevel => false}
+                            {/if}
+                        </li>
+                    {/if}
+                {/foreach}
+            </ul>
+        {/block}
+    {/if}
+    {/form}
+{/block}

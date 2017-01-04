@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{include '../../templates/html/browserRecognition.latte'}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{ifset #description}{include description}{else}{_meta.description}{/ifset}">
+    <meta name="keywords" content="{ifset #keywords}{include keywords}{else}{_meta.keywords}{/ifset}">
+    <meta property="og:image" content="{ifset #facebookImage}{plink //Page:default}{include facebookImage}{else}{plink //Page:default}{_meta.fb_image}{/ifset}"/>
+    <meta property="og:title" content="{ifset #facebookTitle}{_meta.title} - {include facebookTitle}{else}{_meta.fb_title}{/ifset}"/>
+    <meta property="og:url" content="{plink //this}"/>
+    <meta property="og:site_name" content="{_meta.fb_site_name}"/>
+    <meta property="og:description" content="{ifset #facebookDescription}{include facebookDescription}{else}{_meta.fb_description}{/ifset}">
+    <meta property="og:type" content="{_meta.fb_type}"/>
+    {include '../../templates/html/favicon.latte'}
+    {*<link rel="stylesheet" href="/styles/styles{if $is_Production}.min{/if}.css" media="screen">*}
+    <title>{ifset #title}{include title}{else}{_meta.title}{/ifset} | {_meta.project}</title>
+    {include '../../templates/scripts/html5tagsSupport.latte'}
+</head>
+<body>
+    <nav>
+        <ul>
+            {if $user->isLoggedIn()}
+                <li><a href="{plink Sign:out}">Odhlásit se</a></li>
+            {/if}
+        </ul>
+    </nav>
+    {snippet flashMessages}
+    {if count($flashes)}
+        <ul>
+            {foreach $flashes as $flash}
+                <li>{$flash->message}</li>
+            {/foreach}
+        </ul>
+    {/if}
+    {/snippet}
+    <div id="main">
+        {include content}
+    </div>
+    <script type="text/javascript">
+        var USER_ID          = null;
+        var API_ACCESS_TOKEN = {if isset($apiToken)}{$apiToken}{else}null{/if};
+    </script>
+    {include '../../templates/scripts/jquery.latte'}
+    {include '../../templates/scripts/nette.bootstrap.latte'}
+</body>
+</html>

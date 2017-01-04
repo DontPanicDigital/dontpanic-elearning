@@ -1,0 +1,23 @@
+{block content}
+    <h1>ACL - Resources</h1>
+    {control createResourceForm}
+
+    <br />
+
+    {if count($resources)}
+        {block #resources}
+            <ul>
+                {foreach $resources as $resource}
+                    <li>
+                        {$resource->getName()}
+                        <a href="{plink detail, id=>$resource->getId()}">{_admin.resource.edit}</a>
+                        <a n:href="remove! id=>$resource->getId()">{_admin.resource.remove}</a>
+                        {if count($resource->getChildrens())}
+                            {include #resources, resources => $resource->getChildrens()}
+                        {/if}
+                    </li>
+                {/foreach}
+            </ul>
+        {/block}
+    {/if}
+{/block}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{include '../../templates/html/browserRecognition.latte'}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{ifset #description}{include description}{else}{_meta.description}{/ifset}">
+    <meta name="keywords" content="{ifset #keywords}{include keywords}{else}{_meta.keywords}{/ifset}">
+
+    {include '../../templates/html/favicon.latte'}
+    <title>{ifset #title}{include title}{else}{_meta.title}{/ifset} | {_meta.project}</title>
+    {include '../../templates/scripts/html5tagsSupport.latte'}
+
+    <link rel="stylesheet" href="/build/admin{if $isProduction}.min{/if}.css" media="screen">
+</head>
+<body>
+    <div>
+        {snippet flashMessages}
+        {if count($flashes)}
+            <div class="flashMessage flashMessage--autoclose">
+                <ul>
+                    {foreach $flashes as $flash}
+                        <li class="flashMessage__item">{$flash->message}</li>
+                    {/foreach}
+                </ul>
+            </div>
+        {/if}
+        {/snippet}
+        {include content}
+    </div>
+    {include '../../templates/scripts/jquery.latte'}
+    <script src="/build/admin{if $isProduction}.min{/if}.js" type="text/javascript"></script>
+    {*<script src="/build/react{if $isProduction}.min{/if}.js" type="text/javascript"></script>*}
+    {include '../../templates/scripts/nette.bootstrap.latte'}
+</body>
+</html>

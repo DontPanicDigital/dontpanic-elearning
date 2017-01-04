@@ -1,0 +1,48 @@
+parameters:
+	environment: production
+
+	timezone: Europe/Prague
+
+php:
+	date.timezone: %timezone%
+
+
+doctrine:
+	host: %database.default.host%
+	port: %database.default.port%
+	user: %database.default.user%
+	password: %database.default.password%
+	dbname: %database.default.name%
+
+application:
+	debugger: false
+	errorPresenter: Error
+	catchExceptions: true
+
+
+session:
+	expiration: 14 days
+	save_path: %tempDir%/sessions
+	autoStart: true
+
+extensions:
+
+	console: Kdyby\Console\DI\ConsoleExtension
+	events: Kdyby\Events\DI\EventsExtension
+	annotations: Kdyby\Annotations\DI\AnnotationsExtension
+	doctrine: Kdyby\Doctrine\DI\OrmExtension
+	translation: Kdyby\Translation\DI\TranslationExtension
+	event_dispatcher: Symnedi\EventDispatcher\DI\EventDispatcherExtension
+	migrations: Zenify\DoctrineMigrations\DI\MigrationsExtension
+	htmlPanel: Kdyby\Extension\Diagnostics\HtmlValidator\DI\ValidatorExtension
+
+	- Zenify\DoctrineBehaviors\DI\TimestampableExtension
+	- Zenify\DoctrineBehaviors\DI\SoftDeletableExtension
+	- Zenify\DoctrineBehaviors\DI\SluggableExtension
+
+migrations:
+	table: _migrations
+	dirs:
+		- %appDir%/../migrations
+	namespace: Migrations
+	codingStandard: tabs

@@ -1,0 +1,29 @@
+{block content}
+    <h1>ACL - Privilege detail</h1>
+    {form privilegeForm}
+    {input name}
+        <br/>
+    {input comment}
+    {input submit}
+
+    {if count($resources)}
+        {block #resources}
+            <ul>
+                <li>
+                    <input type="radio" name="resources" id="resource_0" value="0">
+                    <label for="resource_0">nic</label>
+                </li>
+                {foreach $resources as $resource}
+                    <li>
+                        <input type="radio" name="resources" id="resource_{$resource->getId()}" value="{$resource->getId()}" {if $resourceId == $resource->getId()}checked{/if}>
+                        <label for="resource_{$resource->getId()}">{$resource->getName()}</label>
+                        {if count($resource->getChildrens())}
+                            {include #resources, resources => $resource->getChildrens()}
+                        {/if}
+                    </li>
+                {/foreach}
+            </ul>
+        {/block}
+    {/if}
+    {/form}
+{/block}

@@ -1,0 +1,61 @@
+permission:
+    form:
+        do_create: Vytvořit oprávnění
+        errors:
+            permission_failed: Oprávnění se nepodařilo přidělit
+            permission_success: Oprávnění přiděleno
+
+role:
+    form:
+        name: Název role
+        comment: Komentář
+        do_update: Upravit roli
+        do_create: Vytvořit roli
+        errors:
+            fill_name: Zadejte název role
+            create_role_failed: Roli se nepodařilo vytvořit
+            role_update_failed: Roli se nepodařilo upravit
+        success:
+            role_update: Role upravena
+
+    edit: Upravit
+    remove: Odstranit
+    role_removed: Role byla odstraněna
+    role_remove_failed: Roli se nepodařilo odstranit
+    role_list_empty: Nejsou založeny žádné role
+
+resource:
+    form:
+        name: Název zdroje
+        comment: Komentář
+        do_update: Upravit zdroj
+        do_create: Vytvořit zdroj
+        errors:
+            fill_name: Zadejte název role
+            create_resource_failed: Zdroj se nepodařilo vytvořit
+            resource_update_failed: Zdroj se nepodařilo upravit
+        success:
+            resource_update: Zdroj upraven
+
+    edit: Upravit
+    remove: Odstranit
+    resource_removed: Zdroj byl odstraněn
+    resource_remove_failed: Zdroj se nepodařilo odstranit
+
+privilege:
+    form:
+        name: Název oprávnění
+        comment: Komentář
+        do_update: Upravit oprávnění
+        do_create: Vytvořit oprávnění
+        errors:
+            fill_name: Zadejte název oprávnění
+            create_privilege_failed: Oprávnění se nepodařilo vytvořit
+            privilege_update_failed: Oprávnění se nepodařilo upravit
+        success:
+            privilege_update: Oprávnění upraven
+
+    edit: Upravit
+    remove: Odstranit
+    privilege_removed: Oprávnění byl odstraněn
+    privilege_remove_failed: Oprávnění se nepodařilo odstranit

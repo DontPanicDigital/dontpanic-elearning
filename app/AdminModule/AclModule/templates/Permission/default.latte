@@ -1,0 +1,75 @@
+{block content}
+    <h1>ACL - Presmission detail</h1>
+    {form permissionForm}
+        {if count($roles)}
+            {block #roles}
+                <ul>
+                    {foreach $roles as $role}
+                        <li>
+                            <input type="checkbox" name="roles[]" id="role_{$role->getId()}" value="{$role->getId()}">
+                            <label for="role_{$role->getId()}">{$role->getName()}</label>
+                            {if count($role->getChildrens())}
+                                {include #roles, roles => $role->getChildrens()}
+                            {/if}
+                        </li>
+                    {/foreach}
+                </ul>
+            {/block}
+        {/if}
+
+        <hr />
+
+        {if count($resources)}
+            {block #resources}
+                <ul>
+                    <li>
+                        <input type="checkbox" name="resources[]" id="resource_0" value="0">
+                        <label for="resource_0">vše</label>
+                    </li>
+                    {foreach $resources as $resource}
+                        <li>
+                            <input type="checkbox" name="resources[]" id="resource_{$resource->getId()}" value="{$resource->getId()}">
+                            <label for="resource_{$resource->getId()}">{$resource->getName()}</label>
+                            {if count($resource->getChildrens())}
+                                {include #resources, resources => $resource->getChildrens()}
+                            {/if}
+                        </li>
+                    {/foreach}
+                </ul>
+            {/block}
+        {/if}
+
+        <hr />
+
+        {if count($privileges)}
+            <ul>
+                <li>
+                    <input type="checkbox" name="privileges[]" id="privilege_0" value="0">
+                    <label for="privilege_0">vše</label>
+                </li>
+                {foreach $privileges as $privilege}
+                    <li data-resource="{if $privilege->getResource()}{$privilege->getResource()->getKeyName()}{/if}">
+                        <input type="checkbox" name="privileges[]" id="privilege_{$privilege->getId()}" value="{$privilege->getId()}">
+                        <label for="privilege_{$privilege->getId()}">{$privilege->getName()}</label>
+                    </li>
+                {/foreach}
+            </ul>
+        {/if}
+
+        <hr />
+
+        <ul>
+            <li>
+                <input type="radio" name="access" id="access_0" value="0">
+                <label for="access_0">zamítnout</label>
+            </li>
+            <li>
+                <input type="radio" name="access" id="access_1" value="1">
+                <label for="access_1">povolit</label>
+            </li>
+        </ul>
+
+        <hr/>
+        {input submit}
+    {/form}
+{/block}

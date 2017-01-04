@@ -1,0 +1,9 @@
+title: "[PAGE_TITLE_(homepage)]"
+project: "[PROJECT_NAME]"
+description: "[META_DESCRIPTION]"
+keywords: "[META_KEYWORDS]"
+fb_title: "[FB_TITLE]"
+fb_site_name: "[FB_SITENAME]"
+fb_description: "[META_FB_DESCRIPTION]"
+fb_image: "[PATH_TO_FB_SHARE_IMAGE]" # should be stored at /assest/images/social
+fb_type: "[FB_TYPE]" # usually 'website'

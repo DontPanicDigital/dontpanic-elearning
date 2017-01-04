@@ -1,0 +1,12 @@
+services:
+	security.user: Nette\Security\User(..., @authenticator)
+
+	authenticator: DontPanic\User\UserAuthModel
+	apiTokenAuthenticator: DontPanic\Auth\APITokenAuthenticator
+
+	routerFactory: RouterFactory
+	router: @routerFactory::createRouter
+
+	serializer:
+		class:   JMS\Serializer\Serializer
+		factory: zvitek\Serializer\SerializerFactory::create

@@ -1,0 +1,9 @@
+default:
+    -
+        resource: role
+        privilege: display
+
+detail:
+    -
+        resource: role
+        privilege: display

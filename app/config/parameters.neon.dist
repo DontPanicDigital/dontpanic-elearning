@@ -1,0 +1,21 @@
+parameters:
+	database:
+		default:
+			host:
+			port: 3306
+			user:
+			password:
+			name:
+
+	serializer:
+		groups:
+			apiList: "apiV1_list"
+			apiDetail: "apiV1_detail"
+
+	rest:
+		default_format: json
+
+	acl:
+		cache: true
+		namespace: User.Acl
+		key: permission

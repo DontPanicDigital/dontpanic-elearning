@@ -1,0 +1,9 @@
+/* [Core] - Mixins
+------------------------------------------------------------------ */
+
+@mixin border-radius($r) {
+    @include border-top-radius($r);
+    @include border-bottom-radius($r);
+    @include border-left-radius($r);
+    @include border-right-radius($r);
+}

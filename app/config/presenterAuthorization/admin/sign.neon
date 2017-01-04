@@ -1,0 +1,8 @@
+in:
+    -
+        resource: null
+        privilege: null
+out:
+    -
+        resource: null
+        privilege: null
