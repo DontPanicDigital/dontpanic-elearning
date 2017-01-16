@@ -1,5 +1,135 @@
 {block content}
+    <div class="container">
+        <div class="box box-1">
+            <div class="box__title">
+                E-learning test
+            </div>
+            <p>
+                Vítejte v kurzu o Pojištění nahodilého poškození a krádeže. Kurz vás provede vším, co byste o pojištění měli vědět. Kurz probíha formou testu, ale nemusíte se bát - všechny vaše správné i špatné odpovědi vám vysvětlíme.
+            </p>
+            <p>
+                Abyhcom mohli začít, potřebujeme znát vaše jméno a příjmení a také email, na který vám pošleme certifikát o úspěšném absolvování kurzu
+            </p>
 
+            <div class="form">
+                {form registrationForm}
+                    {if $form->hasErrors()}
+                        {foreach $form->errors as $error}
+                            <div class="form__error form__error--global">{$error}</div>
+                        {/foreach}
+                    {/if}
+                    <div class="form__row">
+                        <input n:name="name" class="form__input" />
+                    </div>
+                    <div class="form__row">
+                        <input n:name="email" class="form__input" />
+                    </div>
+                    <div class="form__row">
+                        <input n:name="phone" class="form__input" />
+                    </div>
+                    <div class="form__row">
+                        <div class="button--continue">Pokracovat</div>
+                    </div>
+                {/form}
+            </div>
+            <div>
+                <ul class="sortable">
+                    <li id="1">prvni</li>
+                    <li id="2">druhy</li>
+                    <li id="3">treti</li>
+                    <li id="4">ctvrty</li>
+                    <li id="5">paty</li>
+                    <li id="6">sesty</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="box box-2">
+            <div class="box__title">
+                E-learning test 2
+            </div>
+            <p>
+                Vítejte v kurzu o Pojištění nahodilého poškození a krádeže. Kurz vás provede vším, co byste o pojištění měli vědět. Kurz probíha formou testu, ale nemusíte se bát - všechny vaše správné i špatné odpovědi vám vysvětlíme.
+            </p>
+            <p>
+                Abyhcom mohli začít, potřebujeme znát vaše jméno a příjmení a také email, na který vám pošleme certifikát o úspěšném absolvování kurzu
+            </p>
+
+            <div class="form">
+                <form>
+                    <div class="form__row">
+                        <input type="text" name="name" id="name" class="form__input" placeholder="Jméno a příjmení" />
+                    </div>
+
+                    <div class="form__row">
+                        <input type="text" name="email" id="email" class="form__input" placeholder="E-mailová adresa" />
+                    </div>
+
+                    <div class="form__row">
+                        <input type="text" name="phone" id="phone" class="form__input" placeholder="Telefonní číslo" />
+                    </div>
+                </form>
+            </div>
+            <button class="button--continue">Pokracovat</button>
+        </div>
+
+        <div class="box box-3">
+            <div class="box__title">
+                E-learning test 3
+            </div>
+            <p>
+                Vítejte v kurzu o Pojištění nahodilého poškození a krádeže. Kurz vás provede vším, co byste o pojištění měli vědět. Kurz probíha formou testu, ale nemusíte se bát - všechny vaše správné i špatné odpovědi vám vysvětlíme.
+            </p>
+            <p>
+                Abyhcom mohli začít, potřebujeme znát vaše jméno a příjmení a také email, na který vám pošleme certifikát o úspěšném absolvování kurzu
+            </p>
+
+            <div class="form">
+                <form>
+                    <div class="form__row">
+                        <input type="text" name="name" id="name" class="form__input" placeholder="Jméno a příjmení" />
+                    </div>
+
+                    <div class="form__row">
+                        <input type="text" name="email" id="email" class="form__input" placeholder="E-mailová adresa" />
+                    </div>
+
+                    <div class="form__row">
+                        <input type="text" name="phone" id="phone" class="form__input" placeholder="Telefonní číslo" />
+                    </div>
+                </form>
+            </div>
+            <button class="button--continue">Pokracovat</button>
+        </div>
+
+        <div class="box box-4">
+            <div class="box__title">
+                E-learning test 4
+            </div>
+            <p>
+                Vítejte v kurzu o Pojištění nahodilého poškození a krádeže. Kurz vás provede vším, co byste o pojištění měli vědět. Kurz probíha formou testu, ale nemusíte se bát - všechny vaše správné i špatné odpovědi vám vysvětlíme.
+            </p>
+            <p>
+                Abyhcom mohli začít, potřebujeme znát vaše jméno a příjmení a také email, na který vám pošleme certifikát o úspěšném absolvování kurzu
+            </p>
+
+            <div class="form">
+                <form>
+                    <div class="form__row">
+                        <input type="text" name="name" id="name" class="form__input" placeholder="Jméno a příjmení" />
+                    </div>
+
+                    <div class="form__row">
+                        <input type="text" name="email" id="email" class="form__input" placeholder="E-mailová adresa" />
+                    </div>
+
+                    <div class="form__row">
+                        <input type="text" name="phone" id="phone" class="form__input" placeholder="Telefonní číslo" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {/block}
 
-{block title|striptags}WELCOME{/block}
+{block title|striptags}E-learning{/block}

@@ -13,6 +13,8 @@ class ParametersProvider extends Nette\Object
 
     protected $acl;
 
+    protected $version;
+
     /** @var Nette\Http\Request */
     protected $request;
 
@@ -22,18 +24,21 @@ class ParametersProvider extends Nette\Object
      * @param                    $seralizer
      * @param                    $rest
      * @param                    $acl
+     * @param                    $version
      * @param Nette\Http\Request $request
      */
     public function __construct(
         $seralizer,
         $rest,
         $acl,
+        $version,
         Nette\Http\Request $request
     )
     {
         $this->serializer = $seralizer;
         $this->rest       = $rest;
         $this->acl        = $acl;
+        $this->version    = $version;
         $this->request    = $request;
     }
 
@@ -70,5 +75,10 @@ class ParametersProvider extends Nette\Object
     public function getAcl()
     {
         return $this->acl;
+    }
+
+    public function getVersion()
+    {
+        return $this->version;
     }
 }

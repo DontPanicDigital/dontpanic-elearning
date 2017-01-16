@@ -1,1 +1,22 @@
-{control form}
+<div class="container">
+    {form form, class=>'form-signin'}
+        {if $form->hasErrors()}
+            {foreach $form->errors as $error}
+                <div class="form__error form__error--global">{$error}</div>
+            {/foreach}
+        {/if}
+        <h2 class="form-signin-heading">Přihlašte se prosím</h2>
+        <label n:name="email" class="sr-only">E-mail</label>
+        <input class="form-control" placeholder="E-mail" n:name="email" />
+
+        <label n:name="password" class="sr-only">Heslo</label>
+        <input class="form-control" placeholder="Heslo" n:name="password" />
+
+        <div class="checkbox">
+            <label>
+                <input n:name="remember" /> Neodhlašovat automaticky
+            </label>
+        </div>
+        <input n:name="send" class="btn btn-lg btn-primary btn-block" />
+    {/form}
+</div>

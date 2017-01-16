@@ -1,6 +1,8 @@
 <?php
 namespace DontPanic\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Kdyby\Doctrine\Entities\MagicAccessors;
@@ -58,7 +60,7 @@ class AclRole
     private $comment;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="User", mappedBy="userRoles")
      */
@@ -66,8 +68,8 @@ class AclRole
 
     public function __construct()
     {
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->users    = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->children = new ArrayCollection();
+        $this->users    = new ArrayCollection();
     }
 
     /**
@@ -193,7 +195,7 @@ class AclRole
     /**
      * Get category
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getChildrens()
     {
@@ -227,11 +229,10 @@ class AclRole
     /**
      * Get user
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getUsers()
     {
         return $this->users;
     }
 }
-

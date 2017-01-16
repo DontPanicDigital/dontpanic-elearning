@@ -2,3 +2,13 @@ default:
     -
         resource: dashboard
         privilege: display
+
+tests:
+    -
+        resource: dashboard
+        privilege: display
+
+testDetail:
+    -
+        resource: dashboard
+        privilege: display

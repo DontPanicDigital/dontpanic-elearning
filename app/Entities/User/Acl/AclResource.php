@@ -4,6 +4,7 @@ namespace DontPanic\Entities;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Kdyby\Doctrine\Entities\MagicAccessors;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * AclResource
@@ -185,12 +186,10 @@ class AclResource
     /**
      * Get category
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getChildrens()
     {
         return $this->children;
     }
-
 }
-

@@ -1,8 +1,8 @@
 <?php
 namespace DontPanic\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Kdyby\Doctrine\Entities\BaseEntity;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -11,7 +11,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\Table(name="setting_categories")
  * @ORM\Entity
  */
-class SettingCategory extends BaseEntity
+class SettingCategory
 {
 
     /**
@@ -33,7 +33,7 @@ class SettingCategory extends BaseEntity
     /**
      * @ORM\OneToMany(targetEntity="Setting", mappedBy="category", cascade={"persist"})
      *
-     * @var array|\Doctrine\Common\Collections\ArrayCollection
+     * @var array|ArrayCollection
      **/
     protected $settings;
 
@@ -42,7 +42,7 @@ class SettingCategory extends BaseEntity
      */
     public function __construct()
     {
-        $this->settings = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->settings = new ArrayCollection();
     }
 
     /**
@@ -100,11 +100,10 @@ class SettingCategory extends BaseEntity
     }
 
     /**
-     * @return array|\Doctrine\Common\Collections\ArrayCollection
+     * @return array|ArrayCollection
      */
     public function getSettings()
     {
         return $this->settings;
     }
 }
-

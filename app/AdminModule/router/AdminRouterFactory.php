@@ -18,7 +18,7 @@ class AdminRouterFactory implements \IRouter
         AclRouter::createRoutes($router);
         UserRouter::createRoutes($router);
 
-        $router[] = new Route('admin/<presenter>[/<action>[/<token>]]', [
+        $router[] = new Route('admin/<presenter>/<action>[/<token>]', [
             'module'    => 'Admin',
             'presenter' => 'Page',
             'action'    => 'default',

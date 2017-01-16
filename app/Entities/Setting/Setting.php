@@ -2,7 +2,6 @@
 namespace DontPanic\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use Kdyby\Doctrine\Entities\BaseEntity;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -11,7 +10,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\Table(name="settings")
  * @ORM\Entity
  */
-class Setting extends BaseEntity
+class Setting
 {
 
     /**
@@ -183,4 +182,3 @@ class Setting extends BaseEntity
         return $this->category;
     }
 }
-

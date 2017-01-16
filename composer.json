@@ -35,7 +35,6 @@
     "kdyby/translation" : "^2.2",
     "j7mbo/twitter-api-php" : "^1.0",
     "cosenary/instagram" : "^2.3",
-    "facebook/php-sdk-v4" : "^5.1",
     "kdyby/doctrine" : "^3.1",
     "zenify/doctrine-behaviors" : "^2.4",
     "kdyby/forms-replicator" : "@dev",

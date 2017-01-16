@@ -51,9 +51,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     public function createTemplate($class = null)
     {
-        $template                = parent::createTemplate($class);
-        $template->isProduction  = $this->parametersProvider->isProduction();
-        $template->isDevelopment = $this->parametersProvider->isDevelopment();
+        $template                   = parent::createTemplate($class);
+        $template->isProduction     = $this->parametersProvider->isProduction();
+        $template->isDevelopment    = $this->parametersProvider->isDevelopment();
+        $template->versionTimeStamp = $this->parametersProvider->getVersion()['timestamp'];
 
         return $template;
     }

@@ -1,3 +1,5 @@
-import Foo from './components/foo';
+import Questions from './components/questions';
 
-Foo();
+window.onload = () => {
+    Questions.init()
+}

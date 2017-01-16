@@ -11,4 +11,15 @@ html, body {
     margin: 0;
     background-color: #fff;
     font-family: Arial, sans-serif;
+    background: #ededed;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.container {
+    padding: 15px;
+    width: 100%;
+    min-height: 100%;
+    @include position(absolute, 0 null null 0);
+    display: table;
 }

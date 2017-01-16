@@ -1,11 +1,11 @@
 parameters:
 	database:
 		default:
-			host:
-			port: 3306
-			user:
-			password:
-			name:
+			host: {{DB_HOST}}
+			port: {{DB_PORT}}
+			user: {{DB_USER}}
+			password: {{DB_PASSWORD}}
+			name: {{DB_NAME}}
 
 	serializer:
 		groups:
@@ -14,6 +14,9 @@ parameters:
 
 	rest:
 		default_format: json
+
+	version:
+		timestamp: {{TIME_STAMP}}
 
 	acl:
 		cache: true

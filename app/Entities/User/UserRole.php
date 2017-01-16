@@ -1,8 +1,8 @@
 <?php
 namespace DontPanic\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Kdyby\Doctrine\Entities\BaseEntity;
 
 /**
  * UserRole
@@ -10,8 +10,9 @@ use Kdyby\Doctrine\Entities\BaseEntity;
  * @ORM\Table(name="user_role")
  * @ORM\Entity
  */
-class UserRole extends BaseEntity
+class UserRole
 {
+
     /**
      * @var boolean
      *
@@ -40,7 +41,7 @@ class UserRole extends BaseEntity
      */
     public function __construct()
     {
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user = new ArrayCollection;
     }
 
     /**
@@ -111,4 +112,3 @@ class UserRole extends BaseEntity
         return $this->user;
     }
 }
-

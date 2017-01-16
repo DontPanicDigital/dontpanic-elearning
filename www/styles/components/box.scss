@@ -1,0 +1,26 @@
+.box {
+    background-color: $white;
+    width: 100%;
+    padding: 30px 20px;
+    display: table;
+    opacity: 0;
+    display: none;
+    @include position(absolute, 100px -200px null null);
+    
+    @include mq($from: desktop) {
+        width: 375px;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        margin: auto;
+        top: 50%;
+        right: -800px;
+        left: 0;
+    }
+    
+    &__title {
+        font-size: 25px;
+        color: $black;
+        font-weight: bold;
+    }
+}

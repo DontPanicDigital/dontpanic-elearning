@@ -39,11 +39,13 @@ let prepareFiles = () => {
     const path = "www/build";
 
     const sassFiles = [
+        { path: `${basePath}/styles/admin/admin.scss`, name: "admin" },
         { path: `${basePath}/styles/app.scss`, name: "styles" }
     ];
 
     let jsFiles = [
-        { path: `${basePath}/scripts/app.js`, name: "scripts" }
+        { path: `${basePath}/scripts/app.js`, name: "scripts" },
+        { path: `${basePath}/scripts/admin.js`, name: "admin" }
     ];
 
     if(args.react) {
@@ -214,6 +216,7 @@ gulp.task("watch", () => {
     }
 
     let watch = esteWatch(watchDirs, (e) => {
+        console.log(e.extension);
         switch (e.extension) {
             case "scss":
                 gulp.start("sass");

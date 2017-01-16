@@ -22,5 +22,6 @@ services:
 	- DontPanic\ParametersProvider(
 		%serializer.groups%,
 		%rest%,
-		%acl%
+		%acl%,
+		%version%
 	)
