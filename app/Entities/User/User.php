@@ -186,12 +186,36 @@ class User
     protected $apiTokens;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Company", inversedBy="users")
+     * @ORM\JoinTable(name="user_has_company",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="users_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="companies_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $companies;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SmsCode", mappedBy="user", cascade={"persist"})
+     *
+     * @var array|ArrayCollection
+     **/
+    private $smsCodes;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->userRoles = new ArrayCollection();
         $this->apiTokens = new ArrayCollection();
+        $this->companies = new ArrayCollection();
+        $this->smsCodes  = new ArrayCollection();
     }
 
     /**
@@ -637,5 +661,83 @@ class User
     public function removeApiToken(ApiToken $apiToken)
     {
         $this->apiTokens->removeElement($apiToken);
+    }
+
+    /**
+     * @param Company $company
+     *
+     * @return $this
+     */
+    public function addCompany(Company $company)
+    {
+        if ($this->companies->contains($company)) {
+            return;
+        }
+
+        $this->companies->add($company);
+        $company->addUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove company
+     *
+     * @param Company $company
+     */
+    public function removeBranchOffice(Company $company)
+    {
+        if (!$this->companies->contains($company)) {
+            return;
+        }
+
+        $this->companies->removeElement($company);
+        $company->removeUser($this);
+    }
+
+    /**
+     * @return array|ArrayCollection|Collection|static
+     */
+    public function getCompanies()
+    {
+        return $this->companies;
+    }
+
+    /**
+     * @param SmsCode $smsCode
+     *
+     * @return $this
+     */
+    public function addSmsCode(SmsCode $smsCode)
+    {
+        if ($this->smsCodes->contains($smsCode)) {
+            return;
+        }
+
+        $this->smsCodes->add($smsCode);
+
+        return $this;
+    }
+
+    /**
+     * Remove sms code
+     *
+     * @param SmsCode $smsCode
+     */
+    public function removeSmsCode(SmsCode $smsCode)
+    {
+        if (!$this->smsCodes->contains($smsCode)) {
+            return;
+        }
+
+        $this->smsCodes->removeElement($smsCode);
+    }
+
+    /**
+     * @return array|ArrayCollection|Collection|static
+     */
+    public function getSmsCodes()
+    {
+        return $this->smsCodes;
     }
 }
