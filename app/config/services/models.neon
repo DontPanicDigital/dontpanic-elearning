@@ -11,11 +11,20 @@ services:
 	- DontPanic\User\UserModel
 	- DontPanic\User\UserPasswordModel
 	- DontPanic\User\UserRegisterModel
-	- DontPanic\User\UserRoleModel
 	- DontPanic\User\UserFilterModel
 
 	- DontPanic\Setting\SettingModel
 	- DontPanic\Setting\SettingCategoryModel
+
+	- DontPanic\Company\CompanyModel
+
+	- DontPanic\SmsCode\SmsCodeModel
+
+	- DontPanic\Test\TestModel
+	- DontPanic\Test\TestQuestionModel
+	- DontPanic\Test\TestOptionModel
+	- DontPanic\Test\UserTestAnswerModel
+	- DontPanic\Test\UserTestScoreModel
 
 	- DontPanic\Api\ApiTokenModel
 

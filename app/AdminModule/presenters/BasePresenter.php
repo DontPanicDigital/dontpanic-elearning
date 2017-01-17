@@ -10,7 +10,7 @@ abstract class BasePresenter extends \App\Presenters\BasePresenter
     public function startup()
     {
         parent::startup();
-        parent::secured();
+        parent::secured(':Admin:Sign:in');
         parent::setUserEntity();
     }
 

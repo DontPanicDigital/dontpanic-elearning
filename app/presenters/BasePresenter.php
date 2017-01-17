@@ -139,11 +139,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     }
 
     /**
+     * @param string $loginPage
+     *
      * @throws Http403ForbiddenException
      * @throws \InvalidArgumentException
      * @throws \Nette\Application\AbortException
      */
-    protected function secured()
+    protected function secured($loginPage = 'Sign:in')
     {
         if ($this->user->isLoggedIn()) {
             $this->presenterAuthorizationModel->setName($this->name);
@@ -157,10 +159,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $this->presenterAuthorizationModel->check();
         } else {
             if ($this->user->logoutReason === UserStorage::INACTIVITY) {
-                $this->flashMessage($this->translator->trans('user.secured.message_after_logout_inactivity'));
-                $this->redirect('Sign:in');
+                if (!in_array($this->action, [ 'in' ], true)) {
+                    $this->flashMessage($this->translator->trans('user.secured.message_after_logout_inactivity'));
+                    $this->redirect('Sign:in');
+                    throw new Http403ForbiddenException();
+                }
             }
             if (!in_array($this->action, [ 'in' ], true)) {
+                if ($loginPage) {
+                    $this->redirect($loginPage);
+                }
                 throw new Http403ForbiddenException();
             }
         }

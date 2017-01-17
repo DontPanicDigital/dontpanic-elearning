@@ -9,10 +9,9 @@ use DontPanic\Credit\CreditHistoryException;
 use DontPanic\Credit\CreditModel;
 use DontPanic\Credit\CreditStatusModel;
 use DontPanic\Entities\User;
-use DontPanic\Setting\SettingValueNotFoundException;
+use DontPanic\Model\DoctrineModel;
 use Kdyby\Doctrine\EntityManager;
 use Kdyby\Events\Event;
-use DontPanic\Model\DoctrineModel;
 use Nette\Http\Session;
 use Nette\Utils\Random;
 
@@ -28,9 +27,6 @@ class UserRegisterModel extends DoctrineModel
     /** @var UserModel */
     protected $userModel;
 
-    /** @var UserRoleModel */
-    protected $userRoleModel;
-
     /** @var CompanyFacade */
     protected $companyFacade;
 
@@ -45,20 +41,17 @@ class UserRegisterModel extends DoctrineModel
      *
      * @param EntityManager $em
      * @param UserModel     $userModel
-     * @param UserRoleModel $userRoleModel
      * @param Session       $session
      */
     public function __construct(
         EntityManager $em,
         UserModel $userModel,
-        UserRoleModel $userRoleModel,
         Session $session)
     {
-        $this->em            = $em;
-        $this->er            = $this->em->getRepository(User::class);
-        $this->userModel     = $userModel;
-        $this->userRoleModel = $userRoleModel;
-        $this->session       = $session;
+        $this->em        = $em;
+        $this->er        = $this->em->getRepository(User::class);
+        $this->userModel = $userModel;
+        $this->session   = $session;
     }
 
     /**
