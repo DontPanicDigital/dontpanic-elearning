@@ -207,4 +207,14 @@ class Company
             }
         }
     }
+
+    /**
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function hasUser(User $user)
+    {
+        return $this->users->contains($user);
+    }
 }

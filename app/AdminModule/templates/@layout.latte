@@ -10,12 +10,19 @@
     {include '../../templates/html/favicon.latte'}
     <title>{ifset #title}{include title}{else}{_meta.title}{/ifset} | {_meta.project}</title>
     {include '../../templates/scripts/html5tagsSupport.latte'}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous"/>
     <link rel="stylesheet" href="/build/admin{if $isProduction}.min{/if}.css?v={$versionTimeStamp}" media="screen">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body class="{ifCurrent Sign:in}signin{/ifCurrent}">
+<body class="{ifCurrent :Admin:Sign:in}signin{/ifCurrent}">
     <div>
+        {if $user->isLoggedIn()}
+            {if count($companiesControl)}
+                {foreach $companiesControl as $company}
+                    <a n:class="company === $activeCompany ? active" n:href="setActiveCompany! companyToken=>$company->getToken()">{$company->getName()}</a>
+                {/foreach}
+            {/if}
+        {/if}
         {snippet flashMessages}
         {if count($flashes)}
             <div class="flashMessage flashMessage--autoclose">

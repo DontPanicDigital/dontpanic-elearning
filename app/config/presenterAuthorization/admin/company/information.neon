@@ -1,0 +1,4 @@
+noCompanies:
+    -
+        resource: user
+        privilege: display

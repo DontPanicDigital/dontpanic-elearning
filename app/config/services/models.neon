@@ -12,6 +12,7 @@ services:
 	- DontPanic\User\UserPasswordModel
 	- DontPanic\User\UserRegisterModel
 	- DontPanic\User\UserFilterModel
+	- DontPanic\User\UserCompanyControlModel
 
 	- DontPanic\Setting\SettingModel
 	- DontPanic\Setting\SettingCategoryModel

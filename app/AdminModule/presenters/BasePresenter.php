@@ -2,26 +2,72 @@
 
 namespace AdminModule;
 
-use Nette\Http\UserStorage;
+use DontPanic\Entities\Company;
+use DontPanic\User\SwitchCompanyException;
+use DontPanic\User\UserCompanyControlModel;
 
 abstract class BasePresenter extends \App\Presenters\BasePresenter
 {
 
+    /** @var UserCompanyControlModel @inject */
+    public $userCompanyControlModel;
+
+    /** @var Company */
+    public $company;
+
     public function startup()
     {
         parent::startup();
-        parent::secured(':Admin:Sign:in');
         parent::setUserEntity();
+        parent::secured(':Admin:Sign:in');
+
+        if ($this->user->isLoggedIn()) {
+            $this->initializeUserCompanyControl();
+        }
     }
 
-    public function getUser()
+    public function createTemplate($class = null)
     {
-        $user = parent::getUser();
-        // @TODO: set namespace for admin
-        /** @var UserStorage $storage */
-        //$storage = $user->getStorage();
-        //$storage->setNamespace('Admin');
+        $template                   = parent::createTemplate($class);
+        $template->companiesControl = $this->userCompanyControlModel->getCompanies();
+        $template->activeCompany    = $this->company;
+        $template->userEntity       = $this->userEntity;
 
-        return $user;
+        return $template;
+    }
+
+    /**
+     * @throws \Nette\Application\AbortException
+     * @throws \Nette\InvalidArgumentException
+     */
+    private function initializeUserCompanyControl()
+    {
+        $this->userCompanyControlModel->setUser($this->userEntity);
+
+        /** @var Company $company */
+        $this->company = $this->userCompanyControlModel->getActiveCompany();
+
+        if ($this->action !== 'noCompanies' && (!count($this->userCompanyControlModel->getCompanies()) || $this->company === null)) {
+            $this->redirect(':Admin:Company:Information:noCompanies');
+        }
+    }
+
+    /**
+     * @param $companyToken
+     *
+     * @throws \Nette\InvalidArgumentException
+     * @throws \Nette\Application\AbortException
+     * @throws \DontPanic\User\SwitchBranchOfficeException
+     */
+    public function handleSetActiveCompany($companyToken)
+    {
+        try {
+            $this->userCompanyControlModel->setActiveCompany($companyToken);
+        } catch (SwitchCompanyException $e) {
+            $this->flashMessage(
+                $this->translator->translate('company.switch.error')
+            );
+        }
+        $this->redirect('this');
     }
 }
