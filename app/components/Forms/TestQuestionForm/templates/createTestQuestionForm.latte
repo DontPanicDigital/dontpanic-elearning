@@ -1,0 +1,30 @@
+{form form}
+    {if $form->hasErrors()}
+        {foreach $form->errors as $error}
+            {$error}
+        {/foreach}
+    {/if}
+    <div class="form-group">
+        <input type="text" class="form-control" n:name="question" placeholder="Znění otázky"/>
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" n:name="description" rows="3" placeholder="Popis otázky"></textarea>
+    </div>
+    <h4 class="mt-3 mb-1">Výběr typu otázek</h4>
+    <div class="form-group">
+        <div class="row">
+            {foreach $form['type']->items as $key => $label}
+            <div class="col-xs-12 col-md-4">
+                <label n:name="type:$key" class="custom-control custom-radio">
+                    <input id="radio" name="radio" type="radio"  n:name="type:$key" class="custom-control-input question-type" value="radio" data-show="radio">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{_$label}</span>
+                </label>
+            </div>
+            {/foreach}
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" n:name="submit">Přidat otázku</button>
+    </div>
+{/form}

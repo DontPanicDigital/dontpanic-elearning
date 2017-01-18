@@ -4,3 +4,4 @@ services:
 	- DontPanic\Forms\UserFormFactory
 	- DontPanic\Forms\UserFilterFormFactory
 	- DontPanic\Forms\TestFormFactory
+	- DontPanic\Forms\TestQuestionFormFactory

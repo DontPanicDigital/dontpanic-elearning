@@ -5,11 +5,14 @@ namespace AdminModule\TestModule;
 use AppModule\Exception\Http401UnauthorizedException;
 use AppModule\Exception\Http404NotFoundException;
 use DontPanic\Entities\Test;
+use DontPanic\Entities\TestQuestion;
 use DontPanic\Exception\System\DeleteException;
 use DontPanic\Exception\System\NotFoundException;
 use DontPanic\Exception\System\PermissionException;
 use DontPanic\Forms\CreateTestForm;
+use DontPanic\Forms\CreateTestQuestionForm;
 use DontPanic\Forms\TestFormFactory;
+use DontPanic\Forms\TestQuestionFormFactory;
 use DontPanic\Forms\UpdateTestForm;
 use DontPanic\Test\DeleteTestModel;
 use DontPanic\Test\ListingTestModel;
@@ -24,6 +27,9 @@ class PagePresenter extends BasePresenter
 
     /** @var TestFormFactory @inject */
     public $testFormFactory;
+
+    /** @var TestQuestionFormFactory @inject */
+    public $testQuestionFormFactory;
 
     /** @var ListingTestModel @inject */
     public $listingTestModel;
@@ -61,6 +67,10 @@ class PagePresenter extends BasePresenter
         $updateTestForm       = $this->getComponent('updateTestForm');
         $updateTestForm->test = $test;
 
+        /** @var CreateTestQuestionForm $createTestQuestionForm */
+        $createTestQuestionForm       = $this->getComponent('createTestQuestionForm');
+        $createTestQuestionForm->test = $test;
+
         $this->template->test = $test;
     }
 
@@ -93,6 +103,21 @@ class PagePresenter extends BasePresenter
         /** @var UpdateTestForm $control */
         $control             = $this->testFormFactory->updateTest();
         $control->onUpdate[] = function (Test $test) {
+            $this->redirect('this');
+        };
+
+        return $control;
+    }
+
+    /**
+     * @return CreateTestQuestionForm
+     * @throws \Nette\Application\AbortException
+     */
+    public function createComponentCreateTestQuestionForm()
+    {
+        /** @var CreateTestQuestionForm $control */
+        $control             = $this->testQuestionFormFactory->createQuestion();
+        $control->onCreate[] = function (TestQuestion $testQuestion) {
             $this->redirect('this');
         };
 

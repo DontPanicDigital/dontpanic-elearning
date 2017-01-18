@@ -4,8 +4,10 @@ namespace DontPanic\Entities;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Knp\DoctrineBehaviors\Model\SoftDeletable\SoftDeletable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Nette\Utils\Random;
 
 /**
  * TestQuestion
@@ -16,7 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 class TestQuestion
 {
 
-    use SoftDeletable;
+    use Identifier;
     use Timestampable;
     use SoftDeletable;
 
@@ -40,6 +42,13 @@ class TestQuestion
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=10, nullable=false)
+     */
+    private $type;
 
     /**
      * @var Test
@@ -73,13 +82,11 @@ class TestQuestion
     }
 
     /**
-     * @param string $token
-     *
      * @return TestQuestion
      */
-    public function setToken(string $token): TestQuestion
+    public function setToken(): TestQuestion
     {
-        $this->token = $token;
+        $this->token = Random::generate(30, '0-9A-Za-z');
 
         return $this;
     }
@@ -120,6 +127,26 @@ class TestQuestion
     public function setDescription(string $description): TestQuestion
     {
         $this->description = $description ?: null;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return TestQuestion
+     */
+    public function setType(string $type): TestQuestion
+    {
+        $this->type = $type;
 
         return $this;
     }

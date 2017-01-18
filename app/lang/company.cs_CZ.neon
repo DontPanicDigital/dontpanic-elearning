@@ -15,6 +15,20 @@ update:
             fill_name: Zadejte název testu
             error: Test se nepodařilo upravit
 
+create_question:
+    form:
+        question: Otázka
+        description: Doplňující popis
+        type: Typ otázky
+        type_options:
+            checkbox: více možných odpovědí
+            radio: jedna možná odpověď
+            sort: řazení odpovědí
+        enter: Založit
+        errors:
+            fill_question: Zadejte  otázku
+            error: Otázku se nepodařilo založit
+
 list:
     error:
         no_test: Kde nic není ani smrt nebere
