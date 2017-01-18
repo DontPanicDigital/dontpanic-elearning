@@ -4,22 +4,24 @@
         {control createTestForm}
 
         <h2 class="mb-1">Seznam testů</h2>
-        {if count($testsList)}
-            <div class="row">
-                {foreach $testsList as $test}
-                    <div class="col-xs-12 col-md-3">
-                        <div class="card">
-                            <div class="card-block">
-                                <h4 class="card-title">{$test->getName()}</h4>
-                                <a href="{plink detail id=>$test->getToken()}" class="card-link">Editovat</a>
-                                <a href="#" class="card-link">Smazat</a>
+        {snippet testListing}
+            {if count($testsList)}
+                <div class="row">
+                    {foreach $testsList as $test}
+                        <div class="col-xs-12 col-md-3">
+                            <div class="card">
+                                <div class="card-block">
+                                    <h4 class="card-title">{$test->getName()}</h4>
+                                    <a href="{plink detail id=>$test->getToken()}" class="card-link">Editovat</a>
+                                    <a n:href="removeTest! testToken=>$test->getToken()" class="ajax card-link">Smazat</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {/foreach}
-            </div>
-        {else}
-            {_company.list.error.no_test}
-        {/if}
+                    {/foreach}
+                </div>
+            {else}
+                {_company.list.error.no_test}
+            {/if}
+        {/snippet}
     </div>
 {/block}

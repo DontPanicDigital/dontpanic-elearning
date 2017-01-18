@@ -9,3 +9,8 @@ create:
 list:
     error:
         no_test: Kde nic není ani smrt nebere
+
+delete:
+    errors:
+        not_found: Požadovaný test nebyl nalezen
+        error: Test se nepodařilo odstranit

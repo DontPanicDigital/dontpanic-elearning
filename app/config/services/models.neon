@@ -28,6 +28,7 @@ services:
 	- DontPanic\Test\UserTestScoreModel
 	- DontPanic\Test\CreateTestModel
 	- DontPanic\Test\ListingTestModel
+	- DontPanic\Test\DeleteTestModel
 
 	- DontPanic\Api\ApiTokenModel
 
