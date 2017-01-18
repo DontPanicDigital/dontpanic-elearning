@@ -89,7 +89,7 @@ class Test
      */
     public function setDescription(string $description): Test
     {
-        $this->description = $description;
+        $this->description = $description ?: null;
 
         return $this;
     }

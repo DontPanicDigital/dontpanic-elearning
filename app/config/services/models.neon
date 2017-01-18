@@ -30,6 +30,7 @@ services:
 	- DontPanic\Test\ListingTestModel
 	- DontPanic\Test\DeleteTestModel
 	- DontPanic\Test\PermissionTestModel
+	- DontPanic\Test\UpdateTestModel
 
 	- DontPanic\Api\ApiTokenModel
 

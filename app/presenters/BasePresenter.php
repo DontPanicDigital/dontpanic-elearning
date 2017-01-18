@@ -161,7 +161,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             if ($this->user->logoutReason === UserStorage::INACTIVITY) {
                 if (!in_array($this->action, [ 'in' ], true)) {
                     $this->flashMessage($this->translator->trans('user.secured.message_after_logout_inactivity'));
-                    $this->redirect('Sign:in');
+                    $this->redirect($loginPage);
                     throw new Http403ForbiddenException();
                 }
             }

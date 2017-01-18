@@ -6,6 +6,15 @@ create:
             fill_name: Zadejte název testu
             error: Test se nepodařilo založit
 
+update:
+    form:
+        name: Jméno testu
+        description: Popis testu
+        enter: Upravit
+        errors:
+            fill_name: Zadejte název testu
+            error: Test se nepodařilo upravit
+
 list:
     error:
         no_test: Kde nic není ani smrt nebere

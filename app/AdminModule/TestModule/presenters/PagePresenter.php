@@ -10,6 +10,7 @@ use DontPanic\Exception\System\NotFoundException;
 use DontPanic\Exception\System\PermissionException;
 use DontPanic\Forms\CreateTestForm;
 use DontPanic\Forms\TestFormFactory;
+use DontPanic\Forms\UpdateTestForm;
 use DontPanic\Test\DeleteTestModel;
 use DontPanic\Test\ListingTestModel;
 use DontPanic\Test\PermissionTestModel;
@@ -56,6 +57,10 @@ class PagePresenter extends BasePresenter
             throw new Http401UnauthorizedException;
         }
 
+        /** @var UpdateTestForm $updateTestForm */
+        $updateTestForm       = $this->getComponent('updateTestForm');
+        $updateTestForm->test = $test;
+
         $this->template->test = $test;
     }
 
@@ -74,6 +79,21 @@ class PagePresenter extends BasePresenter
         $control->user       = $this->userEntity;
         $control->onCreate[] = function (Test $test) {
             $this->redirect('detail', [ 'id' => $test->getToken() ]);
+        };
+
+        return $control;
+    }
+
+    /**
+     * @return UpdateTestForm
+     * @throws \Nette\Application\AbortException
+     */
+    public function createComponentUpdateTestForm()
+    {
+        /** @var UpdateTestForm $control */
+        $control             = $this->testFormFactory->updateTest();
+        $control->onUpdate[] = function (Test $test) {
+            $this->redirect('this');
         };
 
         return $control;
