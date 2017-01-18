@@ -5,12 +5,22 @@ namespace AdminModule\TestModule;
 use DontPanic\Entities\Test;
 use DontPanic\Forms\CreateTestForm;
 use DontPanic\Forms\TestFormFactory;
+use DontPanic\Test\ListingTestModel;
 
 class PagePresenter extends BasePresenter
 {
 
     /** @var TestFormFactory @inject */
     public $testFormFactory;
+
+    /** @var ListingTestModel @inject */
+    public $listingTestModel;
+
+    public function actionDefault()
+    {
+        $this->listingTestModel->setCompany($this->company);
+        $this->template->testsList = $this->listingTestModel->getList()->getQuery()->getResult();
+    }
 
     /**************************************************************************************************************z*v*/
     /*************** COMPONENTS ***************/

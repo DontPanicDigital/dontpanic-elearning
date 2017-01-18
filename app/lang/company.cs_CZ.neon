@@ -5,3 +5,7 @@ create:
         errors:
             fill_name: Zadejte název testu
             error: Test se nepodařilo založit
+
+list:
+    error:
+        no_test: Kde nic není ani smrt nebere
