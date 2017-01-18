@@ -16,7 +16,7 @@
             {foreach $form['type']->items as $key => $label}
             <div class="col-xs-12 col-md-4">
                 <label n:name="type:$key" class="custom-control custom-radio">
-                    <input id="radio" name="radio" type="radio"  n:name="type:$key" class="custom-control-input question-type" value="radio" data-show="radio">
+                    <input type="radio"  n:name="type:$key" class="custom-control-input question-type" data-show="radio">
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">{_$label}</span>
                 </label>
