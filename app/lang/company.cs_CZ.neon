@@ -1,0 +1,7 @@
+create:
+    form:
+        name: Jméno testu
+        enter: Založit
+        errors:
+            fill_name: Zadejte název testu
+            error: Test se nepodařilo založit

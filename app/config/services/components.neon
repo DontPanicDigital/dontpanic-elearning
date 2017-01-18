@@ -3,3 +3,4 @@ services:
 	- DontPanic\Forms\PasswordFormFactory
 	- DontPanic\Forms\UserFormFactory
 	- DontPanic\Forms\UserFilterFormFactory
+	- DontPanic\Forms\TestFormFactory
