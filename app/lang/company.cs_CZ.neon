@@ -13,4 +13,5 @@ list:
 delete:
     errors:
         not_found: Požadovaný test nebyl nalezen
+        no_permission: Nemáte oprávnění
         error: Test se nepodařilo odstranit
