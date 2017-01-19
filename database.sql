@@ -19,7 +19,7 @@ CREATE TABLE `acl` (
   CONSTRAINT `acl_ibfk_1` FOREIGN KEY (`privilege_id`) REFERENCES `acl_privileges` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `acl_ibfk_2` FOREIGN KEY (`resource_id`) REFERENCES `acl_resources` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `acl_ibfk_3` FOREIGN KEY (`role_id`) REFERENCES `acl_roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 INSERT INTO `acl` (`id`, `role_id`, `privilege_id`, `resource_id`, `access`) VALUES
 (1,	1,	NULL,	NULL,	1);
@@ -35,7 +35,7 @@ CREATE TABLE `acl_privileges` (
   UNIQUE KEY `key_name` (`key_name`),
   KEY `acl_resources_v2_id` (`acl_resources_id`),
   CONSTRAINT `acl_privileges_ibfk_2` FOREIGN KEY (`acl_resources_id`) REFERENCES `acl_resources` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 INSERT INTO `acl_privileges` (`id`, `key_name`, `name`, `comment`, `acl_resources_id`) VALUES
 (1,	'display',	'Display',	NULL,	NULL);
@@ -51,7 +51,7 @@ CREATE TABLE `acl_resources` (
   UNIQUE KEY `key_name` (`key_name`),
   KEY `gui_acl_resources_v2_ibfk_1` (`parent_id`),
   CONSTRAINT `acl_resources_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `acl_resources` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 INSERT INTO `acl_resources` (`id`, `parent_id`, `key_name`, `name`, `comment`) VALUES
 (1,	NULL,	'acl',	'ACL',	NULL),
@@ -73,7 +73,7 @@ CREATE TABLE `acl_roles` (
   UNIQUE KEY `key_name` (`key_name`),
   KEY `gui_acl_roles_v2_ibfk_1` (`parent_id`),
   CONSTRAINT `acl_roles_ibfk_2` FOREIGN KEY (`parent_id`) REFERENCES `acl_roles` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 INSERT INTO `acl_roles` (`id`, `parent_id`, `key_name`, `name`, `comment`) VALUES
 (1,	NULL,	'god',	'God',	NULL),
@@ -110,6 +110,21 @@ CREATE TABLE `api_tokens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
+DROP TABLE IF EXISTS `companies`;
+CREATE TABLE `companies` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `companies` (`id`, `name`, `token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1,	'iwory\'s pub',	'Zzmg3WvuPXF55Dm1RdqH8PN5pyJPgU',	'2017-01-17 17:06:59',	'2017-01-17 17:06:59',	NULL),
+(2,	'don\'t panic',	'3NVV0Dp0CIRBNb48KASNSk2gW1B3Ut',	'2017-01-18 11:16:09',	'2017-01-18 11:16:09',	NULL);
+
 DROP TABLE IF EXISTS `settings`;
 CREATE TABLE `settings` (
   `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
@@ -132,6 +147,97 @@ CREATE TABLE `setting_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
+DROP TABLE IF EXISTS `sms_codes`;
+CREATE TABLE `sms_codes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `token` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `users_id` int(11) NOT NULL,
+  `tests_id` int(10) unsigned NOT NULL,
+  `code` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
+  `used` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `users_id` (`users_id`),
+  KEY `tests_id` (`tests_id`),
+  CONSTRAINT `sms_codes_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `sms_codes_ibfk_2` FOREIGN KEY (`tests_id`) REFERENCES `tests` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+DROP TABLE IF EXISTS `tests`;
+CREATE TABLE `tests` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `token` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `companies_id` tinyint(3) unsigned DEFAULT NULL,
+  `users_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `companies_id` (`companies_id`),
+  KEY `users_id` (`users_id`),
+  CONSTRAINT `tests_ibfk_1` FOREIGN KEY (`companies_id`) REFERENCES `companies` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `tests_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `tests` (`id`, `token`, `name`, `description`, `companies_id`, `users_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1,	'P6vqOtBkiUCCkLv14iAO0KEgLtyNHc',	'Jak se vám daří v práci?',	NULL,	1,	1,	'2017-01-18 10:54:46',	'2017-01-18 10:54:46',	NULL),
+(2,	'3NVV0Dp0CIRBNb48KASNSk2gW1B3Ut',	'Jaké kolečko je větší?',	NULL,	1,	1,	'2017-01-18 10:59:02',	'2017-01-18 15:18:17',	NULL);
+
+DROP TABLE IF EXISTS `test_options`;
+CREATE TABLE `test_options` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `test_questions_id` int(10) unsigned NOT NULL,
+  `token` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `answer` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `annotation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `correct` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `test_questions_id` (`test_questions_id`),
+  CONSTRAINT `test_options_ibfk_1` FOREIGN KEY (`test_questions_id`) REFERENCES `test_questions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `test_options` (`id`, `test_questions_id`, `token`, `answer`, `description`, `annotation`, `correct`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1,	1,	'soYXMsR9MdlSmlBVfu55mpHoEn0ZOj',	'Odpověd 2',	NULL,	NULL,	0,	'2017-01-19 15:02:55',	'2017-01-19 18:15:12',	NULL),
+(2,	1,	'bIJT4azpShEeoMdlw6eVnJf1zmtxad',	NULL,	NULL,	NULL,	0,	'2017-01-19 15:05:57',	'2017-01-19 15:46:02',	'2017-01-19 15:46:02'),
+(3,	1,	'3S6bnqrlcVpRDhaMtWNHbgTgXZ8SHZ',	NULL,	NULL,	NULL,	0,	'2017-01-19 15:06:12',	'2017-01-19 15:48:05',	'2017-01-19 15:48:05'),
+(4,	1,	'sXQIF4xRCpaO0kp7AYXxB1Us866T6w',	NULL,	NULL,	NULL,	0,	'2017-01-19 15:47:46',	'2017-01-19 15:48:04',	'2017-01-19 15:48:04'),
+(5,	1,	'AZ1BYFsaBDAkKzuqoTSfiLmemr3dtP',	'Odpověd 3',	NULL,	NULL,	0,	'2017-01-19 15:47:47',	'2017-01-19 18:15:12',	NULL),
+(6,	1,	'eZeYHjeSzdDegtOTmlOt8ZFhCsKFtD',	NULL,	NULL,	NULL,	0,	'2017-01-19 15:47:48',	'2017-01-19 15:48:21',	'2017-01-19 15:48:21'),
+(7,	1,	'zrJvevvQUzV73bqJ5J1oaq3XBSVJu5',	'Odpověd 4',	NULL,	NULL,	0,	'2017-01-19 15:47:48',	'2017-01-19 18:15:12',	NULL),
+(8,	1,	'HryK8XatMPwDcaGzw0coDIBtQbVplt',	NULL,	NULL,	NULL,	0,	'2017-01-19 15:48:11',	'2017-01-19 15:48:12',	'2017-01-19 15:48:12'),
+(9,	2,	'Ml2j2BHcW0QMAf3kTS8DLdzmqsE6Ck',	'asdas',	NULL,	NULL,	1,	'2017-01-19 16:35:50',	'2017-01-19 18:21:22',	NULL),
+(10,	1,	'EPqAENtZ8pN8LDpJ6nusTYjy0SmAiP',	'Odpověd 5',	NULL,	NULL,	1,	'2017-01-19 17:29:17',	'2017-01-19 18:15:12',	NULL),
+(11,	2,	'5eFLXB9B4Zg2xvc4qXBpHLjrKkEooV',	'asdas',	NULL,	NULL,	0,	'2017-01-19 18:21:15',	'2017-01-19 18:21:22',	NULL);
+
+DROP TABLE IF EXISTS `test_questions`;
+CREATE TABLE `test_questions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tests_id` int(10) unsigned NOT NULL,
+  `token` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `question` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `sort` tinyint(3) unsigned DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tests_id` (`tests_id`),
+  CONSTRAINT `test_questions_ibfk_1` FOREIGN KEY (`tests_id`) REFERENCES `tests` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `test_questions` (`id`, `tests_id`, `token`, `question`, `description`, `type`, `sort`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1,	2,	'iSFvqdb12XaPH0KSJUOETXabUVkuTM',	'Jak ti dneska je?',	'dddasdsa',	'RADIOLIST',	NULL,	'2017-01-18 16:39:12',	'2017-01-19 15:49:02',	NULL),
+(2,	2,	'J8kd9kK686sg7QL15gahgI2ud1SSp2',	'Co budeš dělat?',	NULL,	'RADIOLIST',	NULL,	'2017-01-19 11:39:00',	'2017-01-19 14:40:28',	NULL);
+
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -152,11 +258,57 @@ CREATE TABLE `users` (
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `users` (`id`, `username`, `name`, `surname`, `email`, `phone`, `sex`, `password`, `password_token`, `password_expiration_at`, `token`, `active`, `number_of_logins`, `last_login_at`, `created_at`, `deleted_at`) VALUES
-(1,	NULL,	'Lisa',	'Simpson',	'lisa@dontpanic.cz',	NULL,	NULL,	'$2y$10$zUIOxVWGoi3w5PgDigmtIOPwhA5qH8l1Gj.lXAsEPv15qFGRZ263S',	NULL,	NULL,	'ehf9i35w495tar9zeihghkahrbxv1o',	1,	33,	'2017-01-02 17:45:29',	'2017-01-02 16:05:43',	NULL),
+(1,	NULL,	'Lisa',	'Simpson',	'lisa@dontpanic.cz',	NULL,	NULL,	'$2y$10$zUIOxVWGoi3w5PgDigmtIOPwhA5qH8l1Gj.lXAsEPv15qFGRZ263S',	NULL,	NULL,	'ehf9i35w495tar9zeihghkahrbxv1o',	1,	45,	'2017-01-19 15:02:49',	'2017-01-02 16:05:43',	NULL),
 (2,	NULL,	'Bart',	'Simpson',	'bart@dontpanic.cz',	NULL,	NULL,	'$2y$10$peXSb2UXlOMyQPjyvlQGCeUbG/70KzgYnyorJXYIT2JOEZdKlovqy',	NULL,	NULL,	'0v5kaqzoqujnvir4tm3y8h9xg8jdns',	1,	4,	'2017-01-02 17:30:47',	'2017-01-02 17:25:05',	NULL);
+
+DROP TABLE IF EXISTS `user_has_company`;
+CREATE TABLE `user_has_company` (
+  `users_id` int(11) NOT NULL,
+  `companies_id` tinyint(3) unsigned NOT NULL,
+  KEY `users_id` (`users_id`),
+  KEY `companies_id` (`companies_id`),
+  CONSTRAINT `user_has_company_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `user_has_company_ibfk_2` FOREIGN KEY (`companies_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `user_has_company` (`users_id`, `companies_id`) VALUES
+(1,	1),
+(1,	2);
+
+DROP TABLE IF EXISTS `user_test_answers`;
+CREATE TABLE `user_test_answers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `test_options_id` int(10) unsigned DEFAULT NULL,
+  `users_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `test_options_id` (`test_options_id`),
+  KEY `users_id` (`users_id`),
+  CONSTRAINT `user_test_answers_ibfk_1` FOREIGN KEY (`test_options_id`) REFERENCES `test_options` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `user_test_answers_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+DROP TABLE IF EXISTS `user_test_score`;
+CREATE TABLE `user_test_score` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `users_id` int(11) NOT NULL,
+  `tests_id` int(10) unsigned NOT NULL,
+  `correct_answers` int(11) NOT NULL DEFAULT '0',
+  `wrong_answers` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `users_id` (`users_id`),
+  KEY `tests_id` (`tests_id`),
+  CONSTRAINT `user_test_score_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `user_test_score_ibfk_2` FOREIGN KEY (`tests_id`) REFERENCES `tests` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 DROP TABLE IF EXISTS `user_tokens`;
 CREATE TABLE `user_tokens` (
@@ -180,4 +332,4 @@ CREATE TABLE `_migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
--- 2017-01-02 17:27:13
+-- 2017-01-19 17:23:21
