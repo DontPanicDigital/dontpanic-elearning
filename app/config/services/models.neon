@@ -33,6 +33,8 @@ services:
 	- DontPanic\Test\UpdateTestModel
 	- DontPanic\Test\CreateTestQuestionModel
 	- DontPanic\Test\UpdateTestQuestionModel
+	- DontPanic\Test\DeleteTestQuestionModel
+	- DontPanic\Test\PermissionTestQuestionModel
 
 	- DontPanic\Api\ApiTokenModel
 

@@ -141,6 +141,7 @@ class PagePresenter extends BasePresenter
             /** @var UpdateTestQuestionForm $component */
             $component               = $this->testQuestionFormFactory->updateQuestion();
             $component->testQuestion = $testQuestion;
+            $component->user         = $this->userEntity;
 
             return $component;
         });

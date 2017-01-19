@@ -1,2 +1,4 @@
 services:
 	- DontPanic\User\UserFacade
+
+	- DontPanic\Test\DeleteTestQuestionFacade

@@ -49,3 +49,8 @@ delete:
         not_found: Požadovaný test nebyl nalezen
         no_permission: Nemáte oprávnění
         error: Test se nepodařilo odstranit
+
+delete_question:
+    errors:
+        error: Otázku se nepodařilo odstranit
+    success: Otázka odstraněna
