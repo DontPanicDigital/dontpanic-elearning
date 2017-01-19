@@ -1,6 +1,7 @@
 <?php
 namespace DontPanic\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
@@ -53,6 +54,21 @@ class Test
      * @ORM\JoinColumn(name="users_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @var array|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TestQuestion", mappedBy="test", cascade={"persist"})
+     **/
+    private $questions;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -154,5 +170,41 @@ class Test
     public function getCompany()
     {
         return $this->company;
+    }
+
+    /**
+     * @return array|ArrayCollection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * Add vote
+     *
+     * @param TestQuestion $testQuestion
+     *
+     * @return Test
+     */
+    public function addQuestion(TestQuestion $testQuestion): Test
+    {
+        if ($this->questions->contains($testQuestion)) {
+            return;
+        }
+        $this->questions->add($testQuestion);
+
+        return $this;
+    }
+
+    /**
+     * @param TestQuestion $testQuestion
+     */
+    public function removeQuestion(TestQuestion $testQuestion)
+    {
+        if (!$this->questions->contains($testQuestion)) {
+            return;
+        }
+        $this->questions->removeElement($testQuestion);
     }
 }

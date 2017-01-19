@@ -9,6 +9,15 @@
 
                 <div class="form-group">
 
+                    {if count($test->getQuestions())}
+                        {foreach $test->getQuestions() as $question}
+                            {var $questionId = $question->getId()}
+                            {control updateTestQuestionForm-$questionId}
+                        {/foreach}
+                    {else}
+
+                    {/if}
+
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="collapse radio">

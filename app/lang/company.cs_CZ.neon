@@ -29,6 +29,17 @@ create_question:
             fill_question: Zadejte  otázku
             error: Otázku se nepodařilo založit
 
+update_question:
+    form:
+        question: Otázka
+        description: Doplňující popis
+        enter: Upravit
+        errors:
+            fill_question: Zadejte  otázku
+            error: Otázku se nepodařilo upravit
+        success:
+            question: Upraveno
+
 list:
     error:
         no_test: Kde nic není ani smrt nebere

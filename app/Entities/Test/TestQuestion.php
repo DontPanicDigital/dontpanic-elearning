@@ -51,6 +51,13 @@ class TestQuestion
     private $type;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="sort", type="integer", nullable=true)
+     */
+    private $sort;
+
+    /**
      * @var Test
      *
      * @ORM\ManyToOne(targetEntity="Test", cascade={"persist"}, fetch="LAZY")
@@ -147,6 +154,26 @@ class TestQuestion
     public function setType(string $type): TestQuestion
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @param string $sort
+     *
+     * @return TestQuestion
+     */
+    public function setSort($sort): TestQuestion
+    {
+        $this->sort = $sort;
 
         return $this;
     }

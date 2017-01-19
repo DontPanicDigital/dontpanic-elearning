@@ -14,16 +14,22 @@ use DontPanic\Forms\CreateTestQuestionForm;
 use DontPanic\Forms\TestFormFactory;
 use DontPanic\Forms\TestQuestionFormFactory;
 use DontPanic\Forms\UpdateTestForm;
+use DontPanic\Forms\UpdateTestQuestionForm;
 use DontPanic\Test\DeleteTestModel;
 use DontPanic\Test\ListingTestModel;
 use DontPanic\Test\PermissionTestModel;
 use DontPanic\Test\TestModel;
+use DontPanic\Test\TestQuestionModel;
+use Nette\Application\UI\Multiplier;
 
 class PagePresenter extends BasePresenter
 {
 
     /** @var TestModel @inject */
     public $testModel;
+
+    /** @var TestQuestionModel @inject */
+    public $testQuestionModel;
 
     /** @var TestFormFactory @inject */
     public $testFormFactory;
@@ -120,6 +126,24 @@ class PagePresenter extends BasePresenter
         $control->onCreate[] = function (TestQuestion $testQuestion) {
             $this->redirect('this');
         };
+
+        return $control;
+    }
+
+    /**
+     * @return Multiplier
+     */
+    public function createComponentUpdateTestQuestionForm()
+    {
+        $control = new Multiplier(function ($name) {
+            /** @var TestQuestion $testQuestion */
+            $testQuestion = $this->testQuestionModel->find($name);
+            /** @var UpdateTestQuestionForm $component */
+            $component               = $this->testQuestionFormFactory->updateQuestion();
+            $component->testQuestion = $testQuestion;
+
+            return $component;
+        });
 
         return $control;
     }
