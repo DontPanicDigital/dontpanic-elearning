@@ -1,6 +1,7 @@
 <?php
 namespace DontPanic\Forms;
 
+use DontPanic\Test\CreateTestOptionModel;
 use DontPanic\Test\CreateTestQuestionModel;
 use DontPanic\Test\DeleteTestQuestionFacade;
 use DontPanic\Test\UpdateTestModel;
@@ -20,6 +21,9 @@ class TestQuestionFormFactory
     /** @var DeleteTestQuestionFacade */
     protected $deleteTestQuestionFacade;
 
+    /** @var CreateTestOptionModel */
+    protected $createTestOptionModel;
+
     /** @var ITranslator */
     protected $translator;
 
@@ -33,6 +37,7 @@ class TestQuestionFormFactory
      * @param UpdateTestQuestionModel  $updateTestQuestionModel
      * @param UpdateTestModel          $updateTestModel
      * @param DeleteTestQuestionFacade $deleteTestQuestionFacade
+     * @param CreateTestOptionModel    $createTestOptionModel
      * @param ITranslator              $translator
      * @param EntityManager            $em
      */
@@ -41,6 +46,7 @@ class TestQuestionFormFactory
         UpdateTestQuestionModel $updateTestQuestionModel,
         UpdateTestModel $updateTestModel,
         DeleteTestQuestionFacade $deleteTestQuestionFacade,
+        CreateTestOptionModel $createTestOptionModel,
         ITranslator $translator,
         EntityManager $em
     )
@@ -49,6 +55,7 @@ class TestQuestionFormFactory
         $this->updateTestQuestionModel  = $updateTestQuestionModel;
         $this->updateTestModel          = $updateTestModel;
         $this->deleteTestQuestionFacade = $deleteTestQuestionFacade;
+        $this->createTestOptionModel    = $createTestOptionModel;
         $this->translator               = $translator;
         $this->em                       = $em;
     }
@@ -60,7 +67,7 @@ class TestQuestionFormFactory
 
     public function updateQuestion()
     {
-        return new UpdateTestQuestionForm($this->deleteTestQuestionFacade, $this->updateTestQuestionModel, $this->translator);
+        return new UpdateTestQuestionForm($this->deleteTestQuestionFacade, $this->updateTestQuestionModel, $this->createTestOptionModel, $this->translator);
     }
 
 }

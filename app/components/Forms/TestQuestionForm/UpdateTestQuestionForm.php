@@ -3,8 +3,10 @@ namespace DontPanic\Forms;
 
 use DontPanic\Entities\TestQuestion;
 use DontPanic\Entities\User;
+use DontPanic\Exception\System\CreateException;
 use DontPanic\Exception\System\DeleteException;
 use DontPanic\Exception\System\UpdateException;
+use DontPanic\Test\CreateTestOptionModel;
 use DontPanic\Test\DeleteTestQuestionFacade;
 use DontPanic\Test\UpdateTestQuestionModel;
 use DontPanic\User\UserUpdateException;
@@ -21,6 +23,9 @@ class UpdateTestQuestionForm extends UI\Control
 
     /** @var UpdateTestQuestionModel */
     private $updateTestQuestionModel;
+
+    /** @var CreateTestOptionModel */
+    private $createTestOptionModel;
 
     /** @var Translator */
     private $translator;
@@ -39,17 +44,20 @@ class UpdateTestQuestionForm extends UI\Control
      *
      * @param DeleteTestQuestionFacade $deleteTestQuestionFacade
      * @param UpdateTestQuestionModel  $updateTestQuestionModel
+     * @param CreateTestOptionModel    $createTestOptionModel
      * @param ITranslator              $translator
      */
     public function __construct(
         DeleteTestQuestionFacade $deleteTestQuestionFacade,
         UpdateTestQuestionModel $updateTestQuestionModel,
+        CreateTestOptionModel $createTestOptionModel,
         ITranslator $translator
     )
     {
         parent::__construct();
         $this->deleteTestQuestionFacade = $deleteTestQuestionFacade;
         $this->updateTestQuestionModel  = $updateTestQuestionModel;
+        $this->createTestOptionModel    = $createTestOptionModel;
         $this->translator               = $translator;
     }
 
@@ -130,6 +138,23 @@ class UpdateTestQuestionForm extends UI\Control
             $this->getPresenter()->flashMessage($this->translator->trans('company.delete_question.success'));
         } catch (DeleteException $e) {
             $this->getPresenter()->flashMessage($this->translator->trans('company.delete_question.errors.error'));
+        }
+        if ($this->getPresenter()->isAjax()) {
+            $this->redrawControl('testQuestion');
+            $this->getPresenter()->redrawControl('flashMessages');
+        } else {
+            $this->getPresenter()->redirect('this');
+        }
+    }
+
+    public function handleCreateTestOption()
+    {
+        try {
+            $this->createTestOptionModel->setTestQuestion($this->testQuestion);
+            $this->createTestOptionModel->create();
+            $this->getPresenter()->flashMessage($this->translator->trans('company.create_option.success'));
+        } catch (CreateException $e) {
+            $this->getPresenter()->flashMessage($this->translator->trans('company.create_option.errors.error'));
         }
         if ($this->getPresenter()->isAjax()) {
             $this->redrawControl('testQuestion');

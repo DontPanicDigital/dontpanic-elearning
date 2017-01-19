@@ -31,10 +31,13 @@ services:
 	- DontPanic\Test\DeleteTestModel
 	- DontPanic\Test\PermissionTestModel
 	- DontPanic\Test\UpdateTestModel
+
 	- DontPanic\Test\CreateTestQuestionModel
 	- DontPanic\Test\UpdateTestQuestionModel
 	- DontPanic\Test\DeleteTestQuestionModel
 	- DontPanic\Test\PermissionTestQuestionModel
+
+	- DontPanic\Test\CreateTestOptionModel
 
 	- DontPanic\Api\ApiTokenModel
 

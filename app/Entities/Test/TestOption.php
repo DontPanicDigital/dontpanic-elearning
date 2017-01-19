@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Knp\DoctrineBehaviors\Model\SoftDeletable\SoftDeletable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Nette\Utils\Random;
 
 /** @noinspection PhpDeprecationInspection */
 
@@ -21,13 +23,21 @@ class TestOption
 
     use Identifier;
     use SoftDeletable;
+    use Timestampable;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="answer", type="string", length=255, nullable=false)
+     * @ORM\Column(name="answer", type="string", length=255, nullable=true)
      */
     private $option;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", length=30, nullable=false)
+     */
+    private $token;
 
     /**
      * @var string
@@ -69,6 +79,24 @@ class TestOption
     /**
      * @return string
      */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
+     * @return TestOption
+     */
+    public function setToken(): TestOption
+    {
+        $this->token = Random::generate(30, '0-9A-Za-z');
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getOption(): string
     {
         return $this->option ?: '';
@@ -79,7 +107,7 @@ class TestOption
      *
      * @return TestOption
      */
-    public function setOption(string $option): TestOption
+    public function setOption($option): TestOption
     {
         $this->option = $option ?: null;
 

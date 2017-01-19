@@ -6,16 +6,20 @@
                 {control updateTestForm}
                 <h2 class="mt-3 mb-1">Přidat otázku</h2>
                 {control createTestQuestionForm}
-
+                <br />
+                <hr/>
+                <br />
+                <br />
                 <div class="form-group">
-
                     {if count($test->getQuestions())}
                         {foreach $test->getQuestions() as $question}
                             {var $questionId = $question->getId()}
                             {control updateTestQuestionForm-$questionId}
+                            <hr/>
+                            <br />
                         {/foreach}
                     {else}
-
+                        {_company.list.error.no_question}
                     {/if}
 
                     <div class="row">

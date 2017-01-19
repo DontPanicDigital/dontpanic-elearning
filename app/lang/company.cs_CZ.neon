@@ -29,6 +29,11 @@ create_question:
             fill_question: Zadejte  otázku
             error: Otázku se nepodařilo založit
 
+create_option:
+    errors:
+        error: Další možnost se nepodařilo založit
+    success: Další možnost vytvořena
+
 update_question:
     form:
         question: Otázka
@@ -43,6 +48,8 @@ update_question:
 list:
     error:
         no_test: Kde nic není ani smrt nebere
+        no_question: Kde nic není ani smrt nebere
+        no_option: Kde nic není ani smrt nebere
 
 delete:
     errors:

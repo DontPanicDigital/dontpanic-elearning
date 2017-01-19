@@ -13,9 +13,17 @@
                 <textarea class="form-control" n:name="description" rows="3" placeholder="Popis otázky"></textarea>
             </div>
             <div class="form-group">
+                <a n:href="createTestOption!" class="ajax btn btn-success">Přidat odpověď</a>
                 <button class="btn btn-primary" n:name="submit">Uložit otázku</button>
                 <a n:href="removeTestQuestion! testQuestionToken=>$testQuestion->getToken()" class="btn btn-danger">Odstranit</a>
             </div>
         {/form}
+        {if count($testQuestion->getOptions())}
+            {foreach $testQuestion->getOptions() as $option}
+                {$option->getId()}
+            {/foreach}
+        {else}
+            {_company.list.error.no_option}
+        {/if}
     {/if}
 {/snippet}
