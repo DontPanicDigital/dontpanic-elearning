@@ -13,10 +13,12 @@
                 <div class="form-group">
                     {if count($test->getQuestions())}
                         {foreach $test->getQuestions() as $question}
-                            {var $questionId = $question->getId()}
-                            {control updateTestQuestionForm-$questionId}
-                            <hr/>
-                            <br />
+                            {if !$question->isDeleted()}
+                                {var $questionId = $question->getId()}
+                                {control updateTestQuestionForm-$questionId}
+                                <hr/>
+                                <br />
+                            {/if}
                         {/foreach}
                     {else}
                         {_company.list.error.no_question}

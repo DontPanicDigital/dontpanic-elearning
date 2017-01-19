@@ -2,3 +2,4 @@ services:
 	- DontPanic\User\UserFacade
 
 	- DontPanic\Test\DeleteTestQuestionFacade
+	- DontPanic\Test\DeleteTestOptionFacade

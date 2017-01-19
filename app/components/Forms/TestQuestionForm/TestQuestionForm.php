@@ -3,6 +3,7 @@ namespace DontPanic\Forms;
 
 use DontPanic\Test\CreateTestOptionModel;
 use DontPanic\Test\CreateTestQuestionModel;
+use DontPanic\Test\DeleteTestOptionFacade;
 use DontPanic\Test\DeleteTestQuestionFacade;
 use DontPanic\Test\UpdateTestModel;
 use DontPanic\Test\UpdateTestQuestionModel;
@@ -24,6 +25,9 @@ class TestQuestionFormFactory
     /** @var CreateTestOptionModel */
     protected $createTestOptionModel;
 
+    /** @var DeleteTestOptionFacade */
+    protected $deleteTestOptionFacade;
+
     /** @var ITranslator */
     protected $translator;
 
@@ -38,6 +42,7 @@ class TestQuestionFormFactory
      * @param UpdateTestModel          $updateTestModel
      * @param DeleteTestQuestionFacade $deleteTestQuestionFacade
      * @param CreateTestOptionModel    $createTestOptionModel
+     * @param DeleteTestOptionFacade   $deleteTestOptionFacade
      * @param ITranslator              $translator
      * @param EntityManager            $em
      */
@@ -47,6 +52,7 @@ class TestQuestionFormFactory
         UpdateTestModel $updateTestModel,
         DeleteTestQuestionFacade $deleteTestQuestionFacade,
         CreateTestOptionModel $createTestOptionModel,
+        DeleteTestOptionFacade $deleteTestOptionFacade,
         ITranslator $translator,
         EntityManager $em
     )
@@ -56,6 +62,7 @@ class TestQuestionFormFactory
         $this->updateTestModel          = $updateTestModel;
         $this->deleteTestQuestionFacade = $deleteTestQuestionFacade;
         $this->createTestOptionModel    = $createTestOptionModel;
+        $this->deleteTestOptionFacade   = $deleteTestOptionFacade;
         $this->translator               = $translator;
         $this->em                       = $em;
     }
@@ -67,7 +74,13 @@ class TestQuestionFormFactory
 
     public function updateQuestion()
     {
-        return new UpdateTestQuestionForm($this->deleteTestQuestionFacade, $this->updateTestQuestionModel, $this->createTestOptionModel, $this->translator);
+        return new UpdateTestQuestionForm(
+            $this->deleteTestQuestionFacade,
+            $this->updateTestQuestionModel,
+            $this->createTestOptionModel,
+            $this->deleteTestOptionFacade,
+            $this->translator
+        );
     }
 
 }

@@ -20,7 +20,12 @@
         {/form}
         {if count($testQuestion->getOptions())}
             {foreach $testQuestion->getOptions() as $option}
-                {$option->getId()}
+                {if !$option->isDeleted()}
+                    {$option->getId()}
+                    <div class="form-group">
+                        <a n:href="removeTestOption! testOptionToken=>$option->getToken()" class="ajax btn btn-danger">Odstranit</a>
+                    </div>
+                {/if}
             {/foreach}
         {else}
             {_company.list.error.no_option}

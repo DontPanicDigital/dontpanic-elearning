@@ -38,6 +38,8 @@ services:
 	- DontPanic\Test\PermissionTestQuestionModel
 
 	- DontPanic\Test\CreateTestOptionModel
+	- DontPanic\Test\PermissionTestOptionModel
+	- DontPanic\Test\DeleteTestOptionModel
 
 	- DontPanic\Api\ApiTokenModel
 

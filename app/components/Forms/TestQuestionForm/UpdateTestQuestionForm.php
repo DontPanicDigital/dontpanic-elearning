@@ -7,6 +7,7 @@ use DontPanic\Exception\System\CreateException;
 use DontPanic\Exception\System\DeleteException;
 use DontPanic\Exception\System\UpdateException;
 use DontPanic\Test\CreateTestOptionModel;
+use DontPanic\Test\DeleteTestOptionFacade;
 use DontPanic\Test\DeleteTestQuestionFacade;
 use DontPanic\Test\UpdateTestQuestionModel;
 use DontPanic\User\UserUpdateException;
@@ -27,6 +28,9 @@ class UpdateTestQuestionForm extends UI\Control
     /** @var CreateTestOptionModel */
     private $createTestOptionModel;
 
+    /** @var DeleteTestOptionFacade */
+    private $deleteTestOptionFacade;
+
     /** @var Translator */
     private $translator;
 
@@ -45,12 +49,14 @@ class UpdateTestQuestionForm extends UI\Control
      * @param DeleteTestQuestionFacade $deleteTestQuestionFacade
      * @param UpdateTestQuestionModel  $updateTestQuestionModel
      * @param CreateTestOptionModel    $createTestOptionModel
+     * @param DeleteTestOptionFacade   $deleteTestOptionFacade
      * @param ITranslator              $translator
      */
     public function __construct(
         DeleteTestQuestionFacade $deleteTestQuestionFacade,
         UpdateTestQuestionModel $updateTestQuestionModel,
         CreateTestOptionModel $createTestOptionModel,
+        DeleteTestOptionFacade $deleteTestOptionFacade,
         ITranslator $translator
     )
     {
@@ -58,6 +64,7 @@ class UpdateTestQuestionForm extends UI\Control
         $this->deleteTestQuestionFacade = $deleteTestQuestionFacade;
         $this->updateTestQuestionModel  = $updateTestQuestionModel;
         $this->createTestOptionModel    = $createTestOptionModel;
+        $this->deleteTestOptionFacade  = $deleteTestOptionFacade;
         $this->translator               = $translator;
     }
 
@@ -147,6 +154,11 @@ class UpdateTestQuestionForm extends UI\Control
         }
     }
 
+    /**
+     *
+     * @throws \InvalidArgumentException
+     * @throws \Nette\Application\AbortException
+     */
     public function handleCreateTestOption()
     {
         try {
@@ -155,6 +167,29 @@ class UpdateTestQuestionForm extends UI\Control
             $this->getPresenter()->flashMessage($this->translator->trans('company.create_option.success'));
         } catch (CreateException $e) {
             $this->getPresenter()->flashMessage($this->translator->trans('company.create_option.errors.error'));
+        }
+        if ($this->getPresenter()->isAjax()) {
+            $this->redrawControl('testQuestion');
+            $this->getPresenter()->redrawControl('flashMessages');
+        } else {
+            $this->getPresenter()->redirect('this');
+        }
+    }
+
+    /**
+     * @param string $testOptionToken
+     *
+     * @throws \InvalidArgumentException
+     * @throws \Nette\Application\AbortException
+     */
+    public function handleRemoveTestOption($testOptionToken)
+    {
+        try {
+            $this->deleteTestOptionFacade->setUser($this->user);
+            $this->deleteTestOptionFacade->remove($testOptionToken);
+            $this->getPresenter()->flashMessage($this->translator->trans('company.delete_option.success'));
+        } catch (DeleteException $e) {
+            $this->getPresenter()->flashMessage($this->translator->trans('company.delete_option.errors.error'));
         }
         if ($this->getPresenter()->isAjax()) {
             $this->redrawControl('testQuestion');
