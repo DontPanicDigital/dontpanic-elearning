@@ -83,4 +83,11 @@ class TestQuestionFormFactory
         );
     }
 
+    public function updateOptions()
+    {
+        return new UpdateTestOptionForm(
+            $this->updateTestQuestionModel,
+            $this->translator
+        );
+    }
 }

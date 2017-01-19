@@ -45,6 +45,22 @@ update_question:
         success:
             question: Upraveno
 
+update_option:
+    form:
+        option: Možnost
+        description: Doplňující popis
+        annotation: Vysvětlivka
+        sort: Pořadí
+        correct: Správná odpověď
+        choose: Vyberte jednu z možností
+        enter: Upravit
+        errors:
+            fill_option: Zadejte  možnost
+            error: Možnosti se nepodařilo upravit
+        success:
+            option: Upraveno
+
+
 list:
     error:
         no_test: Kde nic není ani smrt nebere

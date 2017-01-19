@@ -5,3 +5,4 @@ services:
 	- DontPanic\Forms\UserFilterFormFactory
 	- DontPanic\Forms\TestFormFactory
 	- DontPanic\Forms\TestQuestionFormFactory
+	- DontPanic\Forms\TestOptionFormFactory

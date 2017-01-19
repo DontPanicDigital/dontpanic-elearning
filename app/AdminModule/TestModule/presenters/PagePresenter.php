@@ -12,8 +12,10 @@ use DontPanic\Exception\System\PermissionException;
 use DontPanic\Forms\CreateTestForm;
 use DontPanic\Forms\CreateTestQuestionForm;
 use DontPanic\Forms\TestFormFactory;
+use DontPanic\Forms\TestOptionFormFactory;
 use DontPanic\Forms\TestQuestionFormFactory;
 use DontPanic\Forms\UpdateTestForm;
+use DontPanic\Forms\UpdateTestOptionForm;
 use DontPanic\Forms\UpdateTestQuestionForm;
 use DontPanic\Test\DeleteTestModel;
 use DontPanic\Test\ListingTestModel;
@@ -36,6 +38,9 @@ class PagePresenter extends BasePresenter
 
     /** @var TestQuestionFormFactory @inject */
     public $testQuestionFormFactory;
+
+    /** @var TestOptionFormFactory @inject */
+    public $testOptionFormFactory;
 
     /** @var ListingTestModel @inject */
     public $listingTestModel;
@@ -132,6 +137,7 @@ class PagePresenter extends BasePresenter
 
     /**
      * @return Multiplier
+     * @throws \Nette\InvalidStateException
      */
     public function createComponentUpdateTestQuestionForm()
     {
@@ -142,6 +148,12 @@ class PagePresenter extends BasePresenter
             $component               = $this->testQuestionFormFactory->updateQuestion();
             $component->testQuestion = $testQuestion;
             $component->user         = $this->userEntity;
+
+            $component->addComponent($this->testOptionFormFactory->updateOptions(), 'updateTestOptionForm');
+
+            /** @var UpdateTestOptionForm $updateTestOptionForm */
+            $updateTestOptionForm               = $component->getComponent('updateTestOptionForm');
+            $updateTestOptionForm->testQuestion = $testQuestion;
 
             return $component;
         });

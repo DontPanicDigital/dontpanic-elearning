@@ -1,0 +1,25 @@
+{snippet testOption}
+    {form form}
+        {if $testQuestion}
+            {if count($testQuestion->getOptions())}
+                {foreach $testQuestion->getOptions() as $option}
+                    {if !$option->isDeleted()}
+                        <input n:name="$option->getToken() . _option"/>
+                        <textarea n:name="$option->getToken() . _description"/>
+                        <textarea n:name="$option->getToken() . _annotation"/>
+                        <br/>
+                        {if in_array($testQuestion->getType(), ['RADIOLIST', 'CHECKBOXLIST'])}
+                            <input n:name="correct:$option->getToken()"/>
+                        {/if}
+
+                        {if $testQuestion->getType() === 'SORT'}
+                            <input n:name="$option->getToken() . _sort"/>
+                        {/if}
+                        <hr/>
+                    {/if}
+                {/foreach}
+            {/if}
+            <input n:name="submit">
+        {/if}
+    {/form}
+{/snippet}

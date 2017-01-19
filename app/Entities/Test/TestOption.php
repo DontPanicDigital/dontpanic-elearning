@@ -47,6 +47,13 @@ class TestOption
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="annotation", type="string", length=255, nullable=true)
+     */
+    private $annotation;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="correct", type="integer", nullable=false)
@@ -135,6 +142,26 @@ class TestOption
     }
 
     /**
+     * @return string
+     */
+    public function getAnnotation()
+    {
+        return $this->annotation;
+    }
+
+    /**
+     * @param string $annotation
+     *
+     * @return TestOption
+     */
+    public function setAnnotation($annotation): TestOption
+    {
+        $this->annotation = $annotation ?: null;
+
+        return $this;
+    }
+
+    /**
      * Set correct
      *
      * @param int $correct
@@ -154,6 +181,30 @@ class TestOption
      * @return int
      */
     public function getCorrect(): int
+    {
+        return $this->correct;
+    }
+
+    /**
+     * Set correct
+     *
+     * @param int $sort
+     *
+     * @return User
+     */
+    public function setSort(int $sort)
+    {
+        $this->correct = $sort;
+
+        return $this;
+    }
+
+    /**
+     * Get sort
+     *
+     * @return int
+     */
+    public function getSort(): int
     {
         return $this->correct;
     }
