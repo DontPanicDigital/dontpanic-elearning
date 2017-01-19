@@ -126,24 +126,26 @@ class UpdateTestOptionForm extends UI\Control
             if (count($options)) {
                 /** @var TestOption $option */
                 foreach ($options as $option) {
-                    $defaults[$option->getToken() . '_option']      = $option->getOption();
-                    $defaults[$option->getToken() . '_description'] = $option->getDescription();
-                    $defaults[$option->getToken() . '_annotation']  = $option->getAnnotation();
+                    if (!$option->isDeleted()) {
+                        $defaults[$option->getToken() . '_option']      = $option->getOption();
+                        $defaults[$option->getToken() . '_description'] = $option->getDescription();
+                        $defaults[$option->getToken() . '_annotation']  = $option->getAnnotation();
 
-                    if ($questionType === TestQuestionModel::TYPE_CHECKBOXLIST) {
-                        if ($option->getCorrect()) {
-                            $checkboxList[] = $option->getToken();
+                        if ($questionType === TestQuestionModel::TYPE_CHECKBOXLIST) {
+                            if ($option->getCorrect()) {
+                                $checkboxList[] = $option->getToken();
+                            }
                         }
-                    }
 
-                    if ($questionType === TestQuestionModel::TYPE_RADIOLIST) {
-                        if ($option->getCorrect()) {
-                            $radioList = $option->getToken();
+                        if ($questionType === TestQuestionModel::TYPE_RADIOLIST) {
+                            if ($option->getCorrect()) {
+                                $radioList = $option->getToken();
+                            }
                         }
-                    }
 
-                    if ($questionType === TestQuestionModel::TYPE_SORT) {
-                        $defaults[$option->getToken() . '_sort'] = $option->getSort();
+                        if ($questionType === TestQuestionModel::TYPE_SORT) {
+                            $defaults[$option->getToken() . '_sort'] = $option->getSort();
+                        }
                     }
                 }
 
@@ -160,5 +162,16 @@ class UpdateTestOptionForm extends UI\Control
         }
 
         return [];
+    }
+
+    /**************************************************************************************************************z*v*/
+    /*************** HANDLE ***************/
+
+    /**
+     * @param $testOptionToken
+     */
+    public function handleRemoveTestOption($testOptionToken)
+    {
+        $this->getParent()->handleRemoveTestOption($testOptionToken);
     }
 }

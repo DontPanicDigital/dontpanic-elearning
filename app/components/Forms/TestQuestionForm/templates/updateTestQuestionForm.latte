@@ -20,14 +20,6 @@
         {/form}
         {if count($testQuestion->getOptions())}
             {control updateTestOptionForm}
-            {*{foreach $testQuestion->getOptions() as $option}*}
-                {*{if !$option->isDeleted()}*}
-                    {*{$option->getId()}*}
-                    {*<div class="form-group">*}
-                        {*<a n:href="removeTestOption! testOptionToken=>$option->getToken()" class="ajax btn btn-danger">Odstranit</a>*}
-                    {*</div>*}
-                {*{/if}*}
-            {*{/foreach}*}
         {else}
             {_company.list.error.no_option}
         {/if}

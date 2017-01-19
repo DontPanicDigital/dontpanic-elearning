@@ -15,6 +15,9 @@
                         {if $testQuestion->getType() === 'SORT'}
                             <input n:name="$option->getToken() . _sort"/>
                         {/if}
+                        <div class="form-group">
+                            <a n:href="removeTestOption! testOptionToken=>$option->getToken()" class="ajax btn btn-danger">Odstranit</a>
+                        </div>
                         <hr/>
                     {/if}
                 {/foreach}
