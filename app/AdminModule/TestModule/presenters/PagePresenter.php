@@ -189,11 +189,11 @@ class PagePresenter extends BasePresenter
             $this->deleteTestModel->setTest($test);
             $this->deleteTestModel->do();
         } catch (NotFoundException $e) {
-            $this->flashMessage($this->translator->trans('company.delete.errors.not_found'));
+            $this->flashMessage($this->translator->trans('test.delete.errors.not_found'));
         } catch (DeleteException $e) {
-            $this->flashMessage($this->translator->trans('company.delete.errors.error'));
+            $this->flashMessage($this->translator->trans('test.delete.errors.error'));
         } catch (PermissionException $e) {
-            $this->flashMessage($this->translator->trans('company.delete.errors.no_permission'));
+            $this->flashMessage($this->translator->trans('test.delete.errors.no_permission'));
         }
         if ($this->isAjax()) {
             $this->redrawControl('testListing');

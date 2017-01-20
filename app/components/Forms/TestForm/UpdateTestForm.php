@@ -50,12 +50,12 @@ class UpdateTestForm extends UI\Control
         $form = new UI\Form();
         $form->setTranslator($this->translator);
 
-        $form->addText('name', 'company.update.form.name')
-             ->setRequired('company.update.form.errors.fill_name');
+        $form->addText('name', 'test.update.form.name')
+             ->setRequired('test.update.form.errors.fill_name');
 
-        $form->addTextArea('description', 'company.update.form.name');
+        $form->addTextArea('description', 'test.update.form.name');
 
-        $form->addSubmit('submit', 'company.update.form.enter');
+        $form->addSubmit('submit', 'test.update.form.enter');
 
         $form->onSuccess[] = function (UI\Form $form) {
             $this->processForm($form, $form->getValues(true));
@@ -74,7 +74,7 @@ class UpdateTestForm extends UI\Control
             };
             $this->updateTestModel->update();
         } catch (UpdateException $e) {
-            $form->addError($this->translator->translate('company.update.form.errors.error'));
+            $form->addError($this->translator->translate('test.update.form.errors.error'));
         }
     }
 

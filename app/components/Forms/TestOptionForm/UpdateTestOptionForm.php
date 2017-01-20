@@ -65,32 +65,32 @@ class UpdateTestOptionForm extends UI\Control
             /** @var TestOption $option */
             foreach ($this->testQuestion->getOptions() as $option) {
                 if (!$option->isDeleted()) {
-                    $form->addText($option->getToken() . '_option', 'company.update_option.form.option')
-                         ->setRequired('company.update_option.form.errors.fill_option');
+                    $form->addText($option->getToken() . '_option', 'test.update_option.form.option')
+                         ->setRequired('test.update_option.form.errors.fill_option');
 
-                    $form->addTextArea($option->getToken() . '_description', 'company.update_option.form.description');
-                    $form->addTextArea($option->getToken() . '_annotation', 'company.update_option.form.annotation');
+                    $form->addTextArea($option->getToken() . '_description', 'test.update_option.form.description');
+                    $form->addTextArea($option->getToken() . '_annotation', 'test.update_option.form.annotation');
 
                     if ($questionType === TestQuestionModel::TYPE_SORT) {
-                        $form->addText($option->getToken() . '_sort', 'company.update_option.form.sort')
+                        $form->addText($option->getToken() . '_sort', 'test.update_option.form.sort')
                              ->setType('number');
                     }
 
                     if (in_array($questionType, [ TestQuestionModel::TYPE_RADIOLIST, TestQuestionModel::TYPE_CHECKBOXLIST ], true)) {
-                        $optionsList[$option->getToken()] = 'company.update_option.form.correct';
+                        $optionsList[$option->getToken()] = 'test.update_option.form.correct';
                     }
                 }
             }
             if ($questionType === TestQuestionModel::TYPE_RADIOLIST) {
-                $form->addRadioList('correct', 'company.update_option.form.correct', $optionsList)
-                     ->setRequired('company.update_option.form.choose');
+                $form->addRadioList('correct', 'test.update_option.form.correct', $optionsList)
+                     ->setRequired('test.update_option.form.choose');
             }
             if ($questionType === TestQuestionModel::TYPE_CHECKBOXLIST) {
-                $form->addCheckboxList('correct', 'company.update_option.form.correct', $optionsList);
+                $form->addCheckboxList('correct', 'test.update_option.form.correct', $optionsList);
             }
         }
 
-        $form->addSubmit('submit', 'company.update_option.form.enter');
+        $form->addSubmit('submit', 'test.update_option.form.enter');
 
         $form->onSuccess[] = function (UI\Form $form) {
             $this->processForm($form, $form->getValues(true));
@@ -105,9 +105,9 @@ class UpdateTestOptionForm extends UI\Control
             $this->updateTestOptionModel->setTestQuestion($this->testQuestion);
             $this->updateTestOptionModel->prepareFromArray($values);
             $this->updateTestOptionModel->update();
-            $this->getPresenter()->flashMessage($this->translator->translate('company.update_option.form.success.option'));
+            $this->getPresenter()->flashMessage($this->translator->translate('test.update_option.form.success.option'));
         } catch (UpdateException $e) {
-            $form->addError($this->translator->translate('company.update_option.form.errors.error'));
+            $form->addError($this->translator->translate('test.update_option.form.errors.error'));
         }
         if ($this->getPresenter()->isAjax()) {
             $this->redrawControl('testOption');

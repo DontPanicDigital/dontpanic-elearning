@@ -51,18 +51,18 @@ class CreateTestQuestionForm extends UI\Control
         $form = new UI\Form();
         $form->setTranslator($this->translator);
 
-        $form->addText('question', 'company.create_question.form.question')
-             ->setRequired('company.create_question.form.errors.fill_question');
+        $form->addText('question', 'test.create_question.form.question')
+             ->setRequired('test.create_question.form.errors.fill_question');
 
-        $form->addTextArea('description', 'company.create_question.form.description');
+        $form->addTextArea('description', 'test.create_question.form.description');
 
-        $form->addRadioList('type', 'company.create_question.form.type', [
-            TestQuestionModel::TYPE_CHECKBOXLIST => 'company.create_question.form.type_options.checkbox',
-            TestQuestionModel::TYPE_RADIOLIST    => 'company.create_question.form.type_options.radio',
-            TestQuestionModel::TYPE_SORT         => 'company.create_question.form.type_options.sort',
+        $form->addRadioList('type', 'test.create_question.form.type', [
+            TestQuestionModel::TYPE_CHECKBOXLIST => 'test.create_question.form.type_options.checkbox',
+            TestQuestionModel::TYPE_RADIOLIST    => 'test.create_question.form.type_options.radio',
+            TestQuestionModel::TYPE_SORT         => 'test.create_question.form.type_options.sort',
         ]);
 
-        $form->addSubmit('submit', 'company.create_question.form.enter');
+        $form->addSubmit('submit', 'test.create_question.form.enter');
 
         $form->onSuccess[] = function (UI\Form $form) {
             $this->processForm($form, $form->getValues(true));
@@ -83,7 +83,7 @@ class CreateTestQuestionForm extends UI\Control
             };
             $this->createTestQuestionModel->create();
         } catch (CreateException $e) {
-            $form->addError($this->translator->translate('company.create_question.form.errors.error'));
+            $form->addError($this->translator->translate('test.create_question.form.errors.error'));
         }
     }
 }

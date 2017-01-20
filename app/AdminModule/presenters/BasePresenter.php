@@ -65,7 +65,7 @@ abstract class BasePresenter extends \App\Presenters\BasePresenter
             $this->userCompanyControlModel->setActiveCompany($companyToken);
         } catch (SwitchCompanyException $e) {
             $this->flashMessage(
-                $this->translator->translate('company.switch.error')
+                $this->translator->translate('test.switch.error')
             );
         }
         $this->redirect('this');

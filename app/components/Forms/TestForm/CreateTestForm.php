@@ -54,10 +54,10 @@ class CreateTestForm extends UI\Control
         $form = new UI\Form();
         $form->setTranslator($this->translator);
 
-        $form->addText('name', 'company.create.form.name')
-             ->setRequired('company.create.form.errors.fill_name');
+        $form->addText('name', 'test.create.form.name')
+             ->setRequired('test.create.form.errors.fill_name');
 
-        $form->addSubmit('submit', 'company.create.form.enter');
+        $form->addSubmit('submit', 'test.create.form.enter');
 
         $form->onSuccess[] = function (UI\Form $form) {
             $this->processForm($form, $form->getValues(true));
@@ -77,7 +77,7 @@ class CreateTestForm extends UI\Control
             };
             $this->createTestModel->create();
         } catch (CreateException $e) {
-            $form->addError($this->translator->translate('company.create.form.errors.error'));
+            $form->addError($this->translator->translate('test.create.form.errors.error'));
         }
     }
 }

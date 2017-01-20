@@ -83,12 +83,12 @@ class UpdateTestQuestionForm extends UI\Control
         $form->getElementPrototype()->class = 'ajax';
         $form->setTranslator($this->translator);
 
-        $form->addText('question', 'company.update_question.form.question')
-             ->setRequired('company.update_question.form.errors.fill_question');
+        $form->addText('question', 'test.update_question.form.question')
+             ->setRequired('test.update_question.form.errors.fill_question');
 
-        $form->addTextArea('description', 'company.update_question.form.description');
+        $form->addTextArea('description', 'test.update_question.form.description');
 
-        $form->addSubmit('submit', 'company.update_question.form.enter');
+        $form->addSubmit('submit', 'test.update_question.form.enter');
 
         $form->onSuccess[] = function (UI\Form $form) {
             $this->processForm($form, $form->getValues(true));
@@ -106,9 +106,9 @@ class UpdateTestQuestionForm extends UI\Control
                 $this->onUpdate($testQuestion);
             };
             $this->updateTestQuestionModel->update();
-            $this->getPresenter()->flashMessage($this->translator->translate('company.update_question.form.success.question'));
+            $this->getPresenter()->flashMessage($this->translator->translate('test.update_question.form.success.question'));
         } catch (UpdateException $e) {
-            $form->addError($this->translator->translate('company.update_question.form.errors.error'));
+            $form->addError($this->translator->translate('test.update_question.form.errors.error'));
         }
         if ($this->getPresenter()->isAjax()) {
             $this->redrawControl('testQuestion');
@@ -142,9 +142,9 @@ class UpdateTestQuestionForm extends UI\Control
         try {
             $this->deleteTestQuestionFacade->setUser($this->user);
             $this->deleteTestQuestionFacade->remove($testQuestionToken);
-            $this->getPresenter()->flashMessage($this->translator->trans('company.delete_question.success'));
+            $this->getPresenter()->flashMessage($this->translator->trans('test.delete_question.success'));
         } catch (DeleteException $e) {
-            $this->getPresenter()->flashMessage($this->translator->trans('company.delete_question.errors.error'));
+            $this->getPresenter()->flashMessage($this->translator->trans('test.delete_question.errors.error'));
         }
         if ($this->getPresenter()->isAjax()) {
             $this->redrawControl('testQuestion');
@@ -164,9 +164,9 @@ class UpdateTestQuestionForm extends UI\Control
         try {
             $this->createTestOptionModel->setTestQuestion($this->testQuestion);
             $this->createTestOptionModel->create();
-            $this->getPresenter()->flashMessage($this->translator->trans('company.create_option.success'));
+            $this->getPresenter()->flashMessage($this->translator->trans('test.create_option.success'));
         } catch (CreateException $e) {
-            $this->getPresenter()->flashMessage($this->translator->trans('company.create_option.errors.error'));
+            $this->getPresenter()->flashMessage($this->translator->trans('test.create_option.errors.error'));
         }
         if ($this->getPresenter()->isAjax()) {
             $this->redrawControl('testQuestion');
@@ -187,9 +187,9 @@ class UpdateTestQuestionForm extends UI\Control
         try {
             $this->deleteTestOptionFacade->setUser($this->user);
             $this->deleteTestOptionFacade->remove($testOptionToken);
-            $this->getPresenter()->flashMessage($this->translator->trans('company.delete_option.success'));
+            $this->getPresenter()->flashMessage($this->translator->trans('test.delete_option.success'));
         } catch (DeleteException $e) {
-            $this->getPresenter()->flashMessage($this->translator->trans('company.delete_option.errors.error'));
+            $this->getPresenter()->flashMessage($this->translator->trans('test.delete_option.errors.error'));
         }
         if ($this->getPresenter()->isAjax()) {
             $this->redrawControl('testQuestion');
