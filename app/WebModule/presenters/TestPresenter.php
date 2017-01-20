@@ -5,6 +5,7 @@ namespace WebModule;
 use App\Model;
 use AppModule\Exception\Http404NotFoundException;
 use DontPanic\Entities\Test;
+use DontPanic\Entities\UserTestScore;
 use DontPanic\Forms\DisplayTestForm;
 use DontPanic\Forms\TestFormFactory;
 use DontPanic\Test\TestModel;
@@ -46,12 +47,17 @@ class TestPresenter extends BasePresenter
 
     /**
      * @return DisplayTestForm
+     * @throws \Nette\Application\AbortException
      */
     public function createComponentDisplayForm()
     {
         /** @var DisplayTestForm $control */
-        $control       = $this->testFormFactory->displayTest();
-        $control->test = $this->test;
+        $control             = $this->testFormFactory->displayTest();
+        $control->test       = $this->test;
+        $control->user       = $this->userEntity;
+        $control->onCreate[] = function (UserTestScore $userTestScore) {
+            $this->redirect('this');
+        };
 
         return $control;
     }

@@ -35,6 +35,13 @@ class UserTestAnswer
     private $user;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="correct", type="integer", nullable=false)
+     */
+    private $correct = 0;
+
+    /**
      * @return TestOption
      */
     public function getOption(): TestOption
@@ -72,6 +79,54 @@ class UserTestAnswer
         $this->user = $user;
 
         return $this;
+    }
+
+    /**
+     * Set correct
+     *
+     * @param int $correct
+     *
+     * @return UserTestAnswer
+     */
+    public function setCorrect(int $correct)
+    {
+        $this->correct = $correct;
+
+        return $this;
+    }
+
+    /**
+     * Get correct
+     *
+     * @return int
+     */
+    public function getCorrect(): int
+    {
+        return $this->correct;
+    }
+
+    /**
+     * Set correct
+     *
+     * @param int $sort
+     *
+     * @return UserTestAnswer
+     */
+    public function setSort(int $sort)
+    {
+        $this->correct = $sort;
+
+        return $this;
+    }
+
+    /**
+     * Get sort
+     *
+     * @return int
+     */
+    public function getSort(): int
+    {
+        return $this->correct;
     }
 }
 

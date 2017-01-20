@@ -15,6 +15,12 @@ update:
             fill_name: Zadejte název testu
             error: Test se nepodařilo upravit
 
+display:
+    form:
+        enter: Odeslat
+        errors:
+            error: Test se nepodařilo odeslat
+
 create_question:
     form:
         question: Otázka
