@@ -57,8 +57,19 @@ class TestFormFactory
         return new CreateTestForm($this->createTestModel, $this->translator);
     }
 
+    /**
+     * @return UpdateTestForm
+     */
     public function updateTest()
     {
         return new UpdateTestForm($this->updateTestModel, $this->translator);
+    }
+
+    /**
+     * @return DisplayTestForm
+     */
+    public function displayTest()
+    {
+        return new DisplayTestForm($this->translator);
     }
 }
