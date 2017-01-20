@@ -31,7 +31,7 @@ class SignPresenter extends BasePresenter
         $control->onSignIn[] = function () {
             $this->user->setExpiration('60 minutes', true);
             $this->flashMessage($this->translator->trans('user.admin.message_after_login'));
-            $this->redirect('Page:default');
+            $this->redirect('Test:Page:default');
         };
 
         return $control;
