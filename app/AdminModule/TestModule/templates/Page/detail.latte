@@ -6,23 +6,25 @@
                 {control updateTestForm}
                 <h2 class="mt-3 mb-1">Přidat otázku</h2>
                 {control createTestQuestionForm}
-                <br />
+                <br/>
                 <hr/>
-                <br />
-                <br />
+                <br/>
+                <br/>
                 <div class="form-group">
-                    {if count($test->getQuestions())}
-                        {foreach $test->getQuestions() as $question}
-                            {if !$question->isDeleted()}
-                                {var $questionId = $question->getId()}
-                                {control updateTestQuestionForm-$questionId}
-                                <hr/>
-                                <br />
-                            {/if}
-                        {/foreach}
-                    {else}
-                        {_company.list.error.no_question}
-                    {/if}
+                    {snippet questions}
+                        {if count($test->getQuestions())}
+                            {foreach $test->getQuestions() as $question}
+                                {if !$question->isDeleted()}
+                                    {var $questionId = $question->getId()}
+                                    {control updateTestQuestionForm-$questionId}
+                                    <hr/>
+                                    <br/>
+                                {/if}
+                            {/foreach}
+                        {else}
+                            {_company.list.error.no_question}
+                        {/if}
+                    {/snippet}
                 </div>
             </div>
         </div>

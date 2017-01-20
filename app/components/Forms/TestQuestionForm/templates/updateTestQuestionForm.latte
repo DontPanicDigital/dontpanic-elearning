@@ -1,27 +1,29 @@
 {snippet testQuestion}
     {if $testQuestion}
-        {form form}
-        {if $form->hasErrors()}
-            {foreach $form->errors as $error}
-                {$error}
-            {/foreach}
-        {/if}
-            <div class="form-group">
-                <input type="text" class="form-control" n:name="question" placeholder="Znění otázky"/>
-            </div>
-            <div class="form-group">
-                <textarea class="form-control" n:name="description" rows="3" placeholder="Popis otázky"></textarea>
-            </div>
-            <div class="form-group">
-                <a n:href="createTestOption!" class="ajax btn btn-success">Přidat odpověď</a>
-                <button class="btn btn-primary" n:name="submit">Uložit otázku</button>
-                <a n:href="removeTestQuestion! testQuestionToken=>$testQuestion->getToken()" class="btn btn-danger">Odstranit</a>
-            </div>
-        {/form}
-        {if count($testQuestion->getOptions())}
-            {control updateTestOptionForm}
-        {else}
-            {_company.list.error.no_option}
+        {if !$testQuestion->isDeleted()}
+            {form form}
+            {if $form->hasErrors()}
+                {foreach $form->errors as $error}
+                    {$error}
+                {/foreach}
+            {/if}
+                <div class="form-group">
+                    <input type="text" class="form-control" n:name="question" placeholder="Znění otázky"/>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" n:name="description" rows="3" placeholder="Popis otázky"></textarea>
+                </div>
+                <div class="form-group">
+                    <a n:href="createTestOption!" class="ajax btn btn-success">Přidat odpověď</a>
+                    <button class="btn btn-primary" n:name="submit">Uložit otázku</button>
+                    <a n:href="removeTestQuestion! testQuestionToken=>$testQuestion->getToken()" class="ajax btn btn-danger">Odstranit</a>
+                </div>
+            {/form}
+            {if count($testQuestion->getOptions())}
+                {control updateTestOptionForm}
+            {else}
+                {_company.list.error.no_option}
+            {/if}
         {/if}
     {/if}
 {/snippet}

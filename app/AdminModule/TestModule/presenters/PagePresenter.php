@@ -51,38 +51,39 @@ class PagePresenter extends BasePresenter
     /** @var PermissionTestModel @inject */
     public $permissionTestModel;
 
+    /** @var Test */
+    private $test;
+
+    public function startup()
+    {
+        parent::startup();
+        $this->test = $this->testModel->findOneBy([ 'token' => $this->getParameter('id') ]);
+    }
+
     public function renderDefault()
     {
         $this->listingTestModel->setCompany($this->company);
         $this->template->testsList = $this->listingTestModel->getList()->getQuery()->getResult();
     }
 
-    public function actionDetail($id)
+    public function renderDetail($id)
     {
         /** @var Test $test */
-        $test = $this->testModel->findOneBy([ 'token' => $id ]);
+        $this->test = $this->testModel->findOneBy([ 'token' => $id ]);
 
-        if (!$test instanceof Test) {
+        if (!$this->test instanceof Test) {
             throw new Http404NotFoundException;
         }
 
         try {
-            $this->permissionTestModel->setTest($test);
+            $this->permissionTestModel->setTest($this->test);
             $this->permissionTestModel->setUser($this->userEntity);
             $this->permissionTestModel->isAssigned();
         } catch (PermissionException $e) {
             throw new Http401UnauthorizedException;
         }
 
-        /** @var UpdateTestForm $updateTestForm */
-        $updateTestForm       = $this->getComponent('updateTestForm');
-        $updateTestForm->test = $test;
-
-        /** @var CreateTestQuestionForm $createTestQuestionForm */
-        $createTestQuestionForm       = $this->getComponent('createTestQuestionForm');
-        $createTestQuestionForm->test = $test;
-
-        $this->template->test = $test;
+        $this->template->test = $this->test;
     }
 
     /**************************************************************************************************************z*v*/
@@ -113,6 +114,7 @@ class PagePresenter extends BasePresenter
     {
         /** @var UpdateTestForm $control */
         $control             = $this->testFormFactory->updateTest();
+        $control->test       = $this->test;
         $control->onUpdate[] = function (Test $test) {
             $this->redirect('this');
         };
@@ -128,6 +130,7 @@ class PagePresenter extends BasePresenter
     {
         /** @var CreateTestQuestionForm $control */
         $control             = $this->testQuestionFormFactory->createQuestion();
+        $control->test       = $this->test;
         $control->onCreate[] = function (TestQuestion $testQuestion) {
             $this->redirect('this');
         };
