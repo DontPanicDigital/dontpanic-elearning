@@ -23,6 +23,8 @@ services:
 	- DontPanic\Company\CompanyModel
 
 	- DontPanic\SmsCode\SmsCodeModel
+	- DontPanic\SmsCode\CreateSmsCodeModel
+	- DontPanic\SmsCode\SmsCodeGeneratorModel
 
 	- DontPanic\Test\TestModel
 	- DontPanic\Test\TestQuestionModel

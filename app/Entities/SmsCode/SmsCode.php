@@ -43,6 +43,12 @@ class SmsCode
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Test", cascade={"persist"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="tests_id", referencedColumnName="id")
+     */
+    private $test;
+
+    /**
      * @return string
      */
     public function getCode(): string
@@ -102,5 +108,25 @@ class SmsCode
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTest()
+    {
+        return $this->test;
+    }
+
+    /**
+     * @param mixed $test
+     *
+     * @return SmsCode
+     */
+    public function setTest($test)
+    {
+        $this->test = $test;
+
+        return $this;
     }
 }

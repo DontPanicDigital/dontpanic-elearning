@@ -63,11 +63,19 @@ class Test
     private $questions;
 
     /**
+     * @ORM\OneToMany(targetEntity="SmsCode", mappedBy="test", cascade={"persist"})
+     *
+     * @var array|ArrayCollection
+     **/
+    private $smsCodes;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->smsCodes  = new ArrayCollection();
     }
 
     /**
@@ -206,5 +214,43 @@ class Test
             return;
         }
         $this->questions->removeElement($testQuestion);
+    }
+
+    /**
+     * @param SmsCode $smsCode
+     *
+     * @return $this
+     */
+    public function addSmsCode(SmsCode $smsCode)
+    {
+        if ($this->smsCodes->contains($smsCode)) {
+            return;
+        }
+
+        $this->smsCodes->add($smsCode);
+
+        return $this;
+    }
+
+    /**
+     * Remove sms code
+     *
+     * @param SmsCode $smsCode
+     */
+    public function removeSmsCode(SmsCode $smsCode)
+    {
+        if (!$this->smsCodes->contains($smsCode)) {
+            return;
+        }
+
+        $this->smsCodes->removeElement($smsCode);
+    }
+
+    /**
+     * @return array|ArrayCollection|static
+     */
+    public function getSmsCodes()
+    {
+        return $this->smsCodes;
     }
 }
