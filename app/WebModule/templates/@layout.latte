@@ -18,14 +18,14 @@
     <title>{ifset #title}{include title}{else}{_meta.title}{/ifset} | {_meta.project}</title>
     {include '../../templates/scripts/html5tagsSupport.latte'}
 </head>
-<body>
-    <nav>
-        <ul>
-            {if $user->isLoggedIn()}
-                <li><a href="{plink Sign:out}">Odhlásit se</a></li>
-            {/if}
-        </ul>
-    </nav>
+<body class="{ifset #bodyClass}{include bodyClass}{/ifset}">
+    {*<nav>*}
+        {*<ul>*}
+            {*{if $user->isLoggedIn()}*}
+                {*<li><a href="{plink Sign:out}">Odhlásit se</a></li>*}
+            {*{/if}*}
+        {*</ul>*}
+    {*</nav>*}
     {snippet flashMessages}
     {if count($flashes)}
         <ul>
