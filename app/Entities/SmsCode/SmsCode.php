@@ -5,7 +5,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
-use Knp\DoctrineBehaviors\Model\SoftDeletable\SoftDeletable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Nette\Utils\Random;
 
@@ -20,7 +19,6 @@ class SmsCode
 
     use Identifier;
     use Timestampable;
-    use SoftDeletable;
 
     /**
      * @var string
@@ -28,6 +26,13 @@ class SmsCode
      * @ORM\Column(name="code", type="string", length=6, nullable=false)
      */
     private $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="used", type="string", length=6, nullable=false)
+     */
+    private $used;
 
     /**
      * @var string
@@ -64,6 +69,26 @@ class SmsCode
     public function setCode(string $code): SmsCode
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function isUsed(): string
+    {
+        return $this->used;
+    }
+
+    /**
+     * @param string $used
+     *
+     * @return SmsCode
+     */
+    public function setUsed(string $used): SmsCode
+    {
+        $this->used = $used;
 
         return $this;
     }

@@ -9,11 +9,11 @@ use DontPanic\Credit\CreditHistoryException;
 use DontPanic\Credit\CreditModel;
 use DontPanic\Credit\CreditStatusModel;
 use DontPanic\Entities\User;
+use DontPanic\Exception\System\CreateException;
 use DontPanic\Model\DoctrineModel;
 use Kdyby\Doctrine\EntityManager;
 use Kdyby\Events\Event;
-use Nette\Http\Session;
-use Nette\Utils\Random;
+use Nette\Utils\Validators;
 
 /**
  * @method onSignup(User $user)
@@ -30,64 +30,59 @@ class UserRegisterModel extends DoctrineModel
     /** @var CompanyFacade */
     protected $companyFacade;
 
-    /** @var Session */
-    protected $session;
-
     /** @var CreditFacade */
     protected $creditFacade;
+
+    /** @var User */
+    private $user;
 
     /**
      * UserRegisterModel constructor.
      *
      * @param EntityManager $em
      * @param UserModel     $userModel
-     * @param Session       $session
      */
-    public function __construct(
-        EntityManager $em,
-        UserModel $userModel,
-        Session $session)
+    public function __construct(EntityManager $em, UserModel $userModel)
     {
         $this->em        = $em;
         $this->er        = $this->em->getRepository(User::class);
         $this->userModel = $userModel;
-        $this->session   = $session;
+
+        $this->user = new User();
     }
 
     /**
-     * @param $data
-     *
-     * @return User
-     * @throws UserRegistrationException
+     * @return mixed
+     * @throws CreateException
      */
-    public function registerUser($data)
+    public function create()
     {
         try {
-            $user = $this->insertUserToDb($data);
-            if (!empty($data['password'])) {
-                $this->onSignup($user);
-            }
+            $this->save($this->user);
+            $this->onSignup($this->user);
         } catch (UniqueConstraintViolationException $e) {
-            throw new UserRegistrationException;
+            throw new CreateException($e->getMessage());
         }
-
-        return $user;
     }
 
-    protected function insertUserToDb($data)
+    public function prepareFromArray($data)
     {
-        $user = new User();
+        if (array_key_exists('password', $data)) {
+            $this->user->setPassword($data['password']);
+        }
 
-        empty($data['password']) ?: $user->setPassword($data['password']);
-        empty($data['email']) ?: $user->setEmail($data['email']);
-        empty($data['name']) ?: $user->setName($data['name']);
-        empty($data['phone']) ?: $user->setPhone($data['phone']);
+        if (array_key_exists('email', $data) && Validators::isEmail($data['email'])) {
+            $this->user->setEmail($data['email']);
+        }
 
-        $user->setToken(Random::generate(30));
-        $user->setCreatedAt(new \DateTime());
+        if (array_key_exists('phone', $data)) {
+            $this->user->setPhone($data['phone']);
+        }
 
-        $this->userModel->saveUser($user);
+        if (array_key_exists('name', $data)) {
+            $this->user->setName($data['name']);
+        }
 
-        return $user;
+        $this->user->setToken();
     }
 }

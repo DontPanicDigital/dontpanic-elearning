@@ -5,6 +5,7 @@ namespace WebModule;
 use App\Model;
 use AppModule\Exception\Http404NotFoundException;
 use DontPanic\Entities\Test;
+use DontPanic\Entities\User;
 use DontPanic\Entities\UserTestScore;
 use DontPanic\Forms\DisplayTestForm;
 use DontPanic\Forms\TestFormFactory;
@@ -26,6 +27,19 @@ class TestPresenter extends BasePresenter
     {
         parent::startup();
         $this->test = $this->testModel->findOneBy([ 'token' => $this->getParameter('token') ]);
+
+        if (!$this->user->isLoggedIn()) {
+            $this->redirect('Sign:testIn', [ 'backlink' => $this->storeRequest() ]);
+        }
+        if (!$this->userEntity instanceof User) {
+            $this->redirect('Sign:testIn', [ 'backlink' => $this->storeRequest() ]);
+        }
+        if (!$this->userEntity->isPhoneVerification()) {
+            $this->redirect('Sign:authCode', [
+                'backlink' => $this->storeRequest(),
+                'token'    => $this->getParameter('token'),
+            ]);
+        }
     }
 
     /**
@@ -35,6 +49,7 @@ class TestPresenter extends BasePresenter
      */
     public function actionDefault($token)
     {
+
         if (!$this->test instanceof Test) {
             throw new Http404NotFoundException;
         }

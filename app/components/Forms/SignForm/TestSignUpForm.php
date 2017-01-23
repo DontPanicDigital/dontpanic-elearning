@@ -1,17 +1,16 @@
 <?php
 namespace DontPanic\Forms;
 
-use Nette\Localization\ITranslator;
+use DontPanic\Entities\User;
 use DontPanic\User\UserModel;
 use DontPanic\User\UserRegisterModel;
 use DontPanic\User\UserRegistrationException;
-use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI;
 use Nette\Forms\Form;
-use Nette\Utils\Strings;
+use Nette\Localization\ITranslator;
 use zvitek\Component\Form\FormComponent;
 
-class SignUpForm extends FormComponent
+class TestSignUpForm extends FormComponent
 {
 
     /** @var UserRegisterModel */
@@ -19,9 +18,6 @@ class SignUpForm extends FormComponent
 
     /** @var UserModel */
     protected $userModel;
-
-    /** @var EntityManager */
-    protected $em;
 
     public $onSignUp;
 
@@ -31,19 +27,17 @@ class SignUpForm extends FormComponent
      * @param UserRegisterModel $userRegisterModel
      * @param UserModel         $userModel
      * @param ITranslator       $translator
-     * @param EntityManager     $em
      */
-    public function __construct(UserRegisterModel $userRegisterModel, UserModel $userModel, ITranslator $translator, EntityManager $em)
+    public function __construct(UserRegisterModel $userRegisterModel, UserModel $userModel, ITranslator $translator)
     {
         parent::__construct($translator);
         $this->userRegisterModel = $userRegisterModel;
         $this->userModel         = $userModel;
-        $this->em                = $em;
     }
 
     public function render()
     {
-        $this->template->setFile(__DIR__ . '/signUp.latte');
+        $this->template->setFile(__DIR__ . '/testSignUp.latte');
         $this->template->render();
     }
 
@@ -64,18 +58,12 @@ class SignUpForm extends FormComponent
              ->setRequired('user.registration.form.errors.fill_email')
              ->addRule(UI\Form::EMAIL, 'user.registration.form.errors.fill_valid_email');
 
-        $form->addPassword('password', 'user.registration.form.password')
-             ->addRule(UI\Form::FILLED, 'user.registration.form.errors.fill_password')
-             ->getControlPrototype()->addAttributes([ 'placeholder' => 'user.registration.form.errors.fill_password' ]);
-
-        $form->addCheckbox('rules', 'user.registration.form.rules')
-             ->setRequired('user.registration.form.errors.check_rules');
+        $form->addText('phone', 'user.update_profile.form.phone')
+             ->setRequired('user.update_profile.form.errors.fill_phone')
+             ->addRule(UI\Form::PATTERN, 'user.update_profile.form.errors.fill_valid_phone', \zvitek\Validator\Form::INPUT_PHONE_PATTERN)
+             ->setAttribute('placeholder', 'user.update_profile.form.placeholder.phone');
 
         $form->addSubmit('send', 'user.registration.form.do_registration');
-
-        $form->onValidate[] = function (Form $form) {
-            $this->signUpFormValidation($form, $form->getValues(true));
-        };
 
         $form->onSuccess[] = function (Form $form, array $values) {
             $this->signUpFormSucceeded($form, $values);
@@ -84,24 +72,21 @@ class SignUpForm extends FormComponent
         return $form;
     }
 
-    public function signUpFormValidation(Form $form, $values)
-    {
-        if ($this->userModel->findByEmail(Strings::lower($values['email']))) {
-            $form->addError('user.registration.form.errors.email_taken');
-        }
-    }
-
     protected function signUpFormSucceeded(Form $form, array $values)
     {
-        $this->em->beginTransaction();
-
         try {
-            $this->userRegisterModel->create($values);
-            $this->em->commit();
-            $this->onSignUp();
+            $user = $this->userModel->findByPhone($values['phone']);
+            if ($user instanceof User) {
+                $this->onSignUp($user);
+            } else {
+                $this->userRegisterModel->prepareFromArray($values);
+                $this->userRegisterModel->onSignup[] = function (User $user) {
+                    $this->onSignUp($user);
+                };
+                $this->userRegisterModel->create();
+            }
         } catch (UserRegistrationException $e) {
             $form->addError('user.registration.form.errors.registration_failed');
-            $this->em->rollback();
         }
     }
 

@@ -2,12 +2,12 @@
 
 namespace DontPanic\User;
 
+use DontPanic\Entities\User;
 use DontPanic\Exception\Code\UserCodes;
 use DontPanic\Exception\System\DeleteException;
 use DontPanic\Exception\System\NotFoundException;
 use DontPanic\Model\DoctrineModel;
 use Kdyby\Doctrine\EntityManager;
-use DontPanic\Entities\User;
 use Nette\Database\UniqueConstraintViolationException;
 
 class UserModel extends DoctrineModel
@@ -60,6 +60,8 @@ class UserModel extends DoctrineModel
      */
     public function findByPhone($phone, $deleted = false)
     {
+        $phone = preg_replace('/\s+/', '', $phone);
+
         return $this->findOneBy([ 'phone' => $phone ], [], $deleted);
     }
 

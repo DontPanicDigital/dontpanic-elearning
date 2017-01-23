@@ -33,6 +33,13 @@ class UserTestScore extends BaseEntity
     private $wrongAnswers = 0;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="done", type="integer", nullable=false)
+     */
+    private $done = 0;
+
+    /**
      * @var UserTestScore
      *
      * @ORM\ManyToOne(targetEntity="Test", cascade={"persist"}, fetch="LAZY")
@@ -78,6 +85,26 @@ class UserTestScore extends BaseEntity
     public function setWrongAnswers(int $wrongAnswers)
     {
         $this->wrongAnswers = $wrongAnswers;
+    }
+
+    /**
+     * @return int
+     */
+    public function isDone(): int
+    {
+        return $this->done;
+    }
+
+    /**
+     * @param int $done
+     *
+     * @return UserTestScore
+     */
+    public function setDone(int $done): UserTestScore
+    {
+        $this->done = $done;
+
+        return $this;
     }
 
     /**

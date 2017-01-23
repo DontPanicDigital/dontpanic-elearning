@@ -63,6 +63,7 @@ class CreateSmsCodeModel extends DoctrineModel
 
         $this->smsCode->setUser($this->user);
         $this->smsCode->setTest($this->test);
+        $this->smsCode->setUsed(0);
         $this->smsCode->setCode($this->smsCodeGeneratorModel->getCode());
         $this->smsCode->setToken();
     }

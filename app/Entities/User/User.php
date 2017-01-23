@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Kdyby\Doctrine\Entities\MagicAccessors;
 use Knp\DoctrineBehaviors\Model\SoftDeletable\SoftDeletable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Nette\Security\Passwords;
 use Nette\Utils\Random;
 use Nette\Utils\Strings;
@@ -25,6 +26,7 @@ class User
 
     use MagicAccessors;
     use SoftDeletable;
+    use Timestampable;
 
     const PHONE_CODE = '+420';
 
@@ -97,6 +99,13 @@ class User
     private $phone;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="phone_verification", type="integer", nullable=false)
+     */
+    private $phoneVerification = 0;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="sex", type="string", length=6, nullable=true)
@@ -155,13 +164,6 @@ class User
      * @ORM\Column(name="last_login_at", type="datetime", nullable=true)
      */
     private $lastLoginAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
-    private $createdAt;
 
     /**
      * @var Collection
@@ -376,6 +378,26 @@ class User
     }
 
     /**
+     * @return int
+     */
+    public function isPhoneVerification(): int
+    {
+        return $this->phoneVerification;
+    }
+
+    /**
+     * @param int $phoneVerification
+     *
+     * @return User
+     */
+    public function setPhoneVerification(int $phoneVerification): User
+    {
+        $this->phoneVerification = $phoneVerification;
+
+        return $this;
+    }
+
+    /**
      * Set sex
      *
      * @param string $sex
@@ -491,34 +513,6 @@ class User
     public function getToken(): string
     {
         return $this->token;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return User
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @param string $format
-     *
-     * @return \DateTime|string
-     */
-    public function getCreatedAt($format = 'd. m. Y H:i')
-    {
-        if ($format) {
-            return $this->createdAt->format($format);
-        }
-
-        return $this->createdAt;
     }
 
     /**

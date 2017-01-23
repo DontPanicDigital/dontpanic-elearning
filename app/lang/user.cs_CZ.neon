@@ -15,7 +15,7 @@ registration:
         email: E-mail
         password: Heslo
         rules: Podmínky užití
-        do_registration: Registrovat se
+        do_registration: Pokračovat
         errors:
             fill_email: Zadejte email
             fill_valid_email: Zadejte platný email
@@ -24,7 +24,7 @@ registration:
             full_name_pattern: Jméno a příjmení může obsahovat pouze písmena a tečky
             check_rules: Musíte souhlasit s podmínkami
             email_taken: E-mail je již registrován
-            registration_failed: Registraci se nepodařilo dokončit
+            registration_failed: "Přihlášení do testu se nezdařilo, zkuste to, prosím, znovu"
 
 password_change:
     form:
@@ -61,6 +61,16 @@ password_update:
             fill_repeat_password: Zadejte prosím heslo ještě jednou pro kontrolu
             passwords_not_match: Hesla se neshodují
             password_change_failed: Heslo se nepodařilo změnit
+
+sms_code:
+    form:
+        code: Obdržený sms kód
+        do_change: Pokračovat
+        errors:
+            code_fill: Zadejte obdržený sms kód
+            code_valid: SMS kód musí být 6 číslic
+            error: Zadaný kód se neshoduje s vaším účtem
+            error_update: 'Telefon se nepodařilo ověřit, zkuste to, prosím znovu.'
 
 update_profile:
     form:
