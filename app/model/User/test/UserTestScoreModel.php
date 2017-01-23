@@ -65,6 +65,7 @@ class UserTestScoreModel extends DoctrineModel
 
         $this->userTestScore->setUser($this->user);
         $this->userTestScore->setTest($this->test);
+        $this->userTestScore->setDone(1);
     }
 
     /**

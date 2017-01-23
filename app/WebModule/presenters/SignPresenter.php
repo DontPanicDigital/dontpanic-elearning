@@ -35,7 +35,7 @@ class SignPresenter extends BasePresenter
     public function actionAuthCode($token)
     {
         if (!$this->user->isLoggedIn()) {
-            $this->redirect('testIn', [ 'backlink' => $this->storeRequest() ]);
+            $this->redirect('testIn');
         }
 
         /** @var Test $test */
@@ -70,6 +70,7 @@ class SignPresenter extends BasePresenter
 
     /**
      * @return TestSignUpForm
+     * @throws \Nette\Application\AbortException
      * @throws \Nette\Security\AuthenticationException
      */
     protected function createComponentTestSignUpForm()
@@ -80,7 +81,7 @@ class SignPresenter extends BasePresenter
             /** @var Identity $identity */
             $identity = new Identity($user->getId(), [], null);
             $this->user->login($identity);
-            $this->restoreRequest($this->backlink);
+            $this->redirect('Test:default');
         };
 
         return $control;

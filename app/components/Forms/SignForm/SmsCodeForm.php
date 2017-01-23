@@ -93,8 +93,7 @@ class SmsCodeForm extends FormComponent
             $this->smsCodeModel->save($smsCode);
             $this->userModel->save($this->user);
 
-            $this->getPresenter()->restoreRequest($this->getPresenter()->backlink);
-            $this->getPresenter()->redirect('Test:default', [ 'token' => $this->getPresenter()->getParameter('token') ]);
+            $this->getPresenter()->redirect('Test:default');
         } catch (UniqueConstraintViolationException $e) {
             $form->addError('user.sms_code.form.errors.error_update');
         }

@@ -210,14 +210,22 @@ class User
     private $smsCodes;
 
     /**
+     * @ORM\OneToMany(targetEntity="UserTestScore", mappedBy="user", cascade={"persist"})
+     *
+     * @var array|ArrayCollection
+     **/
+    private $testScores;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->userRoles = new ArrayCollection();
-        $this->apiTokens = new ArrayCollection();
-        $this->companies = new ArrayCollection();
-        $this->smsCodes  = new ArrayCollection();
+        $this->userRoles  = new ArrayCollection();
+        $this->apiTokens  = new ArrayCollection();
+        $this->smsCodes   = new ArrayCollection();
+        $this->companies  = new ArrayCollection();
+        $this->testScores = new ArrayCollection();
     }
 
     /**
@@ -733,5 +741,43 @@ class User
     public function getSmsCodes()
     {
         return $this->smsCodes;
+    }
+
+    /**
+     * @param UserTestScore $userTestScore
+     *
+     * @return $this
+     */
+    public function addTestScore(UserTestScore $userTestScore)
+    {
+        if ($this->testScores->contains($userTestScore)) {
+            return;
+        }
+
+        $this->testScores->add($userTestScore);
+
+        return $this;
+    }
+
+    /**
+     * Remove test score
+     *
+     * @param UserTestScore $userTestScore
+     */
+    public function removeTestScore(UserTestScore $userTestScore)
+    {
+        if (!$this->testScores->contains($userTestScore)) {
+            return;
+        }
+
+        $this->testScores->removeElement($userTestScore);
+    }
+
+    /**
+     * @return array|ArrayCollection
+     */
+    public function getTestScores()
+    {
+        return $this->testScores;
     }
 }
