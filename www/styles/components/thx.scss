@@ -1,0 +1,23 @@
+.thxBox {
+    padding-top: 50px;
+    position: relative;
+    
+    &:before {
+        content: '';
+        @include sprites("icon-cup");
+        margin: 0 auto 20px;
+        display: table;
+    }
+    
+    .title {
+        color: $pink;
+        margin-bottom: 0;
+    }
+    
+    p {
+        span {
+            display: block;
+            margin-top: 20px;
+        }
+    }
+}
