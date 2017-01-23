@@ -202,20 +202,26 @@ CREATE TABLE `test_options` (
   PRIMARY KEY (`id`),
   KEY `test_questions_id` (`test_questions_id`),
   CONSTRAINT `test_options_ibfk_1` FOREIGN KEY (`test_questions_id`) REFERENCES `test_questions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `test_options` (`id`, `test_questions_id`, `token`, `answer`, `description`, `annotation`, `correct`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1,	1,	'soYXMsR9MdlSmlBVfu55mpHoEn0ZOj',	'Odpověd 2',	NULL,	NULL,	0,	'2017-01-19 15:02:55',	'2017-01-19 18:15:12',	NULL),
-(2,	1,	'bIJT4azpShEeoMdlw6eVnJf1zmtxad',	NULL,	NULL,	NULL,	0,	'2017-01-19 15:05:57',	'2017-01-19 15:46:02',	'2017-01-19 15:46:02'),
-(3,	1,	'3S6bnqrlcVpRDhaMtWNHbgTgXZ8SHZ',	NULL,	NULL,	NULL,	0,	'2017-01-19 15:06:12',	'2017-01-19 15:48:05',	'2017-01-19 15:48:05'),
-(4,	1,	'sXQIF4xRCpaO0kp7AYXxB1Us866T6w',	NULL,	NULL,	NULL,	0,	'2017-01-19 15:47:46',	'2017-01-19 15:48:04',	'2017-01-19 15:48:04'),
-(5,	1,	'AZ1BYFsaBDAkKzuqoTSfiLmemr3dtP',	'Odpověd 3',	NULL,	NULL,	0,	'2017-01-19 15:47:47',	'2017-01-19 18:15:12',	NULL),
-(6,	1,	'eZeYHjeSzdDegtOTmlOt8ZFhCsKFtD',	NULL,	NULL,	NULL,	0,	'2017-01-19 15:47:48',	'2017-01-19 15:48:21',	'2017-01-19 15:48:21'),
-(7,	1,	'zrJvevvQUzV73bqJ5J1oaq3XBSVJu5',	'Odpověd 4',	NULL,	NULL,	0,	'2017-01-19 15:47:48',	'2017-01-19 18:15:12',	NULL),
-(8,	1,	'HryK8XatMPwDcaGzw0coDIBtQbVplt',	NULL,	NULL,	NULL,	0,	'2017-01-19 15:48:11',	'2017-01-19 15:48:12',	'2017-01-19 15:48:12'),
-(9,	2,	'Ml2j2BHcW0QMAf3kTS8DLdzmqsE6Ck',	'asdas',	NULL,	NULL,	1,	'2017-01-19 16:35:50',	'2017-01-19 18:21:22',	NULL),
-(10,	1,	'EPqAENtZ8pN8LDpJ6nusTYjy0SmAiP',	'Odpověd 5',	NULL,	NULL,	1,	'2017-01-19 17:29:17',	'2017-01-19 18:15:12',	NULL),
-(11,	2,	'5eFLXB9B4Zg2xvc4qXBpHLjrKkEooV',	'asdas',	NULL,	NULL,	0,	'2017-01-19 18:21:15',	'2017-01-19 18:21:22',	NULL);
+(1,	1,	'soYXMsR9MdlSmlBVfu55mpHoEn0ZOj',	'Odpověd 2',	NULL,	NULL,	0,	'2017-01-19 15:02:55',	'2017-01-20 14:55:40',	'2017-01-20 14:55:40'),
+(2,	1,	'bIJT4azpShEeoMdlw6eVnJf1zmtxad',	'Odpověd 3',	NULL,	NULL,	0,	'2017-01-19 15:05:57',	'2017-01-20 14:55:41',	'2017-01-20 14:55:41'),
+(3,	1,	'3S6bnqrlcVpRDhaMtWNHbgTgXZ8SHZ',	'Odpověd 4',	NULL,	NULL,	0,	'2017-01-19 15:06:12',	'2017-01-20 14:55:42',	'2017-01-20 14:55:42'),
+(4,	1,	'sXQIF4xRCpaO0kp7AYXxB1Us866T6w',	'Odpověd 5',	NULL,	NULL,	0,	'2017-01-19 15:47:46',	'2017-01-20 14:55:43',	'2017-01-20 14:55:43'),
+(5,	1,	'AZ1BYFsaBDAkKzuqoTSfiLmemr3dtP',	'Odpověd 6',	NULL,	NULL,	0,	'2017-01-19 15:47:47',	'2017-01-20 14:55:44',	'2017-01-20 14:55:44'),
+(6,	1,	'eZeYHjeSzdDegtOTmlOt8ZFhCsKFtD',	'Odpověd 7',	NULL,	NULL,	0,	'2017-01-19 15:47:48',	'2017-01-19 18:32:26',	'2017-01-19 18:32:26'),
+(7,	1,	'zrJvevvQUzV73bqJ5J1oaq3XBSVJu5',	'Odpověd 8',	NULL,	NULL,	1,	'2017-01-19 15:47:48',	'2017-01-19 18:32:07',	NULL),
+(8,	1,	'HryK8XatMPwDcaGzw0coDIBtQbVplt',	'Odpověd 9',	NULL,	NULL,	0,	'2017-01-19 15:48:11',	'2017-01-20 11:10:44',	'2017-01-20 11:10:44'),
+(9,	2,	'Ml2j2BHcW0QMAf3kTS8DLdzmqsE6Ck',	'asdas adas',	NULL,	NULL,	1,	'2017-01-19 16:35:50',	'2017-01-20 11:10:51',	NULL),
+(10,	1,	'EPqAENtZ8pN8LDpJ6nusTYjy0SmAiP',	'Odpověd 10',	NULL,	NULL,	0,	'2017-01-19 17:29:17',	'2017-01-19 18:32:07',	NULL),
+(11,	2,	'5eFLXB9B4Zg2xvc4qXBpHLjrKkEooV',	'asdasa as das',	NULL,	NULL,	0,	'2017-01-19 18:21:15',	'2017-01-20 11:10:51',	NULL),
+(12,	3,	'SgMFI5vZMiHUT4e2mLfrM5P5XmQyS5',	'asdsa',	NULL,	NULL,	1,	'2017-01-20 12:27:28',	'2017-01-20 12:27:39',	NULL),
+(13,	3,	'dNs6gGK8d7QdwSfvi4z0T6MARHYb8i',	'asdas',	NULL,	NULL,	1,	'2017-01-20 12:27:32',	'2017-01-20 12:27:39',	NULL),
+(14,	3,	'wkfKB8Bzrb54LfiHaKtY7v84Rn71SJ',	'asdas',	NULL,	NULL,	0,	'2017-01-20 12:27:33',	'2017-01-20 12:27:39',	NULL),
+(15,	4,	'R0c2qWobxceq0JEbdGkZoVgTh1RCIh',	'asdas',	NULL,	NULL,	3,	'2017-01-20 14:56:12',	'2017-01-20 14:56:36',	NULL),
+(16,	4,	'JDQfF4HZAgoP5vVl9NK8GJ3QcyR1XX',	'asdsa',	NULL,	NULL,	2,	'2017-01-20 14:56:20',	'2017-01-20 14:56:36',	NULL),
+(17,	4,	'tSy7WP6ov0QvqK9zgd3hyQfmVrsFwP',	'asdas',	NULL,	NULL,	1,	'2017-01-20 14:56:22',	'2017-01-20 14:56:36',	NULL);
 
 DROP TABLE IF EXISTS `test_questions`;
 CREATE TABLE `test_questions` (
@@ -232,11 +238,13 @@ CREATE TABLE `test_questions` (
   PRIMARY KEY (`id`),
   KEY `tests_id` (`tests_id`),
   CONSTRAINT `test_questions_ibfk_1` FOREIGN KEY (`tests_id`) REFERENCES `tests` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `test_questions` (`id`, `tests_id`, `token`, `question`, `description`, `type`, `sort`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1,	2,	'iSFvqdb12XaPH0KSJUOETXabUVkuTM',	'Jak ti dneska je?',	'dddasdsa',	'RADIOLIST',	NULL,	'2017-01-18 16:39:12',	'2017-01-19 15:49:02',	NULL),
-(2,	2,	'J8kd9kK686sg7QL15gahgI2ud1SSp2',	'Co budeš dělat?',	NULL,	'RADIOLIST',	NULL,	'2017-01-19 11:39:00',	'2017-01-19 14:40:28',	NULL);
+(2,	2,	'J8kd9kK686sg7QL15gahgI2ud1SSp2',	'Co budeš dělat?',	NULL,	'RADIOLIST',	NULL,	'2017-01-19 11:39:00',	'2017-01-20 14:55:52',	'2017-01-20 14:55:52'),
+(3,	2,	'OGeVGEkJZXMmdHOa1aF4KU8JjfCmA0',	'Jak jde pes?',	NULL,	'CHECKBOXLIST',	NULL,	'2017-01-20 12:26:52',	'2017-01-20 12:26:52',	NULL),
+(4,	2,	'OSThSxRTv15mLDPZzyd8Y4FGShlCL0',	'Co budeš dělat?',	NULL,	'SORT',	NULL,	'2017-01-20 14:56:05',	'2017-01-20 14:56:05',	NULL);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -261,7 +269,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `users` (`id`, `username`, `name`, `surname`, `email`, `phone`, `sex`, `password`, `password_token`, `password_expiration_at`, `token`, `active`, `number_of_logins`, `last_login_at`, `created_at`, `deleted_at`) VALUES
-(1,	NULL,	'Lisa',	'Simpson',	'lisa@dontpanic.cz',	NULL,	NULL,	'$2y$10$zUIOxVWGoi3w5PgDigmtIOPwhA5qH8l1Gj.lXAsEPv15qFGRZ263S',	NULL,	NULL,	'ehf9i35w495tar9zeihghkahrbxv1o',	1,	45,	'2017-01-19 15:02:49',	'2017-01-02 16:05:43',	NULL),
+(1,	NULL,	'Lisa',	'Simpson',	'lisa@dontpanic.cz',	NULL,	NULL,	'$2y$10$zUIOxVWGoi3w5PgDigmtIOPwhA5qH8l1Gj.lXAsEPv15qFGRZ263S',	NULL,	NULL,	'ehf9i35w495tar9zeihghkahrbxv1o',	1,	49,	'2017-01-20 16:48:25',	'2017-01-02 16:05:43',	NULL),
 (2,	NULL,	'Bart',	'Simpson',	'bart@dontpanic.cz',	NULL,	NULL,	'$2y$10$peXSb2UXlOMyQPjyvlQGCeUbG/70KzgYnyorJXYIT2JOEZdKlovqy',	NULL,	NULL,	'0v5kaqzoqujnvir4tm3y8h9xg8jdns',	1,	4,	'2017-01-02 17:30:47',	'2017-01-02 17:25:05',	NULL);
 
 DROP TABLE IF EXISTS `user_has_company`;
@@ -283,6 +291,7 @@ CREATE TABLE `user_test_answers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `test_options_id` int(10) unsigned DEFAULT NULL,
   `users_id` int(11) DEFAULT NULL,
+  `correct` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -290,8 +299,27 @@ CREATE TABLE `user_test_answers` (
   KEY `users_id` (`users_id`),
   CONSTRAINT `user_test_answers_ibfk_1` FOREIGN KEY (`test_options_id`) REFERENCES `test_options` (`id`) ON DELETE SET NULL,
   CONSTRAINT `user_test_answers_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `user_test_answers` (`id`, `test_options_id`, `users_id`, `correct`, `created_at`, `updated_at`) VALUES
+(1,	10,	1,	1,	'2017-01-20 16:53:27',	'2017-01-20 16:53:27'),
+(2,	12,	1,	1,	'2017-01-20 16:53:27',	'2017-01-20 16:53:27'),
+(3,	13,	1,	1,	'2017-01-20 16:53:27',	'2017-01-20 16:53:27'),
+(4,	15,	1,	2,	'2017-01-20 16:53:27',	'2017-01-20 16:53:27'),
+(5,	16,	1,	3,	'2017-01-20 16:53:27',	'2017-01-20 16:53:27'),
+(6,	17,	1,	1,	'2017-01-20 16:53:27',	'2017-01-20 16:53:27'),
+(7,	10,	1,	1,	'2017-01-20 17:08:17',	'2017-01-20 17:08:17'),
+(8,	12,	1,	1,	'2017-01-20 17:08:17',	'2017-01-20 17:08:17'),
+(9,	13,	1,	1,	'2017-01-20 17:08:17',	'2017-01-20 17:08:17'),
+(10,	15,	1,	2,	'2017-01-20 17:08:17',	'2017-01-20 17:08:17'),
+(11,	16,	1,	3,	'2017-01-20 17:08:17',	'2017-01-20 17:08:17'),
+(12,	17,	1,	1,	'2017-01-20 17:08:17',	'2017-01-20 17:08:17'),
+(13,	10,	1,	1,	'2017-01-20 17:12:02',	'2017-01-20 17:12:02'),
+(14,	12,	1,	1,	'2017-01-20 17:12:02',	'2017-01-20 17:12:02'),
+(15,	13,	1,	1,	'2017-01-20 17:12:02',	'2017-01-20 17:12:02'),
+(16,	15,	1,	2,	'2017-01-20 17:12:02',	'2017-01-20 17:12:02'),
+(17,	16,	1,	3,	'2017-01-20 17:12:02',	'2017-01-20 17:12:02'),
+(18,	17,	1,	1,	'2017-01-20 17:12:02',	'2017-01-20 17:12:02');
 
 DROP TABLE IF EXISTS `user_test_score`;
 CREATE TABLE `user_test_score` (
@@ -307,8 +335,11 @@ CREATE TABLE `user_test_score` (
   KEY `tests_id` (`tests_id`),
   CONSTRAINT `user_test_score_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `user_test_score_ibfk_2` FOREIGN KEY (`tests_id`) REFERENCES `tests` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `user_test_score` (`id`, `users_id`, `tests_id`, `correct_answers`, `wrong_answers`, `created_at`, `updated_at`) VALUES
+(1,	1,	2,	0,	0,	'2017-01-20 17:08:17',	'2017-01-20 17:08:17'),
+(2,	1,	2,	0,	0,	'2017-01-20 17:12:02',	'2017-01-20 17:12:02');
 
 DROP TABLE IF EXISTS `user_tokens`;
 CREATE TABLE `user_tokens` (
@@ -332,4 +363,4 @@ CREATE TABLE `_migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
--- 2017-01-19 17:23:21
+-- 2017-01-23 09:04:57
