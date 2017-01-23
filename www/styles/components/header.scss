@@ -1,0 +1,17 @@
+.header {
+    background: $pink;
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    padding: 35px 20px;
+    
+    &__welcome {
+        font-weight: bold;
+        color: $white;
+        margin: 20px 0 10px;
+    }
+    
+    &__text {
+        color: $white;
+        margin: 0;
+    }
+}

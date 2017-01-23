@@ -1,0 +1,45 @@
+.overlay {
+    @include position(fixed, 0 null null 0);
+    width: 100%;
+    min-height: 100%;
+    background: rgba(63,61,88,0.98);
+    display: none;
+    
+    &__container {
+        @include position(absolute, 20px null 0 0);
+        overflow-y: scroll;
+        margin: auto;
+    }
+    
+    &__content {
+        background: $white;
+        box-shadow: 0 4px 6px rgba(42,42,49,0.53);
+        padding: 30px 20px 0;
+        width: calc(100% - 20px);
+        margin: 0 auto;
+    }
+    
+    &__wrong {
+        color: $orange;
+        font-size: 18px;
+        font-weight: bold;
+        padding-top: 72px;
+        position: relative;
+        text-align: center;
+        margin-bottom: 25px;
+        
+        &:before {
+            content: '';
+            @include sprites("icon-close");
+            @include position(absolute, 0 0 null 0);
+            margin: 0 auto;
+        }
+    }
+    
+    .button {
+        box-shadow: none;
+        width: calc(100% + 40px);
+        margin-left: -20px;
+        margin-top: 70px;
+    }
+}

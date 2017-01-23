@@ -1,0 +1,16 @@
+.footer {
+    background: $pink;
+    padding: 40px 0;
+    margin-top: 50px;
+    
+    .logo {
+        display: block;
+    }
+    
+    a {
+        color: $white;
+        font-size: 15px;
+        display: inline-block;
+        margin-top: 25px;
+    }
+}
