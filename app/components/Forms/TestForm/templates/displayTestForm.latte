@@ -2,29 +2,33 @@
     {if count($test->getQuestions())}
         {foreach $test->getQuestions() as $question}
             {if !$question->isDeleted()}
-                {var $questionType = $question->getType()}
-                {if count($question->getOptions())}
-                    <h3>{$question->getQuestion()}</h3>
-                    {foreach $question->getOptions() as $option}
-                        {if !$option->isDeleted()}
-                            {if in_array($questionType, ['RADIOLIST', 'CHECKBOXLIST'])}
-                                <label data-correct="{$option->getCorrect()}">
-                                    <input n:name="$question->getToken():$option->getToken()" />
-                                    {$option->getOption()}
-                                </label>
+                <div class="question">
+                    {var $questionType = $question->getType()}
+                    {if count($question->getOptions())}
+                        <h3>{$question->getQuestion()}</h3>
+                        {foreach $question->getOptions() as $option}
+                            {if !$option->isDeleted()}
+                                <div class="option">
+                                    {if in_array($questionType, ['RADIOLIST', 'CHECKBOXLIST'])}
+                                        <label data-correct="{$option->getCorrect()}">
+                                            <input n:name="$question->getToken():$option->getToken()" />
+                                            {$option->getOption()}
+                                        </label>
+                                    {/if}
+                                    {if $questionType === 'SORT'}
+                                        <label data-sort="{$option->getSort()}">
+                                            <input n:name="$option->getToken() . _sort" />
+                                            {$option->getOption()}
+                                        </label>
+                                    {/if}
+                                </div>
                             {/if}
-                            {if $questionType === 'SORT'}
-                                <label data-sort="{$option->getSort()}">
-                                    <input n:name="$option->getToken() . _sort" />
-                                    {$option->getOption()}
-                                </label>
-                            {/if}
-                        {/if}
-                    {/foreach}
-                {/if}
+                        {/foreach}
+                    {/if}
+                </div>
             {/if}
         {/foreach}
-        <hr />
-        <input n:name="submit" />
+        {*<hr />*}
+        {*<input n:name="submit" />*}
     {/if}
 {/form}
