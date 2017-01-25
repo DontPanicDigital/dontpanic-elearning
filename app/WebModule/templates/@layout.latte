@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="/build/styles{if $isProduction}.min{/if}.css" media="screen">
     <title>{ifset #title}{include title}{else}{_meta.title}{/ifset} | {_meta.project}</title>
     {include '../../templates/scripts/html5tagsSupport.latte'}
+
+    {include '../../templates/scripts/jquery.latte'}
+    <script type="text/javascript" src="/build/scripts{if $isProduction}.min{/if}.js"></script>
 </head>
 <body class="{ifset #bodyClass}{include bodyClass}{/ifset}">
     {*<nav>*}
@@ -42,8 +45,7 @@
         var USER_ID          = null;
         var API_ACCESS_TOKEN = {if isset($apiToken)}{$apiToken}{else}null{/if};
     </script>
-    {include '../../templates/scripts/jquery.latte'}
-    <script type="text/javascript" src="/build/scripts{if $isProduction}.min{/if}.js"></script>
+
 
     {include '../../templates/scripts/nette.bootstrap.latte'}
 </body>
