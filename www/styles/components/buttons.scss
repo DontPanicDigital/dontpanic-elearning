@@ -12,6 +12,7 @@
     color: $white;
     border: 0;
     text-align: center;
+    cursor: pointer;
     box-shadow: 0 4px 6px rgba(106,106,106,0.53);
     @include linear-gradient(120deg, #e20074 0%, #bc0e6e 100%);
 

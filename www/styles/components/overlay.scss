@@ -6,9 +6,12 @@
     display: none;
     
     &__container {
-        @include position(absolute, 20px null 0 0);
+        @include position(absolute, 0 null 0 0);
         overflow-y: scroll;
         margin: auto;
+        width: 100%;
+        padding: 0 10px;
+        display: table;
     }
     
     &__content {
@@ -17,6 +20,8 @@
         padding: 30px 20px 0;
         width: calc(100% - 20px);
         margin: 0 auto;
+        width: 100%;
+        text-align: center;
     }
     
     &__wrong {

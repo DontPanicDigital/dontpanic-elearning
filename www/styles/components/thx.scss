@@ -1,12 +1,17 @@
-.thxBox {
-    padding-top: 50px;
-    position: relative;
+.thxPage {
+    background: $white;
+    padding-bottom: 50px;
     
-    &:before {
-        content: '';
-        @include sprites("icon-cup");
-        margin: 0 auto 20px;
-        display: table;
+    &__box {
+        padding-top: 50px;
+        position: relative;
+        
+        &:before {
+            content: '';
+            @include sprites("icon-cup");
+            margin: 0 auto 20px;
+            display: table;
+        }
     }
     
     .title {

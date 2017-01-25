@@ -1,7 +1,14 @@
 .content {
     padding: 30px 0;
+    @include clearfix;
 }
 
 .logo {
     @include sprites("logo");
+}
+
+.alreadyCompleted {
+    background: $white;
+    text-align: center;
+    padding: 70px 0 50px;
 }
