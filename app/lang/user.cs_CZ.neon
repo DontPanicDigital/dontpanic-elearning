@@ -12,7 +12,7 @@ login:
 registration:
     form:
         full_name: Jméno a Příjmení
-        email: E-mail
+        email: "E-mail <span>(pro zaslání potvrzení o absolvování)</span>"
         password: Heslo
         rules: Podmínky užití
         do_registration: Pokračovat
@@ -76,7 +76,7 @@ update_profile:
     form:
         name: Jméno a přijmení
         email: E-mail
-        phone: Telefon
+        phone: Telefonní číslo
         address: Adresa
         do_save: Uložit
         errors:
