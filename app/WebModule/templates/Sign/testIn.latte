@@ -1,3 +1,18 @@
 {block content}
-    {control testSignUpForm}
+    <div class="container">
+        <header class="header">
+            <div class="logo">&nbsp;</div>
+            <div class="header__welcome">{_content.welcome_to_course}</div>
+            <div class="title">{_content.welcome_title|noescape}</div>
+            <p class="header__text">
+                {_content.welcome_text|noescape}
+            </p>
+        </header>
+        <div class="contact">
+            <div class="title">{_content.start_course}</div>
+            {control testSignUpForm}
+        </div>
+    </div>
 {/block}
+
+{block bodyClass}whiteBG{/block}
