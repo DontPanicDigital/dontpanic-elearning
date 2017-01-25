@@ -16,13 +16,21 @@
 </head>
 <body class="{ifCurrent :Admin:Sign:in}signin{/ifCurrent}">
     <div>
-        {if $user->isLoggedIn()}
-            {if count($companiesControl)}
-                {foreach $companiesControl as $company}
-                    <a n:class="company === $activeCompany ? active" n:href="setActiveCompany! companyToken=>$company->getToken()">{$company->getName()}</a>
-                {/foreach}
-            {/if}
-        {/if}
+        <div class="container">
+            <div class="row mt-1">
+                <div class="col-xs-12 text--right">
+                    <div class="switcher">
+                        {if $user->isLoggedIn()}
+                            {if count($companiesControl)}
+                                {foreach $companiesControl as $company}
+                                    <a class="btn btn-primary{if $company === $activeCompany} active{/if}" n:href="setActiveCompany! companyToken=>$company->getToken()">{$company->getName()}</a>
+                                {/foreach}
+                            {/if}
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        </div>
         {snippet flashMessages}
         {if count($flashes)}
             <div class="flashMessage flashMessage--autoclose">

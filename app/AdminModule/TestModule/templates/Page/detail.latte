@@ -2,29 +2,45 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-lg-6 offset-lg-2">
-                <h2 class="mb-1">Detail testu</h2>
-                {control updateTestForm}
-                <h2 class="mt-3 mb-1">Přidat otázku</h2>
-                {control createTestQuestionForm}
-                <br/>
-                <hr/>
-                <br/>
-                <br/>
-                <div class="form-group">
-                    {snippet questions}
-                        {if count($test->getQuestions())}
-                            {foreach $test->getQuestions() as $question}
-                                {if !$question->isDeleted()}
-                                    {var $questionId = $question->getId()}
-                                    {control updateTestQuestionForm-$questionId}
-                                    <hr/>
-                                    <br/>
-                                {/if}
-                            {/foreach}
-                        {else}
-                            {_test.list.error.no_question}
-                        {/if}
-                    {/snippet}
+                <ul class="nav nav-tabs mb-2" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#test-detail" role="tab">Detail testu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#add-question" role="tab">Přidat otázku</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#add-answer" role="tab">Přidat odpověď</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="test-detail" role="tabpanel">
+                        <h2 class="mb-1">Detail testu</h2>
+                        {control updateTestForm}
+                    </div>
+                    <div class="tab-pane" id="add-question" role="tabpanel">
+                        <h2 class="mb-1">Přidat otázku</h2>
+                        {control createTestQuestionForm}
+                    </div>
+                    <div class="tab-pane" id="add-answer" role="tabpanel">
+                        {snippet questions}
+                            {if count($test->getQuestions())}
+                                {foreach $test->getQuestions() as $question}
+                                    {if !$question->isDeleted()}
+                                        <h2 class="mb-1">Otázka</h2>
+                                        {var $questionId = $question->getId()}
+                                        {control updateTestQuestionForm-$questionId}
+                                        <hr/>
+                                        <br/>
+                                    {/if}
+                                {/foreach}
+                            {else}
+                                {_test.list.error.no_question}
+                            {/if}
+                        {/snippet}
+                    </div>
                 </div>
             </div>
         </div>
