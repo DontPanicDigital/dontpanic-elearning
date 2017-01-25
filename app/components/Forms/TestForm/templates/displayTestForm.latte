@@ -1,34 +1,92 @@
-{form form}
+{form form, class=>'form'}
     {if count($test->getQuestions())}
-        {foreach $test->getQuestions() as $question}
-            {if !$question->isDeleted()}
-                <div class="question">
-                    {var $questionType = $question->getType()}
-                    {if count($question->getOptions())}
-                        <h3>{$question->getQuestion()}</h3>
-                        {foreach $question->getOptions() as $option}
-                            {if !$option->isDeleted()}
-                                <div class="option">
-                                    {if in_array($questionType, ['RADIOLIST', 'CHECKBOXLIST'])}
-                                        <label data-correct="{$option->getCorrect()}">
-                                            <input n:name="$question->getToken():$option->getToken()" />
-                                            {$option->getOption()}
-                                        </label>
-                                    {/if}
-                                    {if $questionType === 'SORT'}
-                                        <label data-sort="{$option->getSort()}">
-                                            <input n:name="$option->getToken() . _sort" />
-                                            {$option->getOption()}
-                                        </label>
+        <div class="content">
+            <div class="container">
+                <div class="question__count">{_content.question_text} <span class="question__count--current"></span>/<span class="question__count--all"></span></div>
+            </div>
+
+            {foreach $test->getQuestions() as $question}
+                {if !$question->isDeleted()}
+                    <div class="question">
+                        {var $questionType = $question->getType()}
+                        {if count($question->getOptions())}
+                            <div class="container">
+                                {if $question->getDescription()}
+                                    <div class="question__info">
+                                        {$question->getDescription()|noescape}
+                                    </div>
+                                {/if}
+                                <div class="question__text">
+                                    {$question->getQuestion()}
+                                    {if $questionType == 'CHECKBOXLIST'}
+                                        <span>{_content.choose_more_options}</span>
+                                    {elseif $questionType == 'RADIOLIST'}
+                                        <span>{_content.choose_one_option}</span>
+                                    {else}
+                                        <span>{_content.arrange_options}</span>
                                     {/if}
                                 </div>
-                            {/if}
-                        {/foreach}
-                    {/if}
+                            </div>
+                            <div class="question__container">
+                                <div class="question__holder">
+                                    {if $questionType === 'SORT'}
+                                        <div class="question__sortable">
+                                    {/if}
+                                    {foreach $question->getOptions() as $option}
+                                        {if !$option->isDeleted()}
+                                                {if $questionType == 'CHECKBOXLIST'}
+                                                    <div class="question__item">
+                                                        <input n:name="$question->getToken():$option->getToken()" data-correct="{$option->getCorrect()}" data-overlay="{$option->getAnnotation()|noescape}" class="checkbox" />
+                                                        <label n:name="$question->getToken():$option->getToken()">
+                                                            <span>{$option->getOption()}</span>
+                                                        </label>
+                                                    </div>
+                                                {/if}
+                                                {if $questionType == 'RADIOLIST'}
+                                                    <div class="question__item">
+                                                        <input n:name="$question->getToken():$option->getToken()" data-correct="{$option->getCorrect()}" data-overlay="{$option->getAnnotation()|noescape}" class="radio" />
+                                                        <label n:name="$question->getToken():$option->getToken()">
+                                                            <span>{$option->getOption()}</span>
+                                                        </label>
+                                                    </div>
+                                                {/if}
+                                                {if $questionType === 'SORT'}
+                                                    <div class="question__item" data-sort="{$option->getSort()}">
+                                                        <input n:name="$option->getToken() . _sort" value="{$option->getSort()}" class="form__input--hide sort" />
+                                                        <label>
+                                                            <span>{$option->getOption()}</span>
+                                                        </label>
+                                                    </div>
+                                                {/if}
+                                        {/if}
+                                    {/foreach}
+                                    {if $questionType === 'SORT'}
+                                        </div>
+                                    {/if}
+                                </div>
+                            </div>
+
+                            <div class="form__submit">
+                                <div class="button button--continue">{_content.button_continue}</div>
+                            </div>
+                        {/if}
+                    </div>
+                {/if}
+            {/foreach}
+        </div>
+
+        <div class="overlay">
+            <div class="overlay__container">
+                <div class="overlay__content">
+                    <div class="overlay__wrong">
+                        {_content.wrong_answer_title}
+                    </div>
+                    <div class="overlay__text">
+                        {_content.wrong_answer_text|noescape}
+                    </div>
+                    <div class="button button--close">{_content.button_continue}</div>
                 </div>
-            {/if}
-        {/foreach}
-        {*<hr />*}
-        {*<input n:name="submit" />*}
+            </div>
+        </div>
     {/if}
 {/form}
