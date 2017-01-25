@@ -1,3 +1,16 @@
 {snippet code}
-{control form}
+    {form form, class=>'form'}
+        {if $form->hasErrors()}
+            {foreach $form->errors as $error}
+                <div class="form__error form__error--global">{$error}</div>
+            {/foreach}
+        {/if}
+        <div class="form__row">
+            <label n:name="code">{_user.sms_code.form.code}</label>
+            <input n:name="code" class="form__input" />
+        </div>
+        <div class="form__submit">
+            <input n:name="send" class="button" value="{_user.sms_code.form.do_change}" />
+        </div>
+    {/form}
 {/snippet}

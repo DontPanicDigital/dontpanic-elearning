@@ -1,1 +1,22 @@
-{control form}
+{form form, class=>'form-signin form'}
+    {if $form->hasErrors()}
+        {foreach $form->errors as $error}
+            <div class="form__error form__error--global">{$error}</div>
+        {/foreach}
+    {/if}
+    <div class="form__row">
+        <label n:name="name">{_user.registration.form.full_name}</label>
+        <input n:name="name" class="form__input" />
+    </div>
+    <div class="form__row">
+        <label n:name="email">{_user.registration.form.email|noescape}</label>
+        <input type="email" n:name="email" class="form__input" />
+    </div>
+    <div class="form__row">
+        <label n:name="phone">{_user.update_profile.form.phone}</label>
+        <input type="tel" n:name="phone" class="form__input" />
+    </div>
+    <div class="form__submit">
+        <input n:name="send" class="button" value="{_user.registration.form.do_registration}" />
+    </div>
+{/form}

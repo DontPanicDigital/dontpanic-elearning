@@ -4,25 +4,58 @@
             {if count($testQuestion->getOptions())}
                 {foreach $testQuestion->getOptions() as $option}
                     {if !$option->isDeleted()}
-                        <input n:name="$option->getToken() . _option"/>
-                        <textarea n:name="$option->getToken() . _description"/>
-                        <textarea n:name="$option->getToken() . _annotation"/>
-                        <br/>
-                        {if in_array($testQuestion->getType(), ['RADIOLIST', 'CHECKBOXLIST'])}
-                            <input n:name="correct:$option->getToken()"/>
-                        {/if}
-
-                        {if $testQuestion->getType() === 'SORT'}
-                            <input n:name="$option->getToken() . _sort"/>
-                        {/if}
+                        <h2 class="mb-1 mt-3">Odpověď</h2>
                         <div class="form-group">
-                            <a n:href="removeTestOption! testOptionToken=>$option->getToken()" class="ajax btn btn-danger">Odstranit</a>
+                            <label n:name="$option->getToken() . _option">Znění odpovědi</label>
+                            <input class="form-control" n:name="$option->getToken() . _option"/>
+                        </div>
+                        <div class="form-group">
+                            <label n:name="$option->getToken() . _description">Doplňující informace</label>
+                            <textarea class="form-control" n:name="$option->getToken() . _description"/>
+                        </div>
+                        <div class="form-group">
+                            <label n:name="$option->getToken() . _annotation">Vysvětlivka</label>
+                            <textarea class="form-control" n:name="$option->getToken() . _annotation"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                {if $testQuestion->getType() === 'RADIOLIST'}
+                                    <div class="col-xs-4">
+                                        <label n:name="correct:$option->getToken()" class="custom-control custom-radio">
+                                            <input n:name="correct:$option->getToken()" class="custom-control-input question-type" data-show="radio">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">Správná odpověď</span>
+                                        </label>
+                                    </div>
+                                {/if}
+
+                                {if $testQuestion->getType() === 'CHECKBOXLIST'}
+                                    <div class="col-xs-4">
+                                        <label n:name="correct:$option->getToken()" class="custom-control custom-checkbox">
+                                            <input n:name="correct:$option->getToken()" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">Správná odpověď</span>
+                                        </label>
+                                    </div>
+                                {/if}
+
+                                {if $testQuestion->getType() === 'SORT'}
+                                    <div class="col-xs-6">
+                                        <label n:name="$option->getToken() . _sort">Pořadí</label>
+                                        <input n:name="$option->getToken() . _sort"/>
+                                    </div>
+                                {/if}
+
+                                <div class="col-xs-4">
+                                    <a n:href="removeTestOption! testOptionToken=>$option->getToken()" class="ajax btn btn-danger">Odstranit</a>
+                                </div>
+                            </div>
                         </div>
                         <hr/>
                     {/if}
                 {/foreach}
             {/if}
-            <input n:name="submit">
+            <input n:name="submit" class="btn btn-primary">
         {/if}
     {/form}
 {/snippet}
