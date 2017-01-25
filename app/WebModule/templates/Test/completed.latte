@@ -1,3 +1,17 @@
 {block content}
-    Tento test máš již zasebou :)
+    <div class="alreadyCompleted">
+        <div class="container">
+            <div class="title">{_content.already_completed}</div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="logo">&nbsp;</div>
+            <a href="#">
+                {_content.have_question}
+            </a>
+        </div>
+    </footer>
 {/block}
+
+{block bodyClass}pinkBG{/block}
