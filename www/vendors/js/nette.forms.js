@@ -205,9 +205,9 @@ Nette.isDisabled = function(elem) {
  * Display error message.
  */
 Nette.addError = function(elem, message) {
-//    $(elem).closest('.form').find('.errorMsg').remove();
-//    $(elem).closest('.form__item').addClass('error').append('<div class="errorMsg"><div>'+message+'</div></div>');
-    alert(message);
+    $(elem).closest('.form').find('.form__error').remove();
+    $(elem).closest('.form').find('.form__row').removeClass('form__row--error');
+    $(elem).closest('.form__row').addClass('form__row--error').append('<div class="form__error"><div>'+message+'</div></div>');
     if (elem.focus) {
         elem.focus();
     }
