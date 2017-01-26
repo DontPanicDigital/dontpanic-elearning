@@ -39,6 +39,10 @@ class TestPresenter extends BasePresenter
         if (!$this->userEntity instanceof User) {
             $this->redirect('Sign:testIn');
         }
+        if (!$this->userEntity->getPhone(false)) {
+            $this->user->logout(true);
+            $this->redirect('Sign:testIn');
+        }
         if (!$this->userEntity->isPhoneVerification()) {
             $this->redirect('Sign:authCode', [
                 'token' => $this->getParameter('token'),
@@ -70,6 +74,11 @@ class TestPresenter extends BasePresenter
     }
 
     public function renderDone()
+    {
+        $this->user->logout(true);
+    }
+
+    public function renderCompleted()
     {
         $this->user->logout(true);
     }
