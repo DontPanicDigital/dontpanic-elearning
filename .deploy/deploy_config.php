@@ -8,7 +8,7 @@ namespace Deployer;
 define('PROJECT_HOME', __DIR__ . '/../');
 
 //VENDORS SCRIPTS SWITCHES
-set('use_npm', false);
+set('use_npm', true);
 set('use_bower', false);
 
 // STATIC BUILD SWITCH
@@ -43,7 +43,7 @@ set('app_name', 'sandbox');
  *
  * Sets the path to repository of the project, that is deployed
  */
-set('repository', 'https://github.com/DontPanicDigital/sandbox.git');
+set('repository', 'https://github.com/DontPanicDigital/dontpanic-elearning.git');
 
 /**
  * @required
@@ -52,7 +52,7 @@ set('repository', 'https://github.com/DontPanicDigital/sandbox.git');
  * Name of directory on the server.
  * This directory have to be included in HOST config of webserver
  */
-set('deployed_folder', "sandbox");
+set('deployed_folder', '    dontpanic_elearning');
 
 /**
  * @required
