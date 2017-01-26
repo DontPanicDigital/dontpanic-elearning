@@ -3,9 +3,9 @@
         <header class="header">
             <div class="logo">&nbsp;</div>
             <div class="header__welcome">{_content.welcome_to_course}</div>
-            <div class="title">{_content.welcome_title|noescape}</div>
+            <div class="title">{$test->getName()}</div>
             <p class="header__text">
-                {_content.welcome_text|noescape}
+                {$test->getDescription()|noescape}
             </p>
         </header>
         <div class="contact">

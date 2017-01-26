@@ -32,6 +32,17 @@ class SignPresenter extends BasePresenter
     /** @persistent */
     public $backlink = '';
 
+    public function actionTestIn($token)
+    {
+        /** @var Test $test */
+        $test = $this->testModel->findOneBy([ 'token' => $token ]);
+        if (!$test instanceof Test) {
+            throw new Http404NotFoundException;
+        }
+
+        $this->template->test = $test;
+    }
+
     public function actionAuthCode($token)
     {
         if (!$this->user->isLoggedIn()) {
@@ -57,6 +68,8 @@ class SignPresenter extends BasePresenter
         /** @var SmsCodeForm $smsCodeForm */
         $smsCodeForm       = $this->getComponent('smsCodeForm');
         $smsCodeForm->test = $test;
+
+        $this->template->test = $test;
     }
 
     public function actionOut()
