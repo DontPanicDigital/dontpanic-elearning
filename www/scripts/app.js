@@ -1,5 +1,7 @@
 import Questions from './components/questions';
 
 window.onload = () => {
-    Questions.init();
+    if($('.question').length) {
+        Questions.init();
+    }
 }
