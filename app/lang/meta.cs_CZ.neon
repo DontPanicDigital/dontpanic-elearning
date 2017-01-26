@@ -1,4 +1,4 @@
-title: "[PAGE_TITLE_(homepage)]"
+title: "E-learning"
 project: "E-learning"
 description: "[META_DESCRIPTION]"
 keywords: "[META_KEYWORDS]"
@@ -7,3 +7,11 @@ fb_site_name: "[FB_SITENAME]"
 fb_description: "[META_FB_DESCRIPTION]"
 fb_image: "[PATH_TO_FB_SHARE_IMAGE]" # should be stored at /assest/images/social
 fb_type: "[FB_TYPE]" # usually 'website'
+homepage: "Úvodní stránka"
+login_page: "Přihlášení do testu"
+authcode_page: "Ověřenís"
+completed_page: "Test již byl absolvován"
+done_page: "Gratulujeme"
+test_page: "Test"
+admin_homepage: "Admin"
+admin_detail: "Detail testu"

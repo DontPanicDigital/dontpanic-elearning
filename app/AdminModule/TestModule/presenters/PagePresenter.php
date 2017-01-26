@@ -84,6 +84,7 @@ class PagePresenter extends BasePresenter
         }
 
         $this->template->test = $this->test;
+        $this->template->tab = $this->getParameter('tab');
     }
 
     /**************************************************************************************************************z*v*/
@@ -132,7 +133,7 @@ class PagePresenter extends BasePresenter
         $control             = $this->testQuestionFormFactory->createQuestion();
         $control->test       = $this->test;
         $control->onCreate[] = function (TestQuestion $testQuestion) {
-            $this->redirect('this');
+            $this->redirect('this#question-' . $testQuestion->getId(), ['tab'=>'addAnswer']);
         };
 
         return $control;

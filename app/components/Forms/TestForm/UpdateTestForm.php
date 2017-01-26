@@ -70,6 +70,7 @@ class UpdateTestForm extends UI\Control
             $this->updateTestModel->setTest($this->test);
             $this->updateTestModel->prepareFromArray($values);
             $this->updateTestModel->onUpdate[] = function (Test $test) {
+                $this->getPresenter()->flashMessage($this->translator->translate('test.update.form.success.updated'));
                 $this->onUpdate($test);
             };
             $this->updateTestModel->update();

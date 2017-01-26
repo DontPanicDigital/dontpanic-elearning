@@ -203,7 +203,14 @@ class TestQuestion
      */
     public function getOptions()
     {
-        return $this->options;
+        if(!count($this->options)) {
+            return [];
+        }
+        return $this->options->filter(function (TestOption $testOption) {
+            if(!$testOption->isDeleted()) {
+                return $testOption;
+            }
+        });
     }
 
     /**

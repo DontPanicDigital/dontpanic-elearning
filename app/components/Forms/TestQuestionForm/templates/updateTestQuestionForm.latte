@@ -1,29 +1,34 @@
 {snippet testQuestion}
     {if $testQuestion}
         {if !$testQuestion->isDeleted()}
-            {form form}
-            {if $form->hasErrors()}
-                {foreach $form->errors as $error}
-                    {$error}
-                {/foreach}
-            {/if}
-                <div class="form-group">
-                    <input type="text" class="form-control" n:name="question" placeholder="Znění otázky"/>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" n:name="description" rows="3" placeholder="Popis otázky"></textarea>
-                </div>
-                <div class="form-group">
-                    <a n:href="createTestOption!" class="ajax btn btn-success">Přidat odpověď</a>
-                    <button class="btn btn-primary" n:name="submit">Uložit otázku</button>
-                    <a n:href="removeTestQuestion! testQuestionToken=>$testQuestion->getToken()" class="ajax btn btn-danger">Odstranit</a>
-                </div>
-            {/form}
-            {if count($testQuestion->getOptions())}
-                {control updateTestOptionForm}
-            {else}
-                {_test.list.error.no_option}
-            {/if}
+            <div id="question-{$testQuestion->getId()}">
+                <h2 class="mb-1">Otázka</h2>
+                {form form}
+                    {if $form->hasErrors()}
+                        {foreach $form->errors as $error}
+                            {$error}
+                        {/foreach}
+                    {/if}
+                    <div class="form-group">
+                        <input type="text" class="form-control" n:name="question" placeholder="Znění otázky"/>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" n:name="description" rows="3" placeholder="Popis otázky"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <a n:href="createTestOption!" class="ajax btn btn-success">Přidat odpověď</a>
+                        <button class="btn btn-primary" n:name="submit">Uložit otázku</button>
+                        <a n:href="removeTestQuestion! testQuestionToken=>$testQuestion->getToken()" class="ajax btn btn-danger">Odstranit</a>
+                    </div>
+                {/form}
+                {if count($testQuestion->getOptions())}
+                    {control updateTestOptionForm}
+                {else}
+                    {_test.list.error.no_option}
+                {/if}
+                <hr/>
+                <br />
+            </div>
         {/if}
     {/if}
 {/snippet}

@@ -185,7 +185,14 @@ class Test
      */
     public function getQuestions()
     {
-        return $this->questions;
+        if(!count($this->questions)) {
+            return [];
+        }
+        return $this->questions->filter(function (TestQuestion $testQuestion) {
+            if(!$testQuestion->isDeleted()) {
+                return $testQuestion;
+            }
+        });
     }
 
     /**

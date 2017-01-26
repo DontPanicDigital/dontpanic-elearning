@@ -60,7 +60,7 @@ class CreateTestQuestionForm extends UI\Control
             TestQuestionModel::TYPE_CHECKBOXLIST => 'test.create_question.form.type_options.checkbox',
             TestQuestionModel::TYPE_RADIOLIST    => 'test.create_question.form.type_options.radio',
             TestQuestionModel::TYPE_SORT         => 'test.create_question.form.type_options.sort',
-        ]);
+        ])->setRequired('test.create_question.form.errors.fill_type');
 
         $form->addSubmit('submit', 'test.create_question.form.enter');
 
@@ -79,6 +79,7 @@ class CreateTestQuestionForm extends UI\Control
             $this->createTestQuestionModel->setDescription($values['description']);
             $this->createTestQuestionModel->setType($values['type']);
             $this->createTestQuestionModel->onCreate[] = function (TestQuestion $testQuestion) {
+                $this->getPresenter()->flashMessage($this->translator->translate('test.create_question.form.success.was_created'));
                 $this->onCreate($testQuestion);
             };
             $this->createTestQuestionModel->create();

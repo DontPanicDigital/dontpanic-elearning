@@ -11,6 +11,8 @@ update:
         name: Jméno testu
         description: Popis testu
         enter: Upravit
+        success:
+            updated: Test byl aktualizován
         errors:
             fill_name: Zadejte název testu
             error: Test se nepodařilo upravit
@@ -31,8 +33,11 @@ create_question:
             radio: jedna možná odpověď
             sort: řazení odpovědí
         enter: Založit
+        success:
+            was_created: Otázka byla vytvořena
         errors:
             fill_question: Zadejte  otázku
+            fill_type: Vyberte typ otázky
             error: Otázku se nepodařilo založit
 
 create_option:
@@ -69,9 +74,9 @@ update_option:
 
 list:
     error:
-        no_test: Kde nic není ani smrt nebere
-        no_question: Kde nic není ani smrt nebere
-        no_option: Kde nic není ani smrt nebere
+        no_test: Doposud nebyl vytvořen žádný test
+        no_question: Doposud nebyly přidány žádné otázky
+        no_option: Doposud nebyly přidány žádné odpovědi
 
 delete:
     errors:
