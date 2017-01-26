@@ -135,14 +135,16 @@ let Questions = {
             let $currentQuestion = this.cache.question.eq(this.currentQuestion);
 
             TweenLite.to($prevQuestion, 1, {
-                left: "-100%"
+                left: "-100%",
+                opacity: "0"
             });
             TweenLite.fromTo($currentQuestion, 1, {
                 left: "100%",
                 opacity: '1',
                 display: 'table'
             }, {
-                left: "0"
+                left: "0",
+                opacity: "1"
             });
 
             TweenLite.delayedCall(1, function() {
