@@ -1,3 +1,5 @@
+logout: odhlásit se
+
 permission:
     form:
         do_create: Vytvořit oprávnění
