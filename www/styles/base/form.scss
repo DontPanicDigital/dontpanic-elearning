@@ -63,5 +63,13 @@
             border-color: transparent transparent #3f3d58 transparent;
             @include position(absolute, -5px null null 13px);
         }
+        
+        &--global {
+            margin: 0 0 10px;
+            
+            &:before {
+                display: none;
+            }
+        }
     }
 }

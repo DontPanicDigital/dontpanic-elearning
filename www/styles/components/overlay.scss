@@ -12,6 +12,13 @@
         width: 100%;
         padding: 0 10px;
         display: table;
+    
+        @include mq($from: tablet) {
+            width: 400px;
+            margin: auto;
+            padding: 0;
+            right: 0;
+        }
     }
     
     &__content {
