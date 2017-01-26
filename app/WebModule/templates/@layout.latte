@@ -21,7 +21,7 @@
     {include '../../templates/scripts/jquery.latte'}
     <script type="text/javascript" src="/build/scripts{if $isProduction}.min{/if}.js"></script>
 </head>
-<body class="{ifset #bodyClass}{include bodyClass}{/ifset}">
+<body class="test {ifset #bodyClass}{include bodyClass}{/ifset}">
     {*<nav>*}
         {*<ul>*}
             {*{if $user->isLoggedIn()}*}
