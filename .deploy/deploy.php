@@ -3,9 +3,7 @@ namespace Deployer;
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/deployer/deployer/recipe/common.php';
-require __DIR__ . '/../vendor/deployer/deployer/recipe/symfony.php';
 require __DIR__ . '/../vendor/deployer/recipes/local.php';
-
 
 require_once __DIR__ . '/deploy_config.php';
 require_once __DIR__ . '/deploy_includes/servers.php';
@@ -63,17 +61,16 @@ require_once __DIR__ . '/deploy_includes/database.php';
 before('deploy:symlink', 'database:migrate');
 before('local:symlink', 'database:migrate');
 
-require_once __DIR__ . '/deploy_includes/vendors.php';
-after('deploy:vendors', 'vendors');
-after('local:vendors', 'vendors');
-
 require_once __DIR__ . '/deploy_includes/setups.php';
 after('deploy:vendors', 'setups');
 after('local:vendors', 'setups');
 
+require_once __DIR__ . '/deploy_includes/vendors.php';
+after('deploy:vendors', 'vendors');
+after('local:vendors', 'vendors');
+
 after('local', 'slack:notify');
 after('deploy', 'slack:notify');
-
 
 
 
