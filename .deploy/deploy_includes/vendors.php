@@ -37,9 +37,9 @@ task('vendors:static-build', function () {
 
         if (file_exists(PROJECT_HOME . 'gulpfile.babel.js')) {
             if (get('server.name') == 'production') {
-                run('sudo gulp --build --path www/front');
+                run('sudo gulp --production');
             } else {
-                run('sudo gulp --develop --path www/front');
+                run('sudo gulp --stage');
             }
         }
     }
