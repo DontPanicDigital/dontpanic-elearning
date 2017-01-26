@@ -1,3 +1,5 @@
+import FlashMsg from './components/flashmsg';
+
 window.onload = () => {
     $('input[type=radio].question-type').on('change', function () {
         if (!this.checked) return
