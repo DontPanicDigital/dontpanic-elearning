@@ -52,7 +52,7 @@ set('repository', 'https://github.com/DontPanicDigital/dontpanic-elearning.git')
  * Name of directory on the server.
  * This directory have to be included in HOST config of webserver
  */
-set('deployed_folder', '    dontpanic_elearning');
+set('deployed_folder', 'dontpanic_elearning');
 
 /**
  * @required
