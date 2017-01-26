@@ -14,3 +14,17 @@
         list-style: none;
     }
 }
+
+.tab-content>.tab-pane {
+    display: block;
+}
+
+.logout {
+    margin-top: 7px;
+    display: inline-block;
+    
+    span {
+        display: inline-block;
+        margin-left: 5px;
+    }
+}
