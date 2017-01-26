@@ -35,7 +35,7 @@ set('local_bin/composer', 'php /usr/local/bin/composer.phar');
  *
  * Sets the name of application
  */
-set('app_name', 'sandbox');
+set('app_name', 'dontpanic-elearning');
 
 /**
  * @required
