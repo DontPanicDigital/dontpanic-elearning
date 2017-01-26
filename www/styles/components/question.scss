@@ -180,7 +180,7 @@
             input[type="checkbox"] {
                 & + label:after {
                     @include sprites("icon-check-white");
-                    background: none;
+                    background-color: transparent;
                     @include position(absolute, 5px null null 3px);
                     display: none;
                 }
