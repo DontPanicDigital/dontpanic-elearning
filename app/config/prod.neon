@@ -46,3 +46,7 @@ migrations:
 		- %appDir%/../migrations
 	namespace: Migrations
 	codingStandard: tabs
+
+translation:
+	default: cs
+	fallback: [cs_CZ, cs]
