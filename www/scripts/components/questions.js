@@ -76,7 +76,7 @@ let Questions = {
 
     prepare_listeners() {
         let _self = this;
-        const readMore = 'Přečtěte si více...';
+        const readMore = new IntlMessageFormat(lang.read_more, 'cs').format();
 
         this.cache.continue.on('click', () => {
             _self.validate();
