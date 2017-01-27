@@ -31,8 +31,7 @@
         text-align: center;
     }
     
-    &__wrong {
-        color: $orange;
+    &__icon {
         font-size: 18px;
         font-weight: bold;
         padding-top: 72px;
@@ -42,9 +41,26 @@
         
         &:before {
             content: '';
-            @include sprites("icon-close");
-            @include position(absolute, 0 0 null 0);
-            margin: 0 auto;
+        }
+        
+        &--wrong {
+            color: $orange;
+            
+            &:before {
+                @include sprites("icon-close");
+                @include position(absolute, 0 0 null 0);
+                margin: 0 auto;
+            }
+        }
+    
+        &--correct {
+            color: #41ad49;
+            
+            &:before {
+                @include sprites("icon-correct");
+                @include position(absolute, 0 0 null 0);
+                margin: 0 auto;
+            }
         }
     }
     

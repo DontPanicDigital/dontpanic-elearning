@@ -6,7 +6,7 @@
 
 @mixin sprites($name) {
     
-    @include retina-image($imgPath + sprite, 85px 267px, 'png', null, '@2x', false);
+    @include retina-image($imgPath + sprite, 85px 333px, 'png', null, '@2x', false);
     
     background-repeat: no-repeat;
     position: relative;
@@ -18,5 +18,6 @@
     @if $name == "arrow" { @include calculate(108px, 79px, 0px, 84px); }
     @if $name == "logo" { @include calculate(170px, 86px, 0px, 163px); }
     @if $name == "icon-close" { @include calculate(132px, 132px, 0px, 249px); }
-    @if $name == "icon-cup" { @include calculate(128px, 154px, 0px, 381px); }
+    @if $name == "icon-correct" { @include calculate(132px, 132px, 0px, 381px); }
+    @if $name == "icon-cup" { @include calculate(128px, 154px, 0px, 513px); }
 }

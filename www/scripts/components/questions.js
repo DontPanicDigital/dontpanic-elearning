@@ -19,6 +19,7 @@ let Questions = {
         overlay: null,
         overlayText: null,
         overlayClose: null,
+        overlayIcon: null,
         questionCurrent: null,
         questionAll: null,
         readMore: null
@@ -52,6 +53,7 @@ let Questions = {
         this.cache.continue = $('.button--continue');
         this.cache.overlay = $('.overlay');
         this.cache.overlayText = $('.overlay__text');
+        this.cache.overlayIcon = $('.overlay__icon');
         this.cache.overlayClose = this.cache.overlay.find('.button--close');
         this.cache.questionCurrent = $('.question__count--current');
         this.cache.questionAll = $('.question__count--all');
@@ -87,7 +89,7 @@ let Questions = {
             let dataOverlay = $(this).data('overlay');
 
             if($(this).prop("checked") && answer == 0) {
-                _self.show_overlay(dataOverlay);
+                _self.show_overlay(dataOverlay, 'wrong');
                 $(this).prop('checked', false);
             }
 
@@ -122,8 +124,7 @@ let Questions = {
             event.stopPropagation();
             event.preventDefault();
             let dataOverlay = $(this).closest('.question__item').find('input').data('overlay');
-            console.log($(this).closest('.question__item').parent(), dataOverlay);
-            _self.show_overlay(dataOverlay);
+            _self.show_overlay(dataOverlay, 'correct');
             return false;
         });
 
@@ -150,7 +151,11 @@ let Questions = {
         }
     },
 
-    show_overlay(content) {
+    show_overlay(content, type) {
+        let text = type == 'wrong' ? new IntlMessageFormat(lang.wrong, 'cs').format() : new IntlMessageFormat(lang.correct, 'cs').format();
+        this.cache.overlayIcon.removeClass("overlay__icon--wrong overlay__icon--correct");
+        this.cache.overlayIcon.addClass("overlay__icon--" + type);
+        this.cache.overlayIcon.text(text);
         this.cache.overlayText.html(content);
         this.cache.overlay.fadeIn();
     },
