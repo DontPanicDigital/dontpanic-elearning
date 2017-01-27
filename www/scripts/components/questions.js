@@ -20,7 +20,8 @@ let Questions = {
         overlayText: null,
         overlayClose: null,
         questionCurrent: null,
-        questionAll: null
+        questionAll: null,
+        readMore: null
     },
 
     init() {
@@ -54,12 +55,15 @@ let Questions = {
         this.cache.overlayClose = this.cache.overlay.find('.button--close');
         this.cache.questionCurrent = $('.question__count--current');
         this.cache.questionAll = $('.question__count--all');
+        this.cache.readMore = $('.question__readMore');
     },
 
     set_count_question() {
         this.cache.questionAll.html(this.countQuestions);
         this.cache.questionCurrent.html(this.currentQuestion + 1);
-        TweenLite.to($('.question__count'), .5, {css:{scale:1, opacity:1 }});
+        if(this.cache.question.length) {
+            TweenLite.to($('.question__count'), .5, {css:{scale:1, opacity:1 }});
+        }
     },
 
     set_vars() {
@@ -72,26 +76,55 @@ let Questions = {
 
     prepare_listeners() {
         let _self = this;
+        const readMore = 'Přečtěte si více...';
+
         this.cache.continue.on('click', () => {
             _self.validate();
         });
 
         $('input.radio, input.checkbox').click(function() {
             let answer = $(this).data('correct');
+            let dataOverlay = $(this).data('overlay');
+
             if($(this).prop("checked") && answer == 0) {
-                _self.show_overlay($(this).data('overlay'));
+                _self.show_overlay(dataOverlay);
                 $(this).prop('checked', false);
             }
-            if($(this).prop("checked") && answer == 1) {
-                $(this).parent().addClass('question__item--correct');
+
+            if(answer == 1) {
+                if($(this).prop("checked")) {
+                    $(this).parent().addClass('question__item--correct');
+                    if(dataOverlay != '') {
+                        _self.add_text_read_more($(this).parent().find('label span'), readMore, true);
+                    }
+                }
+                else {
+                    if(dataOverlay != '') {
+                        _self.add_text_read_more($(this).parent().find('label span'), readMore, false);
+                    }
+                }
             }
-            else {
+
+            if(!$(this).prop("checked")) {
                 $('input.radio, input.checkbox').each(function() {
+                    if($(this).is(':radio')) {
+                        _self.add_text_read_more($(this).parent().find('label span'), readMore, false);
+                    }
+
                     if(!$(this).prop("checked")) {
                         $(this).parent().removeClass('question__item--correct');
                     }
                 });
             }
+        });
+
+        $(document).on("tap click", '.question__readMore', function( event, data ){
+            event.stopPropagation();
+            event.preventDefault();
+            let dataOverlay = $(this).closest('.question__item').find('input').data('overlay');
+            console.log($(this).closest('.question__item').parent(), dataOverlay);
+            _self.show_overlay(dataOverlay);
+            return false;
         });
 
         this.cache.overlayClose.on('click', function(e) {
@@ -104,6 +137,17 @@ let Questions = {
                 _self.close_overlay();
             }
         });
+    },
+
+    add_text_read_more(item, readMore, checked) {
+        let text = item.text().replace(readMore,'');
+
+        if(checked) {
+            item.html(`${text} <div class="question__readMore">${readMore}</div>`);
+        }
+        else {
+            item.html(`${text}`);
+        }
     },
 
     show_overlay(content) {

@@ -165,7 +165,9 @@
             
             input[type="checkbox"], input[type="radio"] {
                 & + label {
-                    color: $white;
+                    span {
+                        color: $white;
+                    }
                 }
     
                 & + label:before {
@@ -186,6 +188,12 @@
                 }
             }
         }
+    }
+    
+    &__readMore {
+        display: inline;
+        cursro: pointer;
+        text-decoration: underline;
     }
     
     .form__error {
