@@ -188,6 +188,14 @@
                 }
             }
         }
+        
+        &--pink {
+            background: $pink;
+            
+            label span {
+                color: $white;
+            }
+        }
     }
     
     &__readMore {

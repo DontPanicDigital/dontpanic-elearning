@@ -41,6 +41,12 @@ let Questions = {
                     let index = $(this).index() + 1;
                     $(this).find('input').val(index);
                 });
+            },
+            start: function(event, ui) {
+                $(ui.item).addClass("question__item--pink");
+            },
+            stop:function( event, ui ) {
+                $(ui.item).removeClass("question__item--pink");
             }
         });
         this.cache.sortable.disableSelection();
@@ -190,7 +196,7 @@ let Questions = {
             TweenLite.fromTo($currentQuestion, 1, {
                 left: "100%",
                 opacity: '1',
-                display: 'table'
+                display: 'table',
             }, {
                 left: "0",
                 opacity: "1"
@@ -198,6 +204,7 @@ let Questions = {
 
             TweenLite.delayedCall(1, function() {
                 Questions.isAnimating = false;
+                $('html,body').animate({ scrollTop: 0 }, 'fast');
             });
         }
     },
