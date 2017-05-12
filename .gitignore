@@ -57,3 +57,4 @@ Temporary Items
 local_deploy
 /www/assets/images/sprite@2x.png
 /www/assets/images/sprite.png
+/www/styles/core/config.scss
