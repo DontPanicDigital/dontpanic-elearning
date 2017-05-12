@@ -1,0 +1,119 @@
+$darkBlue: #003f7d;
+$lightBlue: #004990;
+$borderBlue: #0058a0;
+$ctaRed: #ed1b2e;
+$gray: #f9fafb;
+
+.electro-world {
+    background: $gray;
+
+    .logo {
+        @include sprites('logo-electro-world');
+    }
+
+    .header {
+        background: $lightBlue;
+
+        .title {
+            color: $white;
+        }
+    }
+
+    .button {
+        @include linear-gradient(120deg, $lightBlue 0%, $darkBlue 100%);
+
+        &:hover {
+            box-shadow: inset 0 2px 0 rgba(0,0,0,0.2);
+            background: $darkBlue;
+        }
+    }
+
+    .question {
+        &__count {
+            color:         $lightBlue;
+        }
+
+        input[type="checkbox"] {
+            & + label:before {
+                border:       2px solid $lightBlue;
+            }
+        }
+
+        input[type="radio"] {
+
+            & + label {
+                span {
+                    color: $black;
+                }
+            }
+
+            & + label:before {
+                border: 2px solid $lightBlue;
+            }
+
+            & + label:after {
+                background: $lightBlue;
+            }
+        }
+
+        &__item {
+            border-bottom: 1px solid #e8e8e8;
+
+
+            &--pink {
+                background: $lightBlue;
+            }
+        }
+    }
+
+    .form {
+        &__row {
+            &--error {
+                .form__input {
+                    background: $gray;
+                }
+            }
+        }
+
+        &__input {
+            color: $black;
+            border: 2px solid $borderBlue;
+        }
+
+        label {
+            color: $borderBlue;
+
+            span {
+                color: $grey;
+            }
+        }
+
+        &__error {
+            background: #3f3d58;
+
+            &:before {
+                border-color: transparent transparent #3f3d58 transparent;
+            }
+        }
+    }
+
+    .thxPage {
+        &__box {
+            &:before {
+                @include sprites("icon-cup-blue");
+                margin: 0 auto 20px;
+                display: table;
+            }
+        }
+        .title {
+            color: $darkBlue;
+        }
+    }
+
+    footer {
+        background: $lightBlue;
+    }
+}
+.electro-world.pinkBG {
+    background: $lightBlue;
+}
