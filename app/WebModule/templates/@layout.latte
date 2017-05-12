@@ -13,12 +13,12 @@
     <meta property="og:description" content="{ifset #facebookDescription}{include facebookDescription}{else}{_meta.fb_description}{/ifset}">
     <meta property="og:type" content="{_meta.fb_type}"/>
     {include '../../templates/html/favicon.latte'}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" media="screen">
-    <link rel="stylesheet" href="/build/styles{if $isProduction}.min{/if}.css" media="screen">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css?v={$versionTimeStamp}" media="screen">
+    <link rel="stylesheet" href="/build/styles{if $isProduction}.min{/if}.css?v={$versionTimeStamp}" media="screen">
     <title>{ifset #title}{include title}{else}{_meta.title}{/ifset} | {_meta.project}</title>
     {include '../../templates/scripts/html5tagsSupport.latte'}
     {include '../../templates/scripts/jquery.latte'}
-    <script type="text/javascript" src="/build/scripts{if $isProduction}.min{/if}.js"></script>
+    <script type="text/javascript" src="/build/scripts{if $isProduction}.min{/if}.js?v={$versionTimeStamp}"></script>
 </head>
 <body class="test {$company->getClassName()} {ifset #bodyClass}{include bodyClass}{/ifset}">
         {snippet flashMessages}
