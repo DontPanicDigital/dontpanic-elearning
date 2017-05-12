@@ -17,36 +17,22 @@
     <link rel="stylesheet" href="/build/styles{if $isProduction}.min{/if}.css" media="screen">
     <title>{ifset #title}{include title}{else}{_meta.title}{/ifset} | {_meta.project}</title>
     {include '../../templates/scripts/html5tagsSupport.latte'}
-
     {include '../../templates/scripts/jquery.latte'}
     <script type="text/javascript" src="/build/scripts{if $isProduction}.min{/if}.js"></script>
 </head>
-<body class="test {ifset #bodyClass}{include bodyClass}{/ifset}">
-    {*<nav>*}
-        {*<ul>*}
-            {*{if $user->isLoggedIn()}*}
-                {*<li><a href="{plink Sign:out}">Odhlásit se</a></li>*}
-            {*{/if}*}
-        {*</ul>*}
-    {*</nav>*}
-    {snippet flashMessages}
-    {if count($flashes)}
-        <ul>
-            {foreach $flashes as $flash}
-                <li>{$flash->message}</li>
-            {/foreach}
-        </ul>
-    {/if}
-    {/snippet}
-    <div id="main">
-        {include content}
-    </div>
-    <script type="text/javascript">
-        var USER_ID          = null;
-        var API_ACCESS_TOKEN = {if isset($apiToken)}{$apiToken}{else}null{/if};
-    </script>
-
-
-    {include '../../templates/scripts/nette.bootstrap.latte'}
+<body class="test {$company->getClassName()} {ifset #bodyClass}{include bodyClass}{/ifset}">
+        {snippet flashMessages}
+            {if count($flashes)}
+                <ul>
+                    {foreach $flashes as $flash}
+                        <li>{$flash->message}</li>
+                    {/foreach}
+                </ul>
+            {/if}
+        {/snippet}
+        <div id="main">
+            {include content}
+        </div>
+        {include '../../templates/scripts/nette.bootstrap.latte'}
 </body>
 </html>

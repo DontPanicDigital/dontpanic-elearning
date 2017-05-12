@@ -13,6 +13,8 @@ use DontPanic\SmsCode\CreateSmsCodeModel;
 use DontPanic\SmsCode\SmsCodeModel;
 use DontPanic\Test\TestModel;
 use Nette\Security\Identity;
+use Nette\Application\AbortException;
+use Nette\Security\AuthenticationException;
 
 class SignPresenter extends BasePresenter
 {
@@ -31,17 +33,6 @@ class SignPresenter extends BasePresenter
 
     /** @persistent */
     public $backlink = '';
-
-    public function actionTestIn($token)
-    {
-        /** @var Test $test */
-        $test = $this->testModel->findOneBy([ 'token' => $token ]);
-        if (!$test instanceof Test) {
-            throw new Http404NotFoundException;
-        }
-
-        $this->template->test = $test;
-    }
 
     public function actionAuthCode($token)
     {
@@ -83,8 +74,8 @@ class SignPresenter extends BasePresenter
 
     /**
      * @return TestSignUpForm
-     * @throws \Nette\Application\AbortException
-     * @throws \Nette\Security\AuthenticationException
+     * @throws AbortException
+     * @throws AuthenticationException
      */
     protected function createComponentTestSignUpForm()
     {

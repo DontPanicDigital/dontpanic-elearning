@@ -15,38 +15,21 @@ use DontPanic\Test\UserTestScoreModel;
 class TestPresenter extends BasePresenter
 {
 
-    /** @var TestModel @inject */
-    public $testModel;
-
     /** @var UserTestScoreModel @inject */
     public $userTestScoreModel;
 
     /** @var TestFormFactory @inject */
     public $testFormFactory;
 
-    /** @var Test */
-    private $test;
-
     public function startup()
     {
         parent::startup();
-        $token      = $this->getParameter('token');
-        $this->test = $this->testModel->findOneBy([ 'token' => $token ]);
 
         if (!$this->user->isLoggedIn()) {
             $this->redirect('Sign:testIn');
         }
         if (!$this->userEntity instanceof User) {
             $this->redirect('Sign:testIn');
-        }
-        if (!$this->userEntity->getPhone(false)) {
-            $this->user->logout(true);
-            $this->redirect('Sign:testIn');
-        }
-        if (!$this->userEntity->isPhoneVerification()) {
-            $this->redirect('Sign:authCode', [
-                'token' => $this->getParameter('token'),
-            ]);
         }
     }
 
@@ -58,19 +41,12 @@ class TestPresenter extends BasePresenter
      */
     public function actionDefault($token)
     {
-
-        if (!$this->test instanceof Test) {
-            throw new Http404NotFoundException;
-        }
-
         /** @var UserTestScore $userScore */
         $userScore = $this->userTestScoreModel->getScore($this->userEntity, $this->test);
 
         if ($userScore && $userScore->isDone()) {
             $this->redirect('completed');
         }
-
-        $this->template->test = $this->test;
     }
 
     public function renderDone()

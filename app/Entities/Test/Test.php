@@ -1,4 +1,5 @@
 <?php
+
 namespace DontPanic\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -39,6 +40,13 @@ class Test
     /**
      * @var string
      *
+     * @ORM\Column(name="end_description", type="string", length=255, nullable=true)
+     */
+    private $endDescription;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="token", type="string", length=30, nullable=false)
      */
     private $token;
@@ -68,6 +76,13 @@ class Test
      * @var array|ArrayCollection
      **/
     private $smsCodes;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="sms_verification", type="boolean")
+     */
+    private $smsVerification = true;
 
     /**
      * Constructor
@@ -114,6 +129,26 @@ class Test
     public function setDescription(string $description): Test
     {
         $this->description = $description ?: null;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEndDescription()
+    {
+        return $this->endDescription;
+    }
+
+    /**
+     * @param string $endDescription
+     *
+     * @return Test
+     */
+    public function setEndDescription(string $endDescription): Test
+    {
+        $this->endDescription = $endDescription;
 
         return $this;
     }
@@ -185,11 +220,12 @@ class Test
      */
     public function getQuestions()
     {
-        if(!count($this->questions)) {
+        if (!count($this->questions)) {
             return [];
         }
+
         return $this->questions->filter(function (TestQuestion $testQuestion) {
-            if(!$testQuestion->isDeleted()) {
+            if (!$testQuestion->isDeleted()) {
                 return $testQuestion;
             }
         });
@@ -208,6 +244,26 @@ class Test
             return;
         }
         $this->questions->add($testQuestion);
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSmsVerification(): bool
+    {
+        return $this->smsVerification;
+    }
+
+    /**
+     * @param bool $smsVerification
+     *
+     * @return Test
+     */
+    public function setSmsVerification(bool $smsVerification): Test
+    {
+        $this->smsVerification = $smsVerification;
 
         return $this;
     }
