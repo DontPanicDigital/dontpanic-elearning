@@ -1,4 +1,5 @@
 <?php
+
 namespace DontPanic\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -36,6 +37,13 @@ class Company
      * @ORM\Column(name="token", type="string", length=30, nullable=false)
      */
     private $token;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="class_name", type="string", length=30, nullable=false)
+     */
+    private $className;
 
     /**
      * @var Collection
@@ -76,6 +84,26 @@ class Company
     public function setName(string $name): Company
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassName(): string
+    {
+        return $this->className;
+    }
+
+    /**
+     * @param string $className
+     *
+     * @return Company
+     */
+    public function setClassName(string $className): Company
+    {
+        $this->className = $className;
 
         return $this;
     }
