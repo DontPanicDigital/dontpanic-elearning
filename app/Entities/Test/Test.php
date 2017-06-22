@@ -45,6 +45,13 @@ class Test
     private $endDescription;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="notify_email", type="string", length=100, nullable=true)
+     */
+    private $notifyEmail;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="token", type="string", length=30, nullable=false)
@@ -149,6 +156,26 @@ class Test
     public function setEndDescription(string $endDescription): Test
     {
         $this->endDescription = $endDescription;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getNotifyEmail()
+    {
+        return $this->notifyEmail;
+    }
+
+    /**
+     * @param null|string $notifyEmail
+     *
+     * @return Test
+     */
+    public function setNotifyEmail($notifyEmail)
+    {
+        $this->notifyEmail = $notifyEmail;
 
         return $this;
     }
