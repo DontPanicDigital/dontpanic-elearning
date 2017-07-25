@@ -12,10 +12,12 @@
         <label n:name="email">{_user.registration.form.email|noescape}</label>
         <input type="email" n:name="email" class="form__input" />
     </div>
-    <div class="form__row">
-        <label n:name="phone">{_user.update_profile.form.phone}</label>
-        <input type="tel" n:name="phone" class="form__input" />
-    </div>
+    {if isset($form['phone'])}
+        <div class="form__row">
+            <label n:name="phone">{_user.update_profile.form.phone}</label>
+            <input type="tel" n:name="phone" class="form__input" />
+        </div>
+    {/if}
     <div class="form__submit">
         <input n:name="send" class="button" value="{_user.registration.form.do_registration}" />
     </div>

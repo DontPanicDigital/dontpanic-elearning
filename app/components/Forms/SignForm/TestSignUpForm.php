@@ -75,7 +75,7 @@ class TestSignUpForm extends FormComponent
     protected function signUpFormSucceeded(Form $form, array $values)
     {
         try {
-            $user = $this->userModel->findByPhone($values['phone']);
+            $user = $this->userModel->findByPhone($values['phone'] ?? null);
             if ($user instanceof User) {
                 $this->onSignUp($user);
             } else {

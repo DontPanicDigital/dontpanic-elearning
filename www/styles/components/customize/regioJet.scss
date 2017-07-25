@@ -1,0 +1,157 @@
+$darkBlue: #ffbd10;
+$lightBlue: #ffbd10;
+$borderBlue: #00519e;
+$ctaRed: #ed1b2e;
+$gray: #e8e8e8;
+$black: #000;
+
+.regio-jet {
+    background: $gray;
+
+    .logo {
+        @include sprites('logo-regio-jet');
+    }
+
+    .header {
+        background: $lightBlue;
+
+        .title {
+            color: $black;
+        }
+        &__text {
+            color: $black;
+        }
+    }
+
+    .button {
+        @include linear-gradient(120deg, $lightBlue 0%, $darkBlue 100%);
+        color: $black;
+        &:hover {
+            box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.2);
+            background: $darkBlue;
+        }
+    }
+
+    .question {
+
+        &__count {
+            color: #727272;
+        }
+
+        input[type="checkbox"] {
+            & + label:before {
+                border: 2px solid #00519e;
+            }
+        }
+
+        input[type="radio"] {
+
+            & + label {
+                span {
+                    color: $black;
+                }
+            }
+
+            & + label:before {
+                border: 2px solid #00519e;
+            }
+
+            & + label:after {
+                background: $white;
+            }
+        }
+
+        &__item {
+            border-bottom: 1px solid #e8e8e8;
+
+            &--pink {
+                background: $lightBlue;
+            }
+        }
+
+        &__item {
+            &--correct {
+                background: #3474b1;
+
+                input[type="checkbox"] {
+                    & + label:before {
+                        border-color: #fff;
+                    }
+                    & + label {
+                        span {
+                            color: $white;
+                        }
+                    }
+                }
+
+                input[type="radio"] {
+                    & + label:before {
+                        border-color: #fff;
+                    }
+                    & + label {
+                        span {
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    .form {
+        &__row {
+            &--error {
+                .form__input {
+                    background:   $gray;
+                    border-color: #e2003b;
+                }
+            }
+        }
+
+        &__input {
+            color:  $black;
+            border: 2px solid $borderBlue;
+        }
+
+        label {
+            color: $borderBlue;
+
+            span {
+                color: #000;
+            }
+        }
+
+        &__error {
+            background: #e2003b;
+
+            &:before {
+                border-color: transparent transparent #e2003b transparent;
+            }
+        }
+    }
+
+    .thxPage {
+        &__box {
+            &:before {
+                @include sprites("icon-cup-blue");
+                margin:  0 auto 20px;
+                display: table;
+            }
+        }
+        .title {
+            color: $borderBlue;
+        }
+    }
+
+    footer {
+        background: $lightBlue;
+    }
+    .overlay {
+        background: rgba(34, 71, 106, 0.98);
+    }
+}
+
+.regio-jet.pinkBG {
+    background: $lightBlue;
+}

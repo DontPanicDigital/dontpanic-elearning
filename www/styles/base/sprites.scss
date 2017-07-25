@@ -6,7 +6,7 @@
 
 @mixin sprites($name) {
     
-    @include retina-image($imgPath + sprite, 299px 462px, 'png', null, '@2x', false);
+    @include retina-image($imgPath + sprite, 299px 515px, 'png', null, '@2x', false);
     
     background-repeat: no-repeat;
     position: relative;
@@ -18,8 +18,9 @@
     @if $name == "arrow" { @include calculate(108px, 79px, 0px, 84px); }
     @if $name == "logo" { @include calculate(170px, 86px, 0px, 163px); }
     @if $name == "logo-electro-world" { @include calculate(598px, 103px, 0px, 249px); }
-    @if $name == "icon-close" { @include calculate(132px, 132px, 0px, 352px); }
-    @if $name == "icon-correct" { @include calculate(132px, 132px, 0px, 484px); }
-    @if $name == "icon-cup-blue" { @include calculate(128px, 154px, 0px, 616px); }
-    @if $name == "icon-cup" { @include calculate(128px, 154px, 0px, 770px); }
+    @if $name == "logo-regio-jet" { @include calculate(392px, 106px, 0px, 352px); }
+    @if $name == "icon-close" { @include calculate(132px, 132px, 0px, 458px); }
+    @if $name == "icon-correct" { @include calculate(132px, 132px, 0px, 590px); }
+    @if $name == "icon-cup-blue" { @include calculate(128px, 154px, 0px, 722px); }
+    @if $name == "icon-cup" { @include calculate(128px, 154px, 0px, 876px); }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace WebModule;
 
 use AppModule\Exception\Http403ForbiddenException;
@@ -80,7 +81,13 @@ class SignPresenter extends BasePresenter
     protected function createComponentTestSignUpForm()
     {
         /** @var TestSignUpForm $control */
-        $control             = $this->signFormFactory->createTestSignUp();
+        $control = $this->signFormFactory->createTestSignUp();
+
+        $form = $control->getComponent('form');
+        if (!$this->test->isSmsVerification()) {
+            unset($form['phone']);
+        }
+
         $control->onSignUp[] = function (User $user) {
             /** @var Identity $identity */
             $identity = new Identity($user->getId(), [], null);
